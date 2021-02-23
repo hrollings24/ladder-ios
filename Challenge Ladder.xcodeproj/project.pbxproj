@@ -1,0 +1,1098 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		679A7B8DA1106B4441C1BAAA /* Pods_Challenge_Ladder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9AC10DC01DEBE76B216A176 /* Pods_Challenge_Ladder.framework */; };
+		767740824659BA0FAFA2F235 /* Pods_Challenge_Ladder_Challenge_LadderUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 238D774F442967D2DEF461C4 /* Pods_Challenge_Ladder_Challenge_LadderUITests.framework */; };
+		7CA3AD75A18F4E23B756CEA6 /* Pods_Challenge_LadderTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A91BF2BAF56DF1A453CC8828 /* Pods_Challenge_LadderTests.framework */; };
+		AF01E9642552D1E1008862B4 /* FindLadderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF01E9632552D1E1008862B4 /* FindLadderViewController.swift */; };
+		AF0BE69724E553F3005FF2CE /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0BE69624E553F3005FF2CE /* SignUpViewController.swift */; };
+		AF0BE69B24E55E27005FF2CE /* MainUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0BE69A24E55E27005FF2CE /* MainUser.swift */; };
+		AF0BE69D24E55EC2005FF2CE /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0BE69C24E55EC2005FF2CE /* Alert.swift */; };
+		AF0BE69F24E56181005FF2CE /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0BE69E24E56181005FF2CE /* HomeViewController.swift */; };
+		AF0BE6A324E5E1EB005FF2CE /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0BE6A224E5E1EB005FF2CE /* MenuViewController.swift */; };
+		AF0BE6A524E5E91D005FF2CE /* SlideInTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0BE6A424E5E91D005FF2CE /* SlideInTransition.swift */; };
+		AF0BE6A724E7EC11005FF2CE /* CreateLadderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0BE6A624E7EC11005FF2CE /* CreateLadderViewController.swift */; };
+		AF0BE6A924E88632005FF2CE /* Ladder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0BE6A824E88632005FF2CE /* Ladder.swift */; };
+		AF3B444125DD469F004CE6DA /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3B444025DD469F004CE6DA /* UserCell.swift */; };
+		AF3B444525DD647A004CE6DA /* DisplayFindViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3B444425DD647A004CE6DA /* DisplayFindViewController.swift */; };
+		AF3B444725DD70BE004CE6DA /* RequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3B444625DD70BE004CE6DA /* RequestCell.swift */; };
+		AF3B444925DD719E004CE6DA /* RequestCellData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3B444825DD719E004CE6DA /* RequestCellData.swift */; };
+		AF3B444C25DEB467004CE6DA /* CreateAccountInDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3B444B25DEB467004CE6DA /* CreateAccountInDB.swift */; };
+		AF3B444E25DEB545004CE6DA /* CreatingAccountStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3B444D25DEB545004CE6DA /* CreatingAccountStatus.swift */; };
+		AF3B445225DEC29B004CE6DA /* CreateUsername.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3B445125DEC29B004CE6DA /* CreateUsername.swift */; };
+		AF45AF5F24F1B11F004A831F /* SelectLadderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF45AF5E24F1B11F004A831F /* SelectLadderViewController.swift */; };
+		AF45AF6124F1BE37004A831F /* LadderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF45AF6024F1BE37004A831F /* LadderViewController.swift */; };
+		AF45AF6324F2DCD4004A831F /* FindUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF45AF6224F2DCD4004A831F /* FindUserViewController.swift */; };
+		AF45AF6924F85D3A004A831F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF45AF6824F85D3A004A831F /* Extensions.swift */; };
+		AF45AF6D24F94C34004A831F /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF45AF6C24F94C34004A831F /* NotificationViewController.swift */; };
+		AF49BB7225DA9FB20089FC2A /* LadderData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF49BB7125DA9FB20089FC2A /* LadderData.swift */; };
+		AF49BB7725DAAC850089FC2A /* SelectLadderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF49BB7625DAAC850089FC2A /* SelectLadderCell.swift */; };
+		AF52ACE9257BA48B004C8BF6 /* AwaitingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF52ACE8257BA48B004C8BF6 /* AwaitingView.swift */; };
+		AF66162325AF228600A744DF /* ChangeJumpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF66162225AF228600A744DF /* ChangeJumpViewController.swift */; };
+		AF66162825AF263100A744DF /* CancelAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF66162725AF263100A744DF /* CancelAlert.swift */; };
+		AF66162D25AF2A0C00A744DF /* ViewUsersInLadderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF66162C25AF2A0C00A744DF /* ViewUsersInLadderViewController.swift */; };
+		AF66163725AF3AF700A744DF /* ViewAdminsInLadderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF66163625AF3AF700A744DF /* ViewAdminsInLadderViewController.swift */; };
+		AF66163C25AF3BA600A744DF /* UserType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF66163B25AF3BA600A744DF /* UserType.swift */; };
+		AF74AB6C2500FB5D0059C388 /* SelectChallengeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74AB6B2500FB5D0059C388 /* SelectChallengeViewController.swift */; };
+		AF74AB6E25014B370059C388 /* ChallengeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74AB6D25014B370059C388 /* ChallengeViewController.swift */; };
+		AF74AB702501503C0059C388 /* Challenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74AB6F2501503C0059C388 /* Challenge.swift */; };
+		AF74AB7625015CBF0059C388 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74AB7525015CBF0059C388 /* User.swift */; };
+		AF835439252F2B010096F3C2 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF835438252F2B010096F3C2 /* ForgotPasswordViewController.swift */; };
+		AF83543B252F59130096F3C2 /* NoLadderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF83543A252F59130096F3C2 /* NoLadderView.swift */; };
+		AF8354452531C76B0096F3C2 /* NoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8354442531C76B0096F3C2 /* NoView.swift */; };
+		AF88726A2541BEE200D6EB5C /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8872692541BEE200D6EB5C /* BaseViewController.swift */; };
+		AF88726C2541C1AB00D6EB5C /* UserButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF88726B2541C1AB00D6EB5C /* UserButton.swift */; };
+		AF88726E2544575300D6EB5C /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF88726D2544575200D6EB5C /* AccountViewController.swift */; };
+		AF8DA29B254F64E800022940 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8DA29A254F64E800022940 /* LoadingView.swift */; };
+		AF8DA29D25503DB700022940 /* LadderSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8DA29C25503DB700022940 /* LadderSettingsViewController.swift */; };
+		AF8DA29F2550445500022940 /* UserCellData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8DA29E2550445500022940 /* UserCellData.swift */; };
+		AFB6410024E3259200570C52 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB640FF24E3259200570C52 /* AppDelegate.swift */; };
+		AFB6410224E3259200570C52 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB6410124E3259200570C52 /* SceneDelegate.swift */; };
+		AFB6410424E3259200570C52 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB6410324E3259200570C52 /* LoginViewController.swift */; };
+		AFB6410724E3259200570C52 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AFB6410524E3259200570C52 /* Main.storyboard */; };
+		AFB6410924E3259400570C52 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFB6410824E3259400570C52 /* Assets.xcassets */; };
+		AFB6410C24E3259400570C52 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AFB6410A24E3259400570C52 /* LaunchScreen.storyboard */; };
+		AFB6411724E3259500570C52 /* Challenge_LadderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB6411624E3259500570C52 /* Challenge_LadderTests.swift */; };
+		AFB6412224E3259500570C52 /* Challenge_LadderUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB6412124E3259500570C52 /* Challenge_LadderUITests.swift */; };
+		AFB6413024E3425800570C52 /* Brand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB6412F24E3425800570C52 /* Brand.swift */; };
+		AFB6413224E3484B00570C52 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AFB6413124E3484B00570C52 /* GoogleService-Info.plist */; };
+		AFBD1A072552CDA400A5053C /* FindViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBD1A062552CDA400A5053C /* FindViewController.swift */; };
+		AFBFC09E25CC5AA900028F77 /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBFC09D25CC5AA800028F77 /* NotificationCell.swift */; };
+		AFBFC0A325CC5BA000028F77 /* NoteData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBFC0A225CC5BA000028F77 /* NoteData.swift */; };
+		AFBFC0AB25D59EB000028F77 /* ChallengeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBFC0AA25D59EAF00028F77 /* ChallengeData.swift */; };
+		AFBFC0B025D5A61E00028F77 /* SelectChallengeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBFC0AF25D5A61E00028F77 /* SelectChallengeCell.swift */; };
+		AFD3EED024FA606400350C9E /* LadderUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD3EECF24FA606400350C9E /* LadderUser.swift */; };
+		AFD3EED224FA79D800350C9E /* LadderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD3EED124FA79D800350C9E /* LadderCell.swift */; };
+		AFE402BC256947E3008AD818 /* ViewRequestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE402BB256947E3008AD818 /* ViewRequestsViewController.swift */; };
+		AFE402C925696A9D008AD818 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE402C825696A9D008AD818 /* LoadingViewController.swift */; };
+		AFE402EB25698794008AD818 /* LadderPermission.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE402EA25698794008AD818 /* LadderPermission.swift */; };
+		AFE402F3256FBFC5008AD818 /* PermissionsTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE402F2256FBFC5008AD818 /* PermissionsTextField.swift */; };
+		AFE9620925ADB8DB001E5E81 /* ChallengeAwaitingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE9620825ADB8DB001E5E81 /* ChallengeAwaitingView.swift */; };
+		AFE9620E25ADE7BB001E5E81 /* HomeMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE9620D25ADE7BB001E5E81 /* HomeMessageView.swift */; };
+		AFE9621325ADE8B2001E5E81 /* ViewLaddersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE9621225ADE8B2001E5E81 /* ViewLaddersView.swift */; };
+		AFE9621825ADE98D001E5E81 /* NoLaddersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE9621725ADE98D001E5E81 /* NoLaddersView.swift */; };
+		AFE9621E25ADEDEF001E5E81 /* PositionsEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE9621D25ADEDEF001E5E81 /* PositionsEx.swift */; };
+		AFE9622625ADEE61001E5E81 /* IncludeYourselfEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE9622525ADEE61001E5E81 /* IncludeYourselfEx.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		AFB6411324E3259500570C52 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AFB640F424E3259200570C52 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AFB640FB24E3259200570C52;
+			remoteInfo = "Challenge Ladder";
+		};
+		AFB6411E24E3259500570C52 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AFB640F424E3259200570C52 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AFB640FB24E3259200570C52;
+			remoteInfo = "Challenge Ladder";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		238D774F442967D2DEF461C4 /* Pods_Challenge_Ladder_Challenge_LadderUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Challenge_Ladder_Challenge_LadderUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3F654833BADB3D3479190F6F /* Pods-Challenge Ladder-Challenge LadderUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Challenge Ladder-Challenge LadderUITests.debug.xcconfig"; path = "Target Support Files/Pods-Challenge Ladder-Challenge LadderUITests/Pods-Challenge Ladder-Challenge LadderUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		A1CDEF27ABC3F2F6FDA93E98 /* Pods-Challenge LadderTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Challenge LadderTests.debug.xcconfig"; path = "Target Support Files/Pods-Challenge LadderTests/Pods-Challenge LadderTests.debug.xcconfig"; sourceTree = "<group>"; };
+		A24178C887645ED9860EEE5E /* Pods-Challenge Ladder-Challenge LadderUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Challenge Ladder-Challenge LadderUITests.release.xcconfig"; path = "Target Support Files/Pods-Challenge Ladder-Challenge LadderUITests/Pods-Challenge Ladder-Challenge LadderUITests.release.xcconfig"; sourceTree = "<group>"; };
+		A91BF2BAF56DF1A453CC8828 /* Pods_Challenge_LadderTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Challenge_LadderTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AF01E9632552D1E1008862B4 /* FindLadderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindLadderViewController.swift; sourceTree = "<group>"; };
+		AF0BE69624E553F3005FF2CE /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		AF0BE69A24E55E27005FF2CE /* MainUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainUser.swift; sourceTree = "<group>"; };
+		AF0BE69C24E55EC2005FF2CE /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
+		AF0BE69E24E56181005FF2CE /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		AF0BE6A224E5E1EB005FF2CE /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		AF0BE6A424E5E91D005FF2CE /* SlideInTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideInTransition.swift; sourceTree = "<group>"; };
+		AF0BE6A624E7EC11005FF2CE /* CreateLadderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateLadderViewController.swift; sourceTree = "<group>"; };
+		AF0BE6A824E88632005FF2CE /* Ladder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ladder.swift; sourceTree = "<group>"; };
+		AF3B444025DD469F004CE6DA /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
+		AF3B444425DD647A004CE6DA /* DisplayFindViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayFindViewController.swift; sourceTree = "<group>"; };
+		AF3B444625DD70BE004CE6DA /* RequestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestCell.swift; sourceTree = "<group>"; };
+		AF3B444825DD719E004CE6DA /* RequestCellData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestCellData.swift; sourceTree = "<group>"; };
+		AF3B444B25DEB467004CE6DA /* CreateAccountInDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountInDB.swift; sourceTree = "<group>"; };
+		AF3B444D25DEB545004CE6DA /* CreatingAccountStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatingAccountStatus.swift; sourceTree = "<group>"; };
+		AF3B445125DEC29B004CE6DA /* CreateUsername.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateUsername.swift; sourceTree = "<group>"; };
+		AF45AF5E24F1B11F004A831F /* SelectLadderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLadderViewController.swift; sourceTree = "<group>"; };
+		AF45AF6024F1BE37004A831F /* LadderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LadderViewController.swift; sourceTree = "<group>"; };
+		AF45AF6224F2DCD4004A831F /* FindUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindUserViewController.swift; sourceTree = "<group>"; };
+		AF45AF6824F85D3A004A831F /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = "/Users/harryrollings/Documents/Dev/Challenge Ladder/Challenge Ladder/Service/Extensions.swift"; sourceTree = "<absolute>"; };
+		AF45AF6C24F94C34004A831F /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
+		AF49BB7125DA9FB20089FC2A /* LadderData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LadderData.swift; sourceTree = "<group>"; };
+		AF49BB7625DAAC850089FC2A /* SelectLadderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLadderCell.swift; sourceTree = "<group>"; };
+		AF52ACE8257BA48B004C8BF6 /* AwaitingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwaitingView.swift; sourceTree = "<group>"; };
+		AF66162225AF228600A744DF /* ChangeJumpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeJumpViewController.swift; sourceTree = "<group>"; };
+		AF66162725AF263100A744DF /* CancelAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelAlert.swift; sourceTree = "<group>"; };
+		AF66162C25AF2A0C00A744DF /* ViewUsersInLadderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewUsersInLadderViewController.swift; sourceTree = "<group>"; };
+		AF66163625AF3AF700A744DF /* ViewAdminsInLadderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAdminsInLadderViewController.swift; sourceTree = "<group>"; };
+		AF66163B25AF3BA600A744DF /* UserType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserType.swift; sourceTree = "<group>"; };
+		AF74AB6B2500FB5D0059C388 /* SelectChallengeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectChallengeViewController.swift; sourceTree = "<group>"; };
+		AF74AB6D25014B370059C388 /* ChallengeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeViewController.swift; sourceTree = "<group>"; };
+		AF74AB6F2501503C0059C388 /* Challenge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Challenge.swift; sourceTree = "<group>"; };
+		AF74AB7525015CBF0059C388 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		AF74AB77250A625D0059C388 /* Challenge Ladder.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Challenge Ladder.entitlements"; sourceTree = "<group>"; };
+		AF835438252F2B010096F3C2 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
+		AF83543A252F59130096F3C2 /* NoLadderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoLadderView.swift; sourceTree = "<group>"; };
+		AF8354442531C76B0096F3C2 /* NoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoView.swift; sourceTree = "<group>"; };
+		AF8872692541BEE200D6EB5C /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		AF88726B2541C1AB00D6EB5C /* UserButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserButton.swift; sourceTree = "<group>"; };
+		AF88726D2544575200D6EB5C /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
+		AF8DA29A254F64E800022940 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		AF8DA29C25503DB700022940 /* LadderSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LadderSettingsViewController.swift; sourceTree = "<group>"; };
+		AF8DA29E2550445500022940 /* UserCellData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCellData.swift; sourceTree = "<group>"; };
+		AFB640FC24E3259200570C52 /* Challenge Ladder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Challenge Ladder.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AFB640FF24E3259200570C52 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		AFB6410124E3259200570C52 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		AFB6410324E3259200570C52 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		AFB6410624E3259200570C52 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		AFB6410824E3259400570C52 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		AFB6410B24E3259400570C52 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		AFB6410D24E3259400570C52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AFB6411224E3259500570C52 /* Challenge LadderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Challenge LadderTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AFB6411624E3259500570C52 /* Challenge_LadderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Challenge_LadderTests.swift; sourceTree = "<group>"; };
+		AFB6411824E3259500570C52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AFB6411D24E3259500570C52 /* Challenge LadderUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Challenge LadderUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AFB6412124E3259500570C52 /* Challenge_LadderUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Challenge_LadderUITests.swift; sourceTree = "<group>"; };
+		AFB6412324E3259500570C52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AFB6412F24E3425800570C52 /* Brand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Brand.swift; sourceTree = "<group>"; };
+		AFB6413124E3484B00570C52 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../GoogleService-Info.plist"; sourceTree = "<group>"; };
+		AFBD1A062552CDA400A5053C /* FindViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindViewController.swift; sourceTree = "<group>"; };
+		AFBFC09D25CC5AA800028F77 /* NotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
+		AFBFC0A225CC5BA000028F77 /* NoteData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteData.swift; sourceTree = "<group>"; };
+		AFBFC0AA25D59EAF00028F77 /* ChallengeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeData.swift; sourceTree = "<group>"; };
+		AFBFC0AF25D5A61E00028F77 /* SelectChallengeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectChallengeCell.swift; sourceTree = "<group>"; };
+		AFD3EECF24FA606400350C9E /* LadderUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LadderUser.swift; sourceTree = "<group>"; };
+		AFD3EED124FA79D800350C9E /* LadderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LadderCell.swift; sourceTree = "<group>"; };
+		AFE402BB256947E3008AD818 /* ViewRequestsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewRequestsViewController.swift; sourceTree = "<group>"; };
+		AFE402C825696A9D008AD818 /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
+		AFE402EA25698794008AD818 /* LadderPermission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LadderPermission.swift; sourceTree = "<group>"; };
+		AFE402F2256FBFC5008AD818 /* PermissionsTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsTextField.swift; sourceTree = "<group>"; };
+		AFE9620825ADB8DB001E5E81 /* ChallengeAwaitingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeAwaitingView.swift; sourceTree = "<group>"; };
+		AFE9620D25ADE7BB001E5E81 /* HomeMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeMessageView.swift; sourceTree = "<group>"; };
+		AFE9621225ADE8B2001E5E81 /* ViewLaddersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewLaddersView.swift; sourceTree = "<group>"; };
+		AFE9621725ADE98D001E5E81 /* NoLaddersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoLaddersView.swift; sourceTree = "<group>"; };
+		AFE9621D25ADEDEF001E5E81 /* PositionsEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositionsEx.swift; sourceTree = "<group>"; };
+		AFE9622525ADEE61001E5E81 /* IncludeYourselfEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncludeYourselfEx.swift; sourceTree = "<group>"; };
+		C6871A2026BDDF32A7A86E8B /* Pods-Challenge Ladder.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Challenge Ladder.debug.xcconfig"; path = "Target Support Files/Pods-Challenge Ladder/Pods-Challenge Ladder.debug.xcconfig"; sourceTree = "<group>"; };
+		DF96A9ACC21CE6B300B37A32 /* Pods-Challenge LadderTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Challenge LadderTests.release.xcconfig"; path = "Target Support Files/Pods-Challenge LadderTests/Pods-Challenge LadderTests.release.xcconfig"; sourceTree = "<group>"; };
+		E0DB3AC5FA746228A8000D8B /* Pods-Challenge Ladder.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Challenge Ladder.release.xcconfig"; path = "Target Support Files/Pods-Challenge Ladder/Pods-Challenge Ladder.release.xcconfig"; sourceTree = "<group>"; };
+		E9AC10DC01DEBE76B216A176 /* Pods_Challenge_Ladder.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Challenge_Ladder.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AFB640F924E3259200570C52 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				679A7B8DA1106B4441C1BAAA /* Pods_Challenge_Ladder.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AFB6410F24E3259500570C52 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7CA3AD75A18F4E23B756CEA6 /* Pods_Challenge_LadderTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AFB6411A24E3259500570C52 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				767740824659BA0FAFA2F235 /* Pods_Challenge_Ladder_Challenge_LadderUITests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4A67F2B731A7EE1206F5AB85 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E9AC10DC01DEBE76B216A176 /* Pods_Challenge_Ladder.framework */,
+				238D774F442967D2DEF461C4 /* Pods_Challenge_Ladder_Challenge_LadderUITests.framework */,
+				A91BF2BAF56DF1A453CC8828 /* Pods_Challenge_LadderTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A6D04B7745E144A6D363B017 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C6871A2026BDDF32A7A86E8B /* Pods-Challenge Ladder.debug.xcconfig */,
+				E0DB3AC5FA746228A8000D8B /* Pods-Challenge Ladder.release.xcconfig */,
+				3F654833BADB3D3479190F6F /* Pods-Challenge Ladder-Challenge LadderUITests.debug.xcconfig */,
+				A24178C887645ED9860EEE5E /* Pods-Challenge Ladder-Challenge LadderUITests.release.xcconfig */,
+				A1CDEF27ABC3F2F6FDA93E98 /* Pods-Challenge LadderTests.debug.xcconfig */,
+				DF96A9ACC21CE6B300B37A32 /* Pods-Challenge LadderTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		AF0BE69824E553F8005FF2CE /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				AFE402F2256FBFC5008AD818 /* PermissionsTextField.swift */,
+				AFE402BA25694569008AD818 /* Ladder Settings */,
+				AFBD1A082552CDC300A5053C /* Parents */,
+				AF88726D2544575200D6EB5C /* AccountViewController.swift */,
+				AF74AB6D25014B370059C388 /* ChallengeViewController.swift */,
+				AF0BE6A624E7EC11005FF2CE /* CreateLadderViewController.swift */,
+				AF01E9632552D1E1008862B4 /* FindLadderViewController.swift */,
+				AF835438252F2B010096F3C2 /* ForgotPasswordViewController.swift */,
+				AF0BE69E24E56181005FF2CE /* HomeViewController.swift */,
+				AF45AF6024F1BE37004A831F /* LadderViewController.swift */,
+				AFB6410324E3259200570C52 /* LoginViewController.swift */,
+				AF0BE6A224E5E1EB005FF2CE /* MenuViewController.swift */,
+				AF45AF6C24F94C34004A831F /* NotificationViewController.swift */,
+				AF74AB6B2500FB5D0059C388 /* SelectChallengeViewController.swift */,
+				AF45AF5E24F1B11F004A831F /* SelectLadderViewController.swift */,
+				AF0BE69624E553F3005FF2CE /* SignUpViewController.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		AF3B444A25DEB454004CE6DA /* Signing In */ = {
+			isa = PBXGroup;
+			children = (
+				AF3B444B25DEB467004CE6DA /* CreateAccountInDB.swift */,
+				AF3B444D25DEB545004CE6DA /* CreatingAccountStatus.swift */,
+				AF3B445125DEC29B004CE6DA /* CreateUsername.swift */,
+			);
+			path = "Signing In";
+			sourceTree = "<group>";
+		};
+		AF69365D24F1AA3E009D9C74 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				AFE9621C25ADEDD8001E5E81 /* Creating Ladder */,
+				AF8354442531C76B0096F3C2 /* NoView.swift */,
+				AF8DA29A254F64E800022940 /* LoadingView.swift */,
+				AF83543F2531C3FA0096F3C2 /* Notifications */,
+				AF83543E2531C3DE0096F3C2 /* Challenge */,
+				AF83543D2531C3D00096F3C2 /* Ladder */,
+				AF83543C252F59190096F3C2 /* Home */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		AF69365E24F1AA52009D9C74 /* Persistance */ = {
+			isa = PBXGroup;
+			children = (
+				AF0BE69A24E55E27005FF2CE /* MainUser.swift */,
+				AF74AB7525015CBF0059C388 /* User.swift */,
+				AF74AB6F2501503C0059C388 /* Challenge.swift */,
+				AF0BE6A824E88632005FF2CE /* Ladder.swift */,
+				AFD3EECF24FA606400350C9E /* LadderUser.swift */,
+			);
+			path = Persistance;
+			sourceTree = "<group>";
+		};
+		AF69365F24F1AA6A009D9C74 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				AF0BE69C24E55EC2005FF2CE /* Alert.swift */,
+				AF66162725AF263100A744DF /* CancelAlert.swift */,
+				AFB6412F24E3425800570C52 /* Brand.swift */,
+				AF45AF6824F85D3A004A831F /* Extensions.swift */,
+				AF88726B2541C1AB00D6EB5C /* UserButton.swift */,
+				AF8DA29E2550445500022940 /* UserCellData.swift */,
+				AF66163B25AF3BA600A744DF /* UserType.swift */,
+				AFE402EA25698794008AD818 /* LadderPermission.swift */,
+				AFBFC0A225CC5BA000028F77 /* NoteData.swift */,
+				AFBFC0AA25D59EAF00028F77 /* ChallengeData.swift */,
+				AF49BB7125DA9FB20089FC2A /* LadderData.swift */,
+				AF3B444825DD719E004CE6DA /* RequestCellData.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		AF83543C252F59190096F3C2 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				AFE9620825ADB8DB001E5E81 /* ChallengeAwaitingView.swift */,
+				AFE9621225ADE8B2001E5E81 /* ViewLaddersView.swift */,
+				AFE9621725ADE98D001E5E81 /* NoLaddersView.swift */,
+				AFE9620D25ADE7BB001E5E81 /* HomeMessageView.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		AF83543D2531C3D00096F3C2 /* Ladder */ = {
+			isa = PBXGroup;
+			children = (
+				AF83543A252F59130096F3C2 /* NoLadderView.swift */,
+				AFD3EED124FA79D800350C9E /* LadderCell.swift */,
+				AF3B444625DD70BE004CE6DA /* RequestCell.swift */,
+				AF49BB7625DAAC850089FC2A /* SelectLadderCell.swift */,
+				AF3B444025DD469F004CE6DA /* UserCell.swift */,
+			);
+			path = Ladder;
+			sourceTree = "<group>";
+		};
+		AF83543E2531C3DE0096F3C2 /* Challenge */ = {
+			isa = PBXGroup;
+			children = (
+				AFBFC0AF25D5A61E00028F77 /* SelectChallengeCell.swift */,
+				AF52ACE8257BA48B004C8BF6 /* AwaitingView.swift */,
+			);
+			path = Challenge;
+			sourceTree = "<group>";
+		};
+		AF83543F2531C3FA0096F3C2 /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				AFBFC09D25CC5AA800028F77 /* NotificationCell.swift */,
+			);
+			path = Notifications;
+			sourceTree = "<group>";
+		};
+		AFB640F324E3259200570C52 = {
+			isa = PBXGroup;
+			children = (
+				AFB640FE24E3259200570C52 /* Challenge Ladder */,
+				AFB6411524E3259500570C52 /* Challenge LadderTests */,
+				AFB6412024E3259500570C52 /* Challenge LadderUITests */,
+				AFB640FD24E3259200570C52 /* Products */,
+				A6D04B7745E144A6D363B017 /* Pods */,
+				4A67F2B731A7EE1206F5AB85 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		AFB640FD24E3259200570C52 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AFB640FC24E3259200570C52 /* Challenge Ladder.app */,
+				AFB6411224E3259500570C52 /* Challenge LadderTests.xctest */,
+				AFB6411D24E3259500570C52 /* Challenge LadderUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AFB640FE24E3259200570C52 /* Challenge Ladder */ = {
+			isa = PBXGroup;
+			children = (
+				AF3B444A25DEB454004CE6DA /* Signing In */,
+				AF74AB77250A625D0059C388 /* Challenge Ladder.entitlements */,
+				AF69365F24F1AA6A009D9C74 /* Service */,
+				AF69365E24F1AA52009D9C74 /* Persistance */,
+				AF69365D24F1AA3E009D9C74 /* Views */,
+				AF0BE69824E553F8005FF2CE /* View Controllers */,
+				AFB640FF24E3259200570C52 /* AppDelegate.swift */,
+				AFB6410124E3259200570C52 /* SceneDelegate.swift */,
+				AFB6410524E3259200570C52 /* Main.storyboard */,
+				AFB6410824E3259400570C52 /* Assets.xcassets */,
+				AFB6410A24E3259400570C52 /* LaunchScreen.storyboard */,
+				AFB6410D24E3259400570C52 /* Info.plist */,
+				AFB6413124E3484B00570C52 /* GoogleService-Info.plist */,
+				AF0BE6A424E5E91D005FF2CE /* SlideInTransition.swift */,
+			);
+			path = "Challenge Ladder";
+			sourceTree = "<group>";
+		};
+		AFB6411524E3259500570C52 /* Challenge LadderTests */ = {
+			isa = PBXGroup;
+			children = (
+				AFB6411624E3259500570C52 /* Challenge_LadderTests.swift */,
+				AFB6411824E3259500570C52 /* Info.plist */,
+			);
+			path = "Challenge LadderTests";
+			sourceTree = "<group>";
+		};
+		AFB6412024E3259500570C52 /* Challenge LadderUITests */ = {
+			isa = PBXGroup;
+			children = (
+				AFB6412124E3259500570C52 /* Challenge_LadderUITests.swift */,
+				AFB6412324E3259500570C52 /* Info.plist */,
+			);
+			path = "Challenge LadderUITests";
+			sourceTree = "<group>";
+		};
+		AFBD1A082552CDC300A5053C /* Parents */ = {
+			isa = PBXGroup;
+			children = (
+				AF8872692541BEE200D6EB5C /* BaseViewController.swift */,
+				AFBD1A062552CDA400A5053C /* FindViewController.swift */,
+				AF3B444425DD647A004CE6DA /* DisplayFindViewController.swift */,
+				AFE402C825696A9D008AD818 /* LoadingViewController.swift */,
+			);
+			path = Parents;
+			sourceTree = "<group>";
+		};
+		AFE402BA25694569008AD818 /* Ladder Settings */ = {
+			isa = PBXGroup;
+			children = (
+				AF8DA29C25503DB700022940 /* LadderSettingsViewController.swift */,
+				AFE402BB256947E3008AD818 /* ViewRequestsViewController.swift */,
+				AF45AF6224F2DCD4004A831F /* FindUserViewController.swift */,
+				AF66162225AF228600A744DF /* ChangeJumpViewController.swift */,
+				AF66162C25AF2A0C00A744DF /* ViewUsersInLadderViewController.swift */,
+				AF66163625AF3AF700A744DF /* ViewAdminsInLadderViewController.swift */,
+			);
+			path = "Ladder Settings";
+			sourceTree = "<group>";
+		};
+		AFE9621C25ADEDD8001E5E81 /* Creating Ladder */ = {
+			isa = PBXGroup;
+			children = (
+				AFE9621D25ADEDEF001E5E81 /* PositionsEx.swift */,
+				AFE9622525ADEE61001E5E81 /* IncludeYourselfEx.swift */,
+			);
+			path = "Creating Ladder";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AFB640FB24E3259200570C52 /* Challenge Ladder */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AFB6412624E3259500570C52 /* Build configuration list for PBXNativeTarget "Challenge Ladder" */;
+			buildPhases = (
+				04A12A5E9C554A40E9C1E356 /* [CP] Check Pods Manifest.lock */,
+				AFB640F824E3259200570C52 /* Sources */,
+				AFB640F924E3259200570C52 /* Frameworks */,
+				AFB640FA24E3259200570C52 /* Resources */,
+				D7A02F5E907C8FBCE8982C74 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Challenge Ladder";
+			productName = "Challenge Ladder";
+			productReference = AFB640FC24E3259200570C52 /* Challenge Ladder.app */;
+			productType = "com.apple.product-type.application";
+		};
+		AFB6411124E3259500570C52 /* Challenge LadderTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AFB6412924E3259500570C52 /* Build configuration list for PBXNativeTarget "Challenge LadderTests" */;
+			buildPhases = (
+				4A05FDF8EC6523CC050150B3 /* [CP] Check Pods Manifest.lock */,
+				AFB6410E24E3259500570C52 /* Sources */,
+				AFB6410F24E3259500570C52 /* Frameworks */,
+				AFB6411024E3259500570C52 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AFB6411424E3259500570C52 /* PBXTargetDependency */,
+			);
+			name = "Challenge LadderTests";
+			productName = "Challenge LadderTests";
+			productReference = AFB6411224E3259500570C52 /* Challenge LadderTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		AFB6411C24E3259500570C52 /* Challenge LadderUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AFB6412C24E3259500570C52 /* Build configuration list for PBXNativeTarget "Challenge LadderUITests" */;
+			buildPhases = (
+				DAB0A1C38F776938046927D7 /* [CP] Check Pods Manifest.lock */,
+				AFB6411924E3259500570C52 /* Sources */,
+				AFB6411A24E3259500570C52 /* Frameworks */,
+				AFB6411B24E3259500570C52 /* Resources */,
+				E9188A82E2E73C85A8141A39 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AFB6411F24E3259500570C52 /* PBXTargetDependency */,
+			);
+			name = "Challenge LadderUITests";
+			productName = "Challenge LadderUITests";
+			productReference = AFB6411D24E3259500570C52 /* Challenge LadderUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AFB640F424E3259200570C52 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1200;
+				LastUpgradeCheck = 1200;
+				TargetAttributes = {
+					AFB640FB24E3259200570C52 = {
+						CreatedOnToolsVersion = 12.0;
+					};
+					AFB6411124E3259500570C52 = {
+						CreatedOnToolsVersion = 12.0;
+						TestTargetID = AFB640FB24E3259200570C52;
+					};
+					AFB6411C24E3259500570C52 = {
+						CreatedOnToolsVersion = 12.0;
+						TestTargetID = AFB640FB24E3259200570C52;
+					};
+				};
+			};
+			buildConfigurationList = AFB640F724E3259200570C52 /* Build configuration list for PBXProject "Challenge Ladder" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = AFB640F324E3259200570C52;
+			productRefGroup = AFB640FD24E3259200570C52 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AFB640FB24E3259200570C52 /* Challenge Ladder */,
+				AFB6411124E3259500570C52 /* Challenge LadderTests */,
+				AFB6411C24E3259500570C52 /* Challenge LadderUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AFB640FA24E3259200570C52 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AFB6410C24E3259400570C52 /* LaunchScreen.storyboard in Resources */,
+				AFB6413224E3484B00570C52 /* GoogleService-Info.plist in Resources */,
+				AFB6410924E3259400570C52 /* Assets.xcassets in Resources */,
+				AFB6410724E3259200570C52 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AFB6411024E3259500570C52 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AFB6411B24E3259500570C52 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		04A12A5E9C554A40E9C1E356 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Challenge Ladder-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4A05FDF8EC6523CC050150B3 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Challenge LadderTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D7A02F5E907C8FBCE8982C74 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Challenge Ladder/Pods-Challenge Ladder-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Challenge Ladder/Pods-Challenge Ladder-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Challenge Ladder/Pods-Challenge Ladder-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DAB0A1C38F776938046927D7 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Challenge Ladder-Challenge LadderUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E9188A82E2E73C85A8141A39 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Challenge Ladder-Challenge LadderUITests/Pods-Challenge Ladder-Challenge LadderUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Challenge Ladder-Challenge LadderUITests/Pods-Challenge Ladder-Challenge LadderUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Challenge Ladder-Challenge LadderUITests/Pods-Challenge Ladder-Challenge LadderUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AFB640F824E3259200570C52 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AF3B445225DEC29B004CE6DA /* CreateUsername.swift in Sources */,
+				AF74AB6C2500FB5D0059C388 /* SelectChallengeViewController.swift in Sources */,
+				AFE9621825ADE98D001E5E81 /* NoLaddersView.swift in Sources */,
+				AFE9621325ADE8B2001E5E81 /* ViewLaddersView.swift in Sources */,
+				AF74AB702501503C0059C388 /* Challenge.swift in Sources */,
+				AFB6410424E3259200570C52 /* LoginViewController.swift in Sources */,
+				AF0BE6A324E5E1EB005FF2CE /* MenuViewController.swift in Sources */,
+				AF52ACE9257BA48B004C8BF6 /* AwaitingView.swift in Sources */,
+				AF45AF6124F1BE37004A831F /* LadderViewController.swift in Sources */,
+				AFE402F3256FBFC5008AD818 /* PermissionsTextField.swift in Sources */,
+				AFBFC09E25CC5AA900028F77 /* NotificationCell.swift in Sources */,
+				AF0BE6A924E88632005FF2CE /* Ladder.swift in Sources */,
+				AF3B444E25DEB545004CE6DA /* CreatingAccountStatus.swift in Sources */,
+				AF66162D25AF2A0C00A744DF /* ViewUsersInLadderViewController.swift in Sources */,
+				AFD3EED024FA606400350C9E /* LadderUser.swift in Sources */,
+				AFBFC0B025D5A61E00028F77 /* SelectChallengeCell.swift in Sources */,
+				AFE9620E25ADE7BB001E5E81 /* HomeMessageView.swift in Sources */,
+				AF0BE69B24E55E27005FF2CE /* MainUser.swift in Sources */,
+				AF0BE6A724E7EC11005FF2CE /* CreateLadderViewController.swift in Sources */,
+				AF45AF6924F85D3A004A831F /* Extensions.swift in Sources */,
+				AFE402BC256947E3008AD818 /* ViewRequestsViewController.swift in Sources */,
+				AF88726C2541C1AB00D6EB5C /* UserButton.swift in Sources */,
+				AF3B444125DD469F004CE6DA /* UserCell.swift in Sources */,
+				AFE9620925ADB8DB001E5E81 /* ChallengeAwaitingView.swift in Sources */,
+				AF45AF6324F2DCD4004A831F /* FindUserViewController.swift in Sources */,
+				AF66162825AF263100A744DF /* CancelAlert.swift in Sources */,
+				AFB6413024E3425800570C52 /* Brand.swift in Sources */,
+				AF45AF6D24F94C34004A831F /* NotificationViewController.swift in Sources */,
+				AF66162325AF228600A744DF /* ChangeJumpViewController.swift in Sources */,
+				AF88726A2541BEE200D6EB5C /* BaseViewController.swift in Sources */,
+				AF49BB7725DAAC850089FC2A /* SelectLadderCell.swift in Sources */,
+				AFE9622625ADEE61001E5E81 /* IncludeYourselfEx.swift in Sources */,
+				AFBFC0AB25D59EB000028F77 /* ChallengeData.swift in Sources */,
+				AF0BE69F24E56181005FF2CE /* HomeViewController.swift in Sources */,
+				AFBFC0A325CC5BA000028F77 /* NoteData.swift in Sources */,
+				AF0BE6A524E5E91D005FF2CE /* SlideInTransition.swift in Sources */,
+				AF01E9642552D1E1008862B4 /* FindLadderViewController.swift in Sources */,
+				AF3B444925DD719E004CE6DA /* RequestCellData.swift in Sources */,
+				AFB6410024E3259200570C52 /* AppDelegate.swift in Sources */,
+				AF3B444725DD70BE004CE6DA /* RequestCell.swift in Sources */,
+				AF8DA29B254F64E800022940 /* LoadingView.swift in Sources */,
+				AFB6410224E3259200570C52 /* SceneDelegate.swift in Sources */,
+				AF8DA29F2550445500022940 /* UserCellData.swift in Sources */,
+				AF45AF5F24F1B11F004A831F /* SelectLadderViewController.swift in Sources */,
+				AF74AB7625015CBF0059C388 /* User.swift in Sources */,
+				AF66163C25AF3BA600A744DF /* UserType.swift in Sources */,
+				AF8DA29D25503DB700022940 /* LadderSettingsViewController.swift in Sources */,
+				AF3B444C25DEB467004CE6DA /* CreateAccountInDB.swift in Sources */,
+				AFE9621E25ADEDEF001E5E81 /* PositionsEx.swift in Sources */,
+				AFE402C925696A9D008AD818 /* LoadingViewController.swift in Sources */,
+				AF49BB7225DA9FB20089FC2A /* LadderData.swift in Sources */,
+				AFD3EED224FA79D800350C9E /* LadderCell.swift in Sources */,
+				AF66163725AF3AF700A744DF /* ViewAdminsInLadderViewController.swift in Sources */,
+				AFE402EB25698794008AD818 /* LadderPermission.swift in Sources */,
+				AF74AB6E25014B370059C388 /* ChallengeViewController.swift in Sources */,
+				AF0BE69724E553F3005FF2CE /* SignUpViewController.swift in Sources */,
+				AF0BE69D24E55EC2005FF2CE /* Alert.swift in Sources */,
+				AF8354452531C76B0096F3C2 /* NoView.swift in Sources */,
+				AF3B444525DD647A004CE6DA /* DisplayFindViewController.swift in Sources */,
+				AF835439252F2B010096F3C2 /* ForgotPasswordViewController.swift in Sources */,
+				AF83543B252F59130096F3C2 /* NoLadderView.swift in Sources */,
+				AF88726E2544575300D6EB5C /* AccountViewController.swift in Sources */,
+				AFBD1A072552CDA400A5053C /* FindViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AFB6410E24E3259500570C52 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AFB6411724E3259500570C52 /* Challenge_LadderTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AFB6411924E3259500570C52 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AFB6412224E3259500570C52 /* Challenge_LadderUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		AFB6411424E3259500570C52 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AFB640FB24E3259200570C52 /* Challenge Ladder */;
+			targetProxy = AFB6411324E3259500570C52 /* PBXContainerItemProxy */;
+		};
+		AFB6411F24E3259500570C52 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AFB640FB24E3259200570C52 /* Challenge Ladder */;
+			targetProxy = AFB6411E24E3259500570C52 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		AFB6410524E3259200570C52 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AFB6410624E3259200570C52 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		AFB6410A24E3259400570C52 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AFB6410B24E3259400570C52 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		AFB6412424E3259500570C52 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		AFB6412524E3259500570C52 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		AFB6412724E3259500570C52 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C6871A2026BDDF32A7A86E8B /* Pods-Challenge Ladder.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Challenge Ladder/Challenge Ladder.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = G3CQTBK5N8;
+				INFOPLIST_FILE = "Challenge Ladder/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "modeflick.Challenge-Ladder";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		AFB6412824E3259500570C52 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E0DB3AC5FA746228A8000D8B /* Pods-Challenge Ladder.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Challenge Ladder/Challenge Ladder.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = G3CQTBK5N8;
+				INFOPLIST_FILE = "Challenge Ladder/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "modeflick.Challenge-Ladder";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		AFB6412A24E3259500570C52 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A1CDEF27ABC3F2F6FDA93E98 /* Pods-Challenge LadderTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = G3CQTBK5N8;
+				INFOPLIST_FILE = "Challenge LadderTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "modeflick.Challenge-LadderTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Challenge Ladder.app/Challenge Ladder";
+			};
+			name = Debug;
+		};
+		AFB6412B24E3259500570C52 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DF96A9ACC21CE6B300B37A32 /* Pods-Challenge LadderTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = G3CQTBK5N8;
+				INFOPLIST_FILE = "Challenge LadderTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "modeflick.Challenge-LadderTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Challenge Ladder.app/Challenge Ladder";
+			};
+			name = Release;
+		};
+		AFB6412D24E3259500570C52 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3F654833BADB3D3479190F6F /* Pods-Challenge Ladder-Challenge LadderUITests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = G3CQTBK5N8;
+				INFOPLIST_FILE = "Challenge LadderUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "modeflick.Challenge-LadderUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Challenge Ladder";
+			};
+			name = Debug;
+		};
+		AFB6412E24E3259500570C52 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A24178C887645ED9860EEE5E /* Pods-Challenge Ladder-Challenge LadderUITests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = G3CQTBK5N8;
+				INFOPLIST_FILE = "Challenge LadderUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "modeflick.Challenge-LadderUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Challenge Ladder";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AFB640F724E3259200570C52 /* Build configuration list for PBXProject "Challenge Ladder" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AFB6412424E3259500570C52 /* Debug */,
+				AFB6412524E3259500570C52 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AFB6412624E3259500570C52 /* Build configuration list for PBXNativeTarget "Challenge Ladder" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AFB6412724E3259500570C52 /* Debug */,
+				AFB6412824E3259500570C52 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AFB6412924E3259500570C52 /* Build configuration list for PBXNativeTarget "Challenge LadderTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AFB6412A24E3259500570C52 /* Debug */,
+				AFB6412B24E3259500570C52 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AFB6412C24E3259500570C52 /* Build configuration list for PBXNativeTarget "Challenge LadderUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AFB6412D24E3259500570C52 /* Debug */,
+				AFB6412E24E3259500570C52 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AFB640F424E3259200570C52 /* Project object */;
+}
