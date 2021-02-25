@@ -11,4 +11,5 @@ enum CreatingAccountStatus{
     case usernameTaken
     case internalError
     case success
+    case userAborted
 }

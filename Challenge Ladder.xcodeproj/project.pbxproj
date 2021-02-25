@@ -26,6 +26,8 @@
 		AF3B444C25DEB467004CE6DA /* CreateAccountInDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3B444B25DEB467004CE6DA /* CreateAccountInDB.swift */; };
 		AF3B444E25DEB545004CE6DA /* CreatingAccountStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3B444D25DEB545004CE6DA /* CreatingAccountStatus.swift */; };
 		AF3B445225DEC29B004CE6DA /* CreateUsername.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3B445125DEC29B004CE6DA /* CreateUsername.swift */; };
+		AF405B8525E8473F0078EC34 /* RetriveDocumentStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF405B8425E8473F0078EC34 /* RetriveDocumentStatus.swift */; };
+		AF405B8825E855530078EC34 /* UserError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF405B8725E855530078EC34 /* UserError.swift */; };
 		AF45AF5F24F1B11F004A831F /* SelectLadderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF45AF5E24F1B11F004A831F /* SelectLadderViewController.swift */; };
 		AF45AF6124F1BE37004A831F /* LadderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF45AF6024F1BE37004A831F /* LadderViewController.swift */; };
 		AF45AF6324F2DCD4004A831F /* FindUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF45AF6224F2DCD4004A831F /* FindUserViewController.swift */; };
@@ -120,6 +122,8 @@
 		AF3B444B25DEB467004CE6DA /* CreateAccountInDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountInDB.swift; sourceTree = "<group>"; };
 		AF3B444D25DEB545004CE6DA /* CreatingAccountStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatingAccountStatus.swift; sourceTree = "<group>"; };
 		AF3B445125DEC29B004CE6DA /* CreateUsername.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateUsername.swift; sourceTree = "<group>"; };
+		AF405B8425E8473F0078EC34 /* RetriveDocumentStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetriveDocumentStatus.swift; sourceTree = "<group>"; };
+		AF405B8725E855530078EC34 /* UserError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserError.swift; sourceTree = "<group>"; };
 		AF45AF5E24F1B11F004A831F /* SelectLadderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLadderViewController.swift; sourceTree = "<group>"; };
 		AF45AF6024F1BE37004A831F /* LadderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LadderViewController.swift; sourceTree = "<group>"; };
 		AF45AF6224F2DCD4004A831F /* FindUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindUserViewController.swift; sourceTree = "<group>"; };
@@ -264,10 +268,34 @@
 			isa = PBXGroup;
 			children = (
 				AF3B444B25DEB467004CE6DA /* CreateAccountInDB.swift */,
-				AF3B444D25DEB545004CE6DA /* CreatingAccountStatus.swift */,
 				AF3B445125DEC29B004CE6DA /* CreateUsername.swift */,
 			);
 			path = "Signing In";
+			sourceTree = "<group>";
+		};
+		AF405B8325E844AA0078EC34 /* Status */ = {
+			isa = PBXGroup;
+			children = (
+				AF405B8425E8473F0078EC34 /* RetriveDocumentStatus.swift */,
+				AF3B444D25DEB545004CE6DA /* CreatingAccountStatus.swift */,
+			);
+			path = Status;
+			sourceTree = "<group>";
+		};
+		AF405B8625E855480078EC34 /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				AF405B8725E855530078EC34 /* UserError.swift */,
+			);
+			path = Error;
+			sourceTree = "<group>";
+		};
+		AF405B8925E862C00078EC34 /* Transitions */ = {
+			isa = PBXGroup;
+			children = (
+				AF0BE6A424E5E91D005FF2CE /* SlideInTransition.swift */,
+			);
+			path = Transitions;
 			sourceTree = "<group>";
 		};
 		AF69365D24F1AA3E009D9C74 /* Views */ = {
@@ -380,6 +408,9 @@
 		AFB640FE24E3259200570C52 /* Challenge Ladder */ = {
 			isa = PBXGroup;
 			children = (
+				AF405B8925E862C00078EC34 /* Transitions */,
+				AF405B8625E855480078EC34 /* Error */,
+				AF405B8325E844AA0078EC34 /* Status */,
 				AF3B444A25DEB454004CE6DA /* Signing In */,
 				AF74AB77250A625D0059C388 /* Challenge Ladder.entitlements */,
 				AF69365F24F1AA6A009D9C74 /* Service */,
@@ -393,7 +424,6 @@
 				AFB6410A24E3259400570C52 /* LaunchScreen.storyboard */,
 				AFB6410D24E3259400570C52 /* Info.plist */,
 				AFB6413124E3484B00570C52 /* GoogleService-Info.plist */,
-				AF0BE6A424E5E91D005FF2CE /* SlideInTransition.swift */,
 			);
 			path = "Challenge Ladder";
 			sourceTree = "<group>";
@@ -461,6 +491,7 @@
 				AFB640F924E3259200570C52 /* Frameworks */,
 				AFB640FA24E3259200570C52 /* Resources */,
 				D7A02F5E907C8FBCE8982C74 /* [CP] Embed Pods Frameworks */,
+				23E9C0EC8A48068DFF6863EB /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -499,6 +530,7 @@
 				AFB6411A24E3259500570C52 /* Frameworks */,
 				AFB6411B24E3259500570C52 /* Resources */,
 				E9188A82E2E73C85A8141A39 /* [CP] Embed Pods Frameworks */,
+				EA7311DD3EDC8DC62376D5FE /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -603,6 +635,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		23E9C0EC8A48068DFF6863EB /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Challenge Ladder/Pods-Challenge Ladder-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Challenge Ladder/Pods-Challenge Ladder-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Challenge Ladder/Pods-Challenge Ladder-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		4A05FDF8EC6523CC050150B3 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -681,6 +730,23 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Challenge Ladder-Challenge LadderUITests/Pods-Challenge Ladder-Challenge LadderUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		EA7311DD3EDC8DC62376D5FE /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Challenge Ladder-Challenge LadderUITests/Pods-Challenge Ladder-Challenge LadderUITests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Challenge Ladder-Challenge LadderUITests/Pods-Challenge Ladder-Challenge LadderUITests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Challenge Ladder-Challenge LadderUITests/Pods-Challenge Ladder-Challenge LadderUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -711,6 +777,7 @@
 				AFE402BC256947E3008AD818 /* ViewRequestsViewController.swift in Sources */,
 				AF88726C2541C1AB00D6EB5C /* UserButton.swift in Sources */,
 				AF3B444125DD469F004CE6DA /* UserCell.swift in Sources */,
+				AF405B8825E855530078EC34 /* UserError.swift in Sources */,
 				AFE9620925ADB8DB001E5E81 /* ChallengeAwaitingView.swift in Sources */,
 				AF45AF6324F2DCD4004A831F /* FindUserViewController.swift in Sources */,
 				AF66162825AF263100A744DF /* CancelAlert.swift in Sources */,
@@ -734,6 +801,7 @@
 				AF45AF5F24F1B11F004A831F /* SelectLadderViewController.swift in Sources */,
 				AF74AB7625015CBF0059C388 /* User.swift in Sources */,
 				AF66163C25AF3BA600A744DF /* UserType.swift in Sources */,
+				AF405B8525E8473F0078EC34 /* RetriveDocumentStatus.swift in Sources */,
 				AF8DA29D25503DB700022940 /* LadderSettingsViewController.swift in Sources */,
 				AF3B444C25DEB467004CE6DA /* CreateAccountInDB.swift in Sources */,
 				AFE9621E25ADEDEF001E5E81 /* PositionsEx.swift in Sources */,

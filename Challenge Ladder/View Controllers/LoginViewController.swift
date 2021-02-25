@@ -13,6 +13,7 @@ import FirebaseFirestore
 import AuthenticationServices
 import CryptoKit
 import FirebaseFunctions
+import GoogleSignIn
 
 
 
@@ -26,6 +27,10 @@ class LoginViewController: LoadingViewController, UITextFieldDelegate {
     var email: String!
     var enterUsernameTextField: UITextField!
     lazy var functions = Functions.functions()
+    
+    let semaphore = DispatchSemaphore(value: 0)
+    var usernameFound: Bool!
+    let serialQueue = DispatchQueue(label: "Serial queue")
 
     var imageView: UIImageView = {
         let imageView = UIImageView()
@@ -134,6 +139,21 @@ class LoginViewController: LoadingViewController, UITextFieldDelegate {
         return btn
     }()
     
+    var siwgButton: UIButton = {
+        let btn = UIButton()
+        btn.setTitle("Sign in with Google", for: .normal)
+        btn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+        btn.titleLabel?.adjustsFontSizeToFitWidth = true
+        btn.layer.cornerRadius = 6
+        btn.titleLabel?.textAlignment = .center
+        btn.setTitleColor(.white, for: .normal)
+        btn.backgroundColor = .black
+        btn.addTarget(self, action:#selector(googlesignInButtonTapped), for: .touchUpInside)
+        return btn
+    }()
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -141,6 +161,8 @@ class LoginViewController: LoadingViewController, UITextFieldDelegate {
         keyboard()
         setupView()
         
+        GIDSignIn.sharedInstance()?.presentingViewController = self
+        GIDSignIn.sharedInstance().delegate = self
         
         navigationController?.navigationBar.isTranslucent = true
         navigationController?.navigationBar.barTintColor = .clear
@@ -160,6 +182,8 @@ class LoginViewController: LoadingViewController, UITextFieldDelegate {
         self.view.addSubview(loginButton)
         self.view.addSubview(signupBtn)
         self.view.addSubview(siwaButton)
+        self.view.addSubview(siwgButton)
+
 
         siwaButton.addTarget(self, action: #selector(appleSignInTapped), for: .touchUpInside)
 
@@ -240,7 +264,7 @@ class LoginViewController: LoadingViewController, UITextFieldDelegate {
         
         signupBtn.snp.makeConstraints { (make) in
             make.leading.equalTo(20)
-            make.top.equalTo(siwaButton.snp.bottom).offset(10)
+            make.top.equalTo(siwgButton.snp.bottom).offset(10)
             
         }
         
@@ -250,6 +274,14 @@ class LoginViewController: LoadingViewController, UITextFieldDelegate {
             make.trailing.equalTo(-20)
             make.height.equalTo(40)
             make.top.equalTo(loginButton.snp.bottom).offset(10)
+        }
+        
+        siwgButton.snp.makeConstraints { (make) in
+            make.width.equalTo(self.view.frame.width - 40)
+            make.leading.equalTo(20)
+            make.trailing.equalTo(-20)
+            make.height.equalTo(40)
+            make.top.equalTo(siwaButton.snp.bottom).offset(10)
         }
         
     }
@@ -349,6 +381,10 @@ class LoginViewController: LoadingViewController, UITextFieldDelegate {
         self.present(vc, animated: true)
     }
     
+    @objc func googlesignInButtonTapped(_ sender: UIButton) {
+        GIDSignIn.sharedInstance()?.signIn()
+    }
+    
     @objc func appleSignInTapped() {
         
         let appleIDProvider = ASAuthorizationAppleIDProvider()
@@ -410,55 +446,92 @@ class LoginViewController: LoadingViewController, UITextFieldDelegate {
         return hashString
     }
     
-    func authoriseWithFirebase(usingCredential: OAuthCredential){
-        //User is loggin in with Apple. they must add a username if it is a new account
-        guard email != nil else {
-            //user has signed in before. Proceed to login function
-            login(usingCredential: usingCredential)
-            return
-        }
-        //this is the first time the user is signing up. They must have a username
-        showUsernameAlert(withCredential: usingCredential)
-        
-    }
-    
-    func signup(usingCredential: OAuthCredential){
-        Auth.auth().signIn(with: usingCredential) { [self] (authResult, error) in
-            //Do something after Firebase sign in completed
-            //create the user in the database
-            
-            let userID = Auth.auth().currentUser?.uid
-            let createinDB = CreateAccountInDB(username: username, firstName: firstName, surname: surname, userID: userID!)
-            createinDB.createUser() { (result) in
-                print(result)
-                switch (result){
-                case .usernameTaken:
-                    Alert(withTitle: "Username Taken", withDescription: "An unknown error occured", fromVC: self, perform: {})
-                case .internalError:
-                    Alert(withTitle: "Error", withDescription: "An unknown error occured", fromVC: self, perform: {})
-                case .success:
-                    UserDefaults.standard.set(true, forKey: "usersignedin")
-                    UserDefaults.standard.synchronize()
-                    goHome()
-                }
-            }
-        }
-    }
-    
-    func login(usingCredential: OAuthCredential){
+    func authoriseWithFirebase(usingCredential: AuthCredential){
+        //User is loggin in with Google. they must add a username if it is a new account
         Auth.auth().signIn(with: usingCredential) { [self] (authResult, error) in
             //Do something after Firebase login completed
             if let error = error{
                 Alert(withTitle: "Error", withDescription: error.localizedDescription, fromVC: self, perform: {})
             }
             else{
-                UserDefaults.standard.set(true, forKey: "usersignedin")
-                UserDefaults.standard.synchronize()
-                goHome()
+                if authResult!.additionalUserInfo!.isNewUser{
+                    
+                                    
+                    usernameFound = false
+                    usernameHasAResult(withCredential: usingCredential)
+                    showUsername(withCredential: usingCredential)
+                     
+                }
+                else{
+                    //check if document is EMPTY
+                    
+                    
+                    UserDefaults.standard.set(true, forKey: "usersignedin")
+                    UserDefaults.standard.synchronize()
+                    goHome()
+                }
+            }
+        }
+        
+    }
+    
+    func showUsername(withCredential: AuthCredential){
+        showUsernameAlert(withCredential: withCredential) { status in
+            if status == .success{
+                self.usernameFound = true
+            }
+            else if status == .userAborted{
+                self.usernameFound = false
+                Auth.auth().currentUser?.delete(completion: { error in
+                    if let error = error{
+                        Alert(withTitle: "Error", withDescription: error.localizedDescription, fromVC: self, perform: {})
+                    }
+                })
+            }
+            else{
+                self.usernameFound = false
+            }
+            self.semaphore.signal()
+        }
+    }
+    
+    func usernameHasAResult(withCredential: AuthCredential){
+        serialQueue.async {
+            self.semaphore.wait()
+            if self.usernameFound{
+                //username is cool
+                self.continueSignUp()
+            }
+            else{
+                DispatchQueue.main.async {
+                    print("I have arrived")
+                }
             }
         }
     }
     
+    
+    
+    func continueSignUp(){
+        let userID = Auth.auth().currentUser?.uid
+        let createinDB = CreateAccountInDB(username: username, firstName: firstName, surname: surname, userID: userID!)
+        createinDB.createUser() { (result) in
+            print(result)
+            switch (result){
+            case .usernameTaken:
+                Alert(withTitle: "Username Taken", withDescription: "An unknown error occured", fromVC: self, perform: {})
+            case .internalError:
+                Alert(withTitle: "Error", withDescription: "An unknown error occured", fromVC: self, perform: {})
+            case .success:
+                UserDefaults.standard.set(true, forKey: "usersignedin")
+                UserDefaults.standard.synchronize()
+                self.goHome()
+            case .userAborted:
+                Alert(withTitle: "Error", withDescription: "An unknown error occured", fromVC: self, perform: {})
+
+            }
+        }
+    }
     
     func goHome(){
         let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
@@ -532,6 +605,8 @@ extension LoginViewController : ASAuthorizationControllerDelegate {
             // optional, might be nil
             self.surname = appleIDCredential.fullName?.familyName
             
+            
+            
             // Retrieve the secure nonce generated during Apple sign in
             guard let nonce = currentNonce else {
                 fatalError("Invalid state: A login callback was received, but no login request was sent.")
@@ -553,7 +628,14 @@ extension LoginViewController : ASAuthorizationControllerDelegate {
             let firebaseCredential = OAuthProvider.credential(withProviderID: "apple.com",
                                                               idToken: idTokenString,
                                                               rawNonce: nonce)
-            authoriseWithFirebase(usingCredential: firebaseCredential)
+            
+            if self.email == nil || self.firstName == nil || self.surname == nil{
+                Alert(withTitle: "Error", withDescription: "Unable to sign in with Apple. If you have recently deleted your account, please unlink your Apple ID from Ladder in your Apple ID Settings", fromVC: self, perform: {})
+            }
+            else{
+                authoriseWithFirebase(usingCredential: firebaseCredential)
+
+            }
 
             
            }
@@ -567,5 +649,29 @@ extension LoginViewController : ASAuthorizationControllerPresentationContextProv
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
         // return the current view window
         return self.view.window!
+    }
+}
+
+extension LoginViewController: GIDSignInDelegate{
+    
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        
+        if let error = error {
+            print(error.localizedDescription)
+            return
+        }
+        
+        guard let auth = user.authentication else { return }
+        
+        let credentials = GoogleAuthProvider.credential(withIDToken: auth.idToken, accessToken: auth.accessToken)
+        
+        self.firstName = user.profile.givenName
+        self.surname = user.profile.familyName
+
+        self.email = user.profile.email
+        
+        authoriseWithFirebase(usingCredential: credentials)
+               
+        
     }
 }

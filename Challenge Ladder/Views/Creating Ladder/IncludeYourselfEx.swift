@@ -24,8 +24,9 @@ class IncludeYourselfEx: UIView{
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .white
-        self.alpha = 0.8
-
+        self.alpha = 1.0
+        self.layer.cornerRadius = 5
+        
         self.addSubview(label)
         label.snp.makeConstraints { (make) in
             make.top.bottom.leading.trailing.equalToSuperview()

@@ -16,6 +16,8 @@ target 'Challenge Ladder' do
   pod 'Firebase/Storage'
   pod 'Firebase/Messaging'
   pod 'Firebase/Functions'
+  pod 'GoogleSignIn'
+
 
 
   target 'Challenge LadderTests' do

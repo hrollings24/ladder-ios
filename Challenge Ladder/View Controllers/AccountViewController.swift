@@ -135,11 +135,7 @@ class AccountViewController: BaseViewController {
         let user = Auth.auth().currentUser
 
         // Check provider ID to verify that the user has signed in with Apple
-           if let providerId = user?.providerData.first?.providerID, providerId == "apple.com" {
-               // Clear saved user ID
-            Alert(withTitle: "Account Linked with Apple ID", withDescription: "You cannot delete your account as it is linked with your Apple ID", fromVC: self, perform: {})
-           }
-           else{
+        
             
             let deleteperform = {
                 self.showLoading()
@@ -175,7 +171,7 @@ class AccountViewController: BaseViewController {
             }
             
             CancelAlert(withTitle: "Delete Account", withDescription: "Are you sure you want to delete your account? This will delete any ladders you are the only admin of", fromVC: self, perform: deleteperform)
-           }
+           
         
         
         

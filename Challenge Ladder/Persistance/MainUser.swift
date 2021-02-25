@@ -18,16 +18,16 @@ class MainUser: User{
     
     var db = Firestore.firestore()
     
-    func getUser(withID: String, completion: @escaping(Bool)->()) {
+    func getUser(withID: String, completion: @escaping(RetriveDocumentStatus)->() ){
         let db = Firestore.firestore()
         let docRef = db.collection("users").document(withID)
         docRef.addSnapshotListener { documentSnapshot, error in
             guard let document = documentSnapshot else {
-                print("Error fetching document: \(error!)")
+                completion(RetriveDocumentStatus.noDocument)
                 return
             }
             guard let data = document.data() else {
-                print("Document data was empty.")
+                completion(RetriveDocumentStatus.documentEmpty)
                 return
             }
             self.firstName = document.get("firstName") as? String
@@ -46,7 +46,7 @@ class MainUser: User{
             }
             
             
-            completion(true)
+            completion(RetriveDocumentStatus.success)
                 
         }
     }
@@ -71,5 +71,7 @@ class MainUser: User{
         let docRef = db.collection("users").document(userID)
         docRef.updateData(["username" : to])
     }
+    
+    
     
 }

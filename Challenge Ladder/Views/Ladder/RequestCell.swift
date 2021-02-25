@@ -167,14 +167,14 @@ class RequestCell: UITableViewCell{
         presentingVC.showLoading()
         let msg = "Your request to join " + data!.ladder.name + " has been accepted"
 
-        let data = [
+        let dataToSend = [
             "toUserID": data!.userID,
             "ladderID": data!.ladder.id!,
             "fromUser": MainUser.shared.userID!,
             "message": msg
         ] as [String : Any]
         
-        functions.httpsCallable("acceptRequest").call(data) { (result, error) in
+        functions.httpsCallable("acceptRequest").call(dataToSend) { (result, error) in
             self.presentingVC.removeLoading()
             let perform = {
                 self.presentingVC.refreshViews()
@@ -197,14 +197,14 @@ class RequestCell: UITableViewCell{
         presentingVC.showLoading()
         let msg = "Your request to join " + data!.ladder.name + " has been rejected"
 
-        let data = [
+        let dataToSend = [
             "requestUserID": data!.userID,
             "ladderID": data!.ladder.id!,
             "fromUser": MainUser.shared.userID!,
             "message": msg
         ] as [String : Any]
         
-        functions.httpsCallable("rejectRequest").call(data) { (result, error) in
+        functions.httpsCallable("rejectRequest").call(dataToSend) { (result, error) in
             self.presentingVC.removeLoading()
             let perform = {
                 self.presentingVC.refreshViews()

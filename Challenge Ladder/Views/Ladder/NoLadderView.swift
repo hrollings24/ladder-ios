@@ -44,8 +44,9 @@ class NoLadderView: UIView{
         btn.layer.cornerRadius = 10
         btn.titleLabel?.textAlignment = .center
         btn.setTitleColor(.blue, for: .normal)
-        btn.addTarget(self, action:#selector(findLadderClicked), for: .touchUpInside)
         btn.backgroundColor = .clear
+        btn.addTarget(self, action:#selector(findLadderClicked), for: .touchUpInside)
+
         return btn
     }()
     
@@ -59,6 +60,7 @@ class NoLadderView: UIView{
     }
     
     func load(){
+        self.isUserInteractionEnabled = true
         self.addSubview(mainLabel)
         self.addSubview(createLadder)
         self.addSubview(requestLadder)
@@ -86,12 +88,14 @@ class NoLadderView: UIView{
     }
     
     @objc func findLadderClicked(){
+        print("hajhf")
         let vc = FindLadderViewController()
         vc.modalPresentationStyle = .fullScreen //or .overFullScreen for transparency
         presentingVC.navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc func createLadderClicked(){
+        print("dhdfj")
         let vc = CreateLadderViewController()
         vc.modalPresentationStyle = .fullScreen //or .overFullScreen for transparency
         presentingVC.navigationController?.pushViewController(vc, animated: true)
@@ -118,6 +122,8 @@ class NoLadderView: UIView{
             make.leading.equalTo(self.frame.width / 2)
             make.trailing.equalTo(-20)
         }
+        
+        
     }
     
 }

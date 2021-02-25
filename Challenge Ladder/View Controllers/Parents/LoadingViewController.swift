@@ -38,11 +38,13 @@ class LoadingViewController: UIViewController {
     func showLoading(){
         let sizeOfView = CGRect(x: self.view.frame.width / 2 - 50, y: self.view.frame.height / 2 - 50, width: 100, height: 100)
         loadView = LoadingView(frame: sizeOfView)
+        self.view.isUserInteractionEnabled = false
         self.view.addSubview(loadView)
     }
     
     func removeLoading(){
         loadView.end()
+        self.view.isUserInteractionEnabled = true
         loadView.removeFromSuperview()
     }
 }

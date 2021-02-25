@@ -40,6 +40,7 @@ class SelectLadderViewController: BaseViewController {
         super.viewDidLoad()
         
         noView = NoLadderView()
+        noView.presentingVC = self
         
         loadedLadderCount = 0
         self.title = "Select Ladder"
@@ -62,6 +63,16 @@ class SelectLadderViewController: BaseViewController {
             make.bottom.equalToSuperview().offset(-20)
             make.top.equalTo(cornerButton.snp.bottom).offset(10)
         }
+        
+        self.view.addSubview(noView)
+        noView.snp.makeConstraints { (make) in
+            make.leading.equalTo(16)
+            make.trailing.equalTo(-16)
+            make.bottom.equalToSuperview()
+            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(30)
+        }
+        noView.isHidden = true
+
         
         tableView.register(SelectLadderCell.self, forCellReuseIdentifier: "selectladdercell")
         
@@ -86,17 +97,12 @@ class SelectLadderViewController: BaseViewController {
         data.removeAll()
         if MainUser.shared.ladders.count == 0{
             tableView.isHidden = true
-            self.view.addSubview(noView)
             cornerButton.isHidden = true
+            noView.isHidden = false
             removeLoading()
-            noView.snp.makeConstraints { (make) in
-                make.leading.equalTo(16)
-                make.trailing.equalTo(-16)
-                make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(30)
-            }
         }
         else{
-            noView.removeFromSuperview()
+            noView.isHidden = true
             cornerButton.isHidden = false
             tableView.isHidden = false
             for ladder in MainUser.shared.ladders{
@@ -132,14 +138,10 @@ class SelectLadderViewController: BaseViewController {
             self.view.addSubview(noView)
             cornerButton.isHidden = true
             removeLoading()
-            noView.snp.makeConstraints { (make) in
-                make.leading.equalTo(16)
-                make.trailing.equalTo(-16)
-                make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(30)
-            }
+            noView.isHidden = false
         }
         else{
-            noView.removeFromSuperview()
+            noView.isHidden = true
             cornerButton.isHidden = false
             tableView.isHidden = false
             for ladder in MainUser.shared.ladders{

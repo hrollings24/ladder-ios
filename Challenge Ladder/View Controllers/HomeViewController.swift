@@ -58,11 +58,23 @@ class HomeViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         self.title = "Home"
-        checkPermissions()
+        
+        do {
+            try checkPermissions()
+        }
+        catch UserError.currentUserNil{
+            Alert(withTitle: "Error", withDescription:  UserError.currentUserNil.rawValue, fromVC: self, perform: {
+                self.moveToLogin()
+            })
+        }
+        catch{
+            Alert(withTitle: "Error", withDescription:  "Unknown error occured", fromVC: self, perform: {})
+        }
+        
     }
     
   
-    func checkPermissions(){
+    func checkPermissions() throws{
         if UserDefaults.standard.bool(forKey: "usersignedin") {
             //user is logged in
             activity = UIActivityIndicatorView()
@@ -72,15 +84,27 @@ class HomeViewController: BaseViewController {
             self.view.addSubview(activity)
             activity.startAnimating()
 
-            let user2 = Auth.auth().currentUser
-            MainUser.shared.getUser(withID: user2!.uid) { (completed) in
+            
+            guard let user2 = Auth.auth().currentUser else{
+                throw UserError.currentUserNil
+            }
+            
+            
+            MainUser.shared.getUser(withID: user2.uid) { (completed) in
                 self.activity.stopAnimating()
-                self.setupView()
+                switch completed{
+                case .documentEmpty:
+                    self.ghostUser()
+                case .success:
+                    self.setupView()
+                case .noDocument:
+                    self.ghostUser()
+                }
             }
         }
         else{
             //login
-            moveToLogin()
+            self.moveToLogin()
         }
     }
     
@@ -293,6 +317,18 @@ class HomeViewController: BaseViewController {
         
 
 
+    }
+    
+    func ghostUser(){
+        Auth.auth().currentUser?.delete(completion: { error in
+            if let error = error{
+                Alert(withTitle: "Error", withDescription: error.localizedDescription, fromVC: self, perform: {})
+            }
+            else{
+                Alert(withTitle: "Error", withDescription: "An error occured when signing in", fromVC: self, perform: {})
+                self.moveToLogin()
+            }
+        })
     }
     
 }

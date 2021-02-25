@@ -150,7 +150,7 @@ class UserCell: UITableViewCell{
     @objc func inviteUser(){
         presentingVC.showLoading()
         
-        let data = [
+        let dataToSend = [
             "toUserID": data!.user.documentID,
             "message": MainUser.shared.username + " has invited you to join " + data!.ladder.name,
             "ladderID": data!.ladder.id!,
@@ -160,7 +160,7 @@ class UserCell: UITableViewCell{
             "username": usernameLabel.text!
         ] as [String : Any]
         
-        functions.httpsCallable("inviteUser").call(data) { (result, error) in
+        functions.httpsCallable("inviteUser").call(dataToSend) { (result, error) in
             self.presentingVC.removeLoading()
             if let error = error{
                 Alert(withTitle: "Error", withDescription: error.localizedDescription, fromVC: self.presentingVC, perform: {})
@@ -176,7 +176,7 @@ class UserCell: UITableViewCell{
     @objc func inviteAdmin(){
         presentingVC.showLoading()
         
-        let data = [
+        let dataToSend = [
             "toUserID": data!.user.documentID,
             "message": MainUser.shared.username + " has invited you to be an admin of " + data!.ladder.name,
             "ladderID": data!.ladder.id!,
@@ -186,7 +186,7 @@ class UserCell: UITableViewCell{
             "username": usernameLabel.text!
         ] as [String : Any]
         
-        functions.httpsCallable("addAdmin").call(data) { (result, error) in
+        functions.httpsCallable("addAdmin").call(dataToSend) { (result, error) in
             self.presentingVC.removeLoading()
             if let error = error{
                 Alert(withTitle: "Error", withDescription: error.localizedDescription, fromVC: self.presentingVC, perform: {})
