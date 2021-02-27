@@ -14,6 +14,7 @@ import FirebaseMessaging
 class SignUpViewController: LoadingViewController, UITextFieldDelegate {
     
     lazy var functions = Functions.functions()
+    var selectedTF: UITextField!
 
     var welcomeLabel: UILabel = {
         let textLabel = UILabel()
@@ -61,6 +62,7 @@ class SignUpViewController: LoadingViewController, UITextFieldDelegate {
         textField.keyboardType = UIKeyboardType.default
         textField.returnKeyType = UIReturnKeyType.done
         textField.clearButtonMode = UITextField.ViewMode.whileEditing
+        textField.addTarget(self, action: #selector(textTarget), for: .touchDown)
         textField.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
         return textField
     }()
@@ -90,6 +92,7 @@ class SignUpViewController: LoadingViewController, UITextFieldDelegate {
         textField.textColor = .white
         textField.keyboardType = UIKeyboardType.default
         textField.returnKeyType = UIReturnKeyType.done
+        textField.addTarget(self, action: #selector(textTarget), for: .touchDown)
         textField.clearButtonMode = UITextField.ViewMode.whileEditing
         textField.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
         return textField
@@ -119,6 +122,7 @@ class SignUpViewController: LoadingViewController, UITextFieldDelegate {
         textField.backgroundColor = .clear
         textField.textColor = .white
         textField.keyboardType = UIKeyboardType.default
+        textField.addTarget(self, action: #selector(textTarget), for: .touchDown)
         textField.returnKeyType = UIReturnKeyType.done
         textField.clearButtonMode = UITextField.ViewMode.whileEditing
         textField.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
@@ -146,6 +150,7 @@ class SignUpViewController: LoadingViewController, UITextFieldDelegate {
         textField.font = UIFont.systemFont(ofSize: 15)
         textField.borderStyle = UITextField.BorderStyle.none
         textField.autocorrectionType = UITextAutocorrectionType.no
+        textField.addTarget(self, action: #selector(textTarget), for: .touchDown)
         textField.backgroundColor = .clear
         textField.textColor = .white
         textField.keyboardType = UIKeyboardType.default
@@ -181,6 +186,7 @@ class SignUpViewController: LoadingViewController, UITextFieldDelegate {
         textField.keyboardType = UIKeyboardType.default
         textField.returnKeyType = UIReturnKeyType.done
         textField.clearButtonMode = UITextField.ViewMode.whileEditing
+        textField.addTarget(self, action: #selector(textTarget), for: .touchDown)
         textField.isSecureTextEntry = true
         textField.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
         return textField
@@ -208,6 +214,7 @@ class SignUpViewController: LoadingViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        keyboard()
         
         self.view.backgroundColor = .background
         
@@ -457,5 +464,35 @@ class SignUpViewController: LoadingViewController, UITextFieldDelegate {
         }
         alertController.addAction(okAction)
         self.present(alertController, animated: true, completion: nil)
+    }
+    
+    func keyboard(){
+       NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShowSignUp), name: UIResponder.keyboardWillShowNotification, object: nil)
+       NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHideSignUp), name: UIResponder.keyboardWillHideNotification, object: nil)
+       NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShowSignUp), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+    }
+
+    deinit {
+       NotificationCenter.default.removeObserver(UIResponder.keyboardWillShowNotification)
+       NotificationCenter.default.removeObserver(UIResponder.keyboardWillHideNotification)
+       NotificationCenter.default.removeObserver(UIResponder.keyboardWillChangeFrameNotification)
+
+    }
+      
+    @objc func keyboardWillShowSignUp(notification: Notification) {
+       if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+           let amountToShift = (keyboardSize.height - (self.view.frame.height - (selectedTF.frame.minY+selectedTF.frame.height))) + 40
+           if amountToShift > 0{
+              self.view.frame.origin.y = -amountToShift
+           }
+       }
+    }
+
+    @objc func keyboardWillHideSignUp(notification: Notification) {
+        self.view.frame.origin.y = 0
+    }
+    
+    @objc func textTarget(textField: UITextField) {
+        selectedTF = textField
     }
 }

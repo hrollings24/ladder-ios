@@ -14,7 +14,7 @@ extension LoginViewController{
     func showUsernameAlert(withCredential: OAuthCredential, completion: @escaping (CreatingAccountStatus)->()){
         
         
-        let alert = UIAlertController(title: "Creare Username", message: "Please enter a new username", preferredStyle: UIAlertController.Style.alert)
+        let alert = UIAlertController(title: "Create Username", message: "Please enter a new username", preferredStyle: UIAlertController.Style.alert)
 
         alert.addTextField(configurationHandler: configurationTextField)
 

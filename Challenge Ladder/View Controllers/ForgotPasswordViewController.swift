@@ -58,14 +58,8 @@ class ForgotPasswordViewController: LoadingViewController, UITextFieldDelegate {
     }()
     
     var submitButton: UIButton = {
-        let btn = UIButton()
+        let btn = BlackButton()
         btn.setTitle("Submit", for: .normal)
-        btn.titleLabel?.font = UIFont.systemFont(ofSize: 18)
-        btn.titleLabel?.adjustsFontSizeToFitWidth = true
-        btn.layer.cornerRadius = 10
-        btn.titleLabel?.textAlignment = .center
-        btn.setTitleColor(.white, for: .normal)
-        btn.backgroundColor = .black
         btn.addTarget(self, action:#selector(submitClicked), for: .touchUpInside)
         return btn
     }()

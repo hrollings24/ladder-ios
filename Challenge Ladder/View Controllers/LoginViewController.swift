@@ -36,7 +36,7 @@ class LoginViewController: LoadingViewController, UITextFieldDelegate {
         let imageView = UIImageView()
         let image = UIImage(named: "logo")
         imageView.image = image
-        imageView.contentMode = .scaleAspectFill
+        imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
 
         return imageView
@@ -116,14 +116,8 @@ class LoginViewController: LoadingViewController, UITextFieldDelegate {
     }()
 
     var loginButton: UIButton = {
-        let btn = UIButton()
+        let btn = BlackButton()
         btn.setTitle("Login", for: .normal)
-        btn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
-        btn.titleLabel?.adjustsFontSizeToFitWidth = true
-        btn.layer.cornerRadius = 6
-        btn.titleLabel?.textAlignment = .center
-        btn.setTitleColor(.white, for: .normal)
-        btn.backgroundColor = .black
         btn.addTarget(self, action:#selector(loginClicked), for: .touchUpInside)
         return btn
     }()
@@ -140,14 +134,8 @@ class LoginViewController: LoadingViewController, UITextFieldDelegate {
     }()
     
     var siwgButton: UIButton = {
-        let btn = UIButton()
+        let btn = BlackButton()
         btn.setTitle("Sign in with Google", for: .normal)
-        btn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
-        btn.titleLabel?.adjustsFontSizeToFitWidth = true
-        btn.layer.cornerRadius = 6
-        btn.titleLabel?.textAlignment = .center
-        btn.setTitleColor(.white, for: .normal)
-        btn.backgroundColor = .black
         btn.addTarget(self, action:#selector(googlesignInButtonTapped), for: .touchUpInside)
         return btn
     }()
@@ -305,7 +293,7 @@ class LoginViewController: LoadingViewController, UITextFieldDelegate {
       
     @objc func keyboardWillShowSignUp(notification: Notification) {
        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-           let amountToShift = (keyboardSize.height - (self.view.frame.height - (passwordTextField.frame.minY+passwordTextField.frame.height))) + 20
+           let amountToShift = (keyboardSize.height - (self.view.frame.height - (loginButton.frame.minY+loginButton.frame.height))) + 20
            if amountToShift > 0{
               self.view.frame.origin.y = -amountToShift
            }
@@ -456,10 +444,14 @@ class LoginViewController: LoadingViewController, UITextFieldDelegate {
             else{
                 if authResult!.additionalUserInfo!.isNewUser{
                     
-                                    
-                    usernameFound = false
-                    usernameHasAResult(withCredential: usingCredential)
-                    showUsername(withCredential: usingCredential)
+                    if self.email == nil || self.firstName == nil || self.surname == nil{
+                        Alert(withTitle: "Error", withDescription: "Unable to sign in with Apple. If you have recently deleted your account, please unlink your Apple ID from Ladder in your Apple ID Settings", fromVC: self, perform: {})
+                    }
+                    else{
+                        usernameFound = false
+                        usernameHasAResult(withCredential: usingCredential)
+                        showUsername(withCredential: usingCredential)
+                    }
                      
                 }
                 else{
@@ -629,13 +621,8 @@ extension LoginViewController : ASAuthorizationControllerDelegate {
                                                               idToken: idTokenString,
                                                               rawNonce: nonce)
             
-            if self.email == nil || self.firstName == nil || self.surname == nil{
-                Alert(withTitle: "Error", withDescription: "Unable to sign in with Apple. If you have recently deleted your account, please unlink your Apple ID from Ladder in your Apple ID Settings", fromVC: self, perform: {})
-            }
-            else{
                 authoriseWithFirebase(usingCredential: firebaseCredential)
 
-            }
 
             
            }

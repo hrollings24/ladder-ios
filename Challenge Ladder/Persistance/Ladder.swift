@@ -21,6 +21,7 @@ class Ladder{
     var challengesIHaveWithOtherUserIds: [String: String] = [:]
     var updateScene: LadderViewController!
     var updateSettings: LadderSettingsViewController!
+    var initialising: Bool!
     
     init(ref: DocumentReference, completion: @escaping(Ladder)->()) {
         ref.addSnapshotListener { (document, error) in
@@ -37,6 +38,12 @@ class Ladder{
                     self.positions = dic!["positions"] as? [String]
                     self.adminIDs = dic!["admins"] as? [String]
                     self.requests = dic!["requests"] as? [String]
+                    if self.initialising == nil{
+                        self.initialising = true
+                    }
+                    else if self.initialising{
+                        self.initialising = false
+                    }
                     
                     Firestore.firestore().collection("challenge").whereField("ladder", isEqualTo: self.id!).addSnapshotListener { (querySnapshot, err) in
                         if let err = err {

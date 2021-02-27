@@ -207,8 +207,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             UserDefaults.standard.setValue(false, forKey: "usersignedin")
             
         }
-        catch let error {
-            let perform = {}
+        catch _ {
         }
 
     }

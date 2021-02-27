@@ -149,14 +149,19 @@ class SelectLadderViewController: BaseViewController {
                 //ladder is DocumentReference
                 Ladder(ref: ladder, completion: { [self] (completed) in
                     print(completed.name!)
-                    data.append(LadderData(nameofladder: completed.name!, ladderitself: completed))
-                    loadedLadderCount += 1
-                    if loadedLadderCount == MainUser.shared.ladders.count{
-                        loadedLadderCount = 0
-                        print(data)
-                        removeLoading()
-                        tableView.reloadData()
+                    let ladderToADD = LadderData(nameofladder: completed.name!, ladderitself: completed)
+                    let found = data.filter{$0.nameofladder == completed.name!}.count > 0
+                    if !found{
+                        data.append(ladderToADD)
+                        loadedLadderCount += 1
+                        if loadedLadderCount == MainUser.shared.ladders.count{
+                            loadedLadderCount = 0
+                            print(data)
+                            removeLoading()
+                            tableView.reloadData()
+                        }
                     }
+                    
                 })
             }
         }

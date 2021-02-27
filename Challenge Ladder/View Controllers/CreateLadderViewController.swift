@@ -91,14 +91,8 @@ class CreateLadderViewController: BaseViewController, UITextFieldDelegate {
     }()
     
     var createLadderButton: UIButton = {
-        let btn = UIButton()
+        let btn = BlackButton()
         btn.setTitle("Create Ladder", for: .normal)
-        btn.titleLabel?.font = UIFont.systemFont(ofSize: 18)
-        btn.titleLabel?.adjustsFontSizeToFitWidth = true
-        btn.layer.cornerRadius = 10
-        btn.titleLabel?.textAlignment = .center
-        btn.setTitleColor(.white, for: .normal)
-        btn.backgroundColor = .brandPurple
         btn.addTarget(self, action:#selector(createdPressed), for: .touchUpInside)
         return btn
     }()
@@ -274,12 +268,35 @@ class CreateLadderViewController: BaseViewController, UITextFieldDelegate {
     }
     
     @objc func createdPressed(){
-    
+        let db = Firestore.firestore()
+
         if permissionsTextField.text?.isReallyEmpty ?? true || ladderNameTextField.text?.isReallyEmpty ?? true || amountTextField.text?.isReallyEmpty ?? true{
             Alert(withTitle: "Error", withDescription: "Please complete all fields", fromVC: self, perform: {})
         }
         else{
-            createLadder()
+            //check if ladder name already exists
+            let ref = db.collection("ladders").whereField("name", isEqualTo: ladderNameTextField.text!.lowercased())
+            ref.getDocuments { snapshot, error in
+                if let error = error{
+                    Alert(withTitle: "Error", withDescription: error.localizedDescription, fromVC: self, perform: {})
+                }
+                else{
+                    if let snapshot = snapshot{
+                        if snapshot.isEmpty{
+                            self.createLadder()
+                        }
+                        else{
+                            Alert(withTitle: "Name Taken", withDescription: "A ladder with your chosen name already exists. Please choose a new name", fromVC: self, perform: {})
+                        }
+                    }
+                    else{
+                        Alert(withTitle: "Error", withDescription: "An unknown error occured", fromVC: self, perform: {})
+
+                    }
+                }
+            }
+
+            
         }
         
     }
@@ -303,7 +320,9 @@ class CreateLadderViewController: BaseViewController, UITextFieldDelegate {
 
         showLoading()
         //create ladder
+        
         let db = Firestore.firestore()
+
         let ref = db.collection("ladders").document()
         ref.setData([
             "permission": permissions!,
@@ -323,15 +342,17 @@ class CreateLadderViewController: BaseViewController, UITextFieldDelegate {
                 
                 self.ladder = Ladder(ref: ref, completion: { (completed) in
                     //ladder loaded
-                    self.removeLoading()
-                    let alertController = UIAlertController(title: "Success", message: "Ladder successfully created", preferredStyle: .alert)
-                    let okAction = UIAlertAction(title: "OK", style: .default) {
-                            UIAlertAction in
-                        self.goToLadder()
-                    }
-                    alertController.addAction(okAction)
-                    self.present(alertController, animated: true, completion: nil)
                     
+                    if self.ladder.initialising{
+                        self.removeLoading()
+                        let alertController = UIAlertController(title: "Success", message: "Ladder successfully created", preferredStyle: .alert)
+                        let okAction = UIAlertAction(title: "OK", style: .default) {
+                                UIAlertAction in
+                            self.goToLadder()
+                        }
+                        alertController.addAction(okAction)
+                        self.present(alertController, animated: true, completion: nil)
+                    }
                 })
             }
         }

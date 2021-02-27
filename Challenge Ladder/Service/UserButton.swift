@@ -12,6 +12,6 @@ class UserButton: UIButton{
     
     func add(user: User){
         self.user = user
-        self.setTitle(user.firstName, for: .normal)
+        self.setTitle(user.username, for: .normal)
     }
 }
