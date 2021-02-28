@@ -30,8 +30,8 @@ class NotificationViewController: BaseViewController {
         tableView.separatorStyle = .none
 
         tableView.snp.makeConstraints { (make) in
-            make.leading.equalTo(30)
-            make.trailing.equalTo(-30)
+            make.leading.equalTo(16)
+            make.trailing.equalTo(-16)
             make.bottom.equalToSuperview().offset(-20)
             make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(30)
         }
@@ -44,6 +44,8 @@ class NotificationViewController: BaseViewController {
         configureRefreshControl()
         getNotifications()
         
+        self.tableView.estimatedRowHeight = 100
+        self.tableView.rowHeight = UITableView.automaticDimension
 
     }
     
@@ -68,6 +70,7 @@ class NotificationViewController: BaseViewController {
                         if self.noView != nil{
                             self.noView.removeFromSuperview()
                         }
+                        
                         let noteData2 = document.data()
                         let noteToAdd = NoteData(message: noteData2["message"] as! String, type: noteData2["type"] as! String, fromUser: noteData2["fromUser"] as! DocumentReference, notification: document, ladderReference: noteData2["ladder"] as? DocumentReference, challengeReference: noteData2["challengeRef"] as? DocumentReference)
                         self.data.append(noteToAdd)
@@ -159,17 +162,14 @@ extension NotificationViewController: UITableViewDelegate, UITableViewDataSource
         
         cell.acceptBtn.removeTarget(nil, action: nil, for: .allEvents)
         cell.denyBtn.removeTarget(nil, action: nil, for: .allEvents)
+        cell.contentView.isUserInteractionEnabled = false // <<-- the solution
 
         cell.presentingVC = self
         cell.data = data[indexPath.row]
         cell.selectionStyle = .none
         return cell
     }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 90
-    }
-    
+   
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
        

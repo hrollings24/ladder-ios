@@ -39,36 +39,38 @@ class NotificationCell: UITableViewCell{
             switch type{
             case "challenge":
                 isMessage = false
-                self.addSubview(acceptBtn)
-                self.addSubview(denyBtn)
+                acceptBtn.isHidden = false
+                denyBtn.isHidden = false
                 denyBtn.addTarget(self, action:#selector(deny), for: .touchUpInside)
                 acceptBtn.addTarget(self, action:#selector(acceptChallenge), for: .touchUpInside)
 
                 break
             case "invite":
                 isMessage = false
-                self.addSubview(acceptBtn)
-                self.addSubview(denyBtn)
+                acceptBtn.isHidden = false
+                denyBtn.isHidden = false
                 denyBtn.addTarget(self, action:#selector(declineInvite), for: .touchUpInside)
                 acceptBtn.addTarget(self, action:#selector(acceptInvite), for: .touchUpInside)
 
                 break
             case "admin":
                 isMessage = false
-                self.addSubview(acceptBtn)
-                self.addSubview(denyBtn)
+                acceptBtn.isHidden = false
+                denyBtn.isHidden = false
                 denyBtn.addTarget(self, action:#selector(declineAdminInvite), for: .touchUpInside)
                 acceptBtn.addTarget(self, action:#selector(acceptAdmin), for: .touchUpInside)
 
                 break
             case "message":
                 isMessage = true
-                self.addSubview(acceptBtn)
+                acceptBtn.isHidden = false
+                denyBtn.isHidden = true
                 acceptBtn.setTitle("OK", for: .normal)
                 acceptBtn.addTarget(self, action:#selector(decline), for: .touchUpInside)
 
             case "request":
-                self.addSubview(acceptBtn)
+                acceptBtn.isHidden = false
+                denyBtn.isHidden = true
                 isMessage = true
                 acceptBtn.setTitle("View Request", for: .normal)
                 acceptBtn.addTarget(self, action:#selector(goToRequest), for: .touchUpInside)
@@ -82,6 +84,12 @@ class NotificationCell: UITableViewCell{
             
         }
     }
+    
+    var blankView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .clear
+        return view
+    }()
     
     var messageLabel: UILabel = {
         let textLabel = UILabel()
@@ -101,7 +109,7 @@ class NotificationCell: UITableViewCell{
         btn.titleLabel?.adjustsFontSizeToFitWidth = true
         btn.layer.cornerRadius = 10
         btn.titleLabel?.textAlignment = .center
-        btn.setTitleColor(.blue, for: .normal)
+        btn.setTitleColor(.black, for: .normal)
         btn.backgroundColor = .clear
         return btn
     }()
@@ -113,7 +121,7 @@ class NotificationCell: UITableViewCell{
         btn.titleLabel?.adjustsFontSizeToFitWidth = true
         btn.layer.cornerRadius = 10
         btn.titleLabel?.textAlignment = .center
-        btn.setTitleColor(.blue, for: .normal)
+        btn.setTitleColor(.black, for: .normal)
         btn.backgroundColor = .clear
         return btn
     }()
@@ -123,8 +131,39 @@ class NotificationCell: UITableViewCell{
         
         self.backgroundColor = .clear
         
-        self.addSubview(messageLabel)
+        self.isUserInteractionEnabled = true
         
+        self.addSubview(acceptBtn)
+        self.addSubview(denyBtn)
+        self.addSubview(messageLabel)
+        self.addSubview(blankView)
+        
+        messageLabel.snp.makeConstraints { (make) in
+            make.top.leading.trailing.equalToSuperview()
+            make.bottom.equalTo(acceptBtn.snp.top)
+        }
+        
+        acceptBtn.snp.makeConstraints { (make) in
+            make.top.equalTo(messageLabel.snp.bottom).offset(10)
+            make.bottom.equalTo(blankView.snp.top)
+            make.leading.equalToSuperview()
+            make.trailing.equalTo(-self.frame.width / 2)
+        }
+
+        denyBtn.snp.makeConstraints { (make) in
+            make.top.equalTo(messageLabel.snp.bottom).offset(10)
+            make.trailing.equalToSuperview()
+            make.leading.equalTo(acceptBtn.snp.trailing)
+            make.bottom.equalTo(blankView.snp.top)
+        }
+     
+        blankView.snp.makeConstraints { (make) in
+            make.top.equalTo(acceptBtn.snp.bottom)
+            make.leading.trailing.equalToSuperview()
+            make.height.equalTo(20)
+            make.bottom.equalToSuperview()
+        }
+
     }
     
     required init?(coder: NSCoder) {
@@ -135,31 +174,38 @@ class NotificationCell: UITableViewCell{
         
         messageLabel.snp.remakeConstraints { (make) in
             make.top.leading.trailing.equalToSuperview()
+            make.bottom.equalTo(acceptBtn.snp.top)
         }
-        
         
         if !isMessage{
             acceptBtn.snp.remakeConstraints { (make) in
                 make.top.equalTo(messageLabel.snp.bottom).offset(10)
-                make.bottom.equalToSuperview()
+                make.bottom.equalTo(blankView.snp.top)
                 make.leading.equalToSuperview()
                 make.trailing.equalTo(-self.frame.width / 2)
             }
-            
+
             denyBtn.snp.remakeConstraints { (make) in
                 make.top.equalTo(messageLabel.snp.bottom).offset(10)
                 make.trailing.equalToSuperview()
                 make.leading.equalTo(acceptBtn.snp.trailing)
-                make.bottom.equalToSuperview()
+                make.bottom.equalTo(blankView.snp.top)
             }
         }
         else{
             acceptBtn.snp.remakeConstraints { (make) in
                 make.top.equalTo(messageLabel.snp.bottom).offset(10)
-                make.bottom.equalToSuperview()
+                make.bottom.equalTo(blankView.snp.top)
                 make.leading.equalToSuperview()
                 make.trailing.equalToSuperview()
             }
+        }
+        
+        blankView.snp.remakeConstraints { (make) in
+            make.top.equalTo(acceptBtn.snp.bottom)
+            make.leading.trailing.equalToSuperview()
+            make.height.equalTo(20)
+            make.bottom.equalToSuperview()
         }
     }
     

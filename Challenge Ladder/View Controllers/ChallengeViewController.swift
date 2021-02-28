@@ -63,7 +63,7 @@ class ChallengeViewController: LoadingViewController {
         btn.titleLabel?.adjustsFontSizeToFitWidth = true
         btn.layer.cornerRadius = 10
         btn.titleLabel?.textAlignment = .center
-        btn.setTitleColor(.blue, for: .normal)
+        btn.setTitleColor(.black, for: .normal)
         btn.backgroundColor = .clear
         btn.addTarget(self, action:#selector(player1BtnPressed), for: .touchUpInside)
         return btn
@@ -75,7 +75,7 @@ class ChallengeViewController: LoadingViewController {
         btn.titleLabel?.adjustsFontSizeToFitWidth = true
         btn.layer.cornerRadius = 10
         btn.titleLabel?.textAlignment = .center
-        btn.setTitleColor(.blue, for: .normal)
+        btn.setTitleColor(.black, for: .normal)
         btn.backgroundColor = .clear
         btn.addTarget(self, action:#selector(player2BtnPressed), for: .touchUpInside)
         return btn
@@ -88,7 +88,7 @@ class ChallengeViewController: LoadingViewController {
         btn.layer.cornerRadius = 10
         btn.setTitle("Confirm", for: .normal)
         btn.titleLabel?.textAlignment = .center
-        btn.setTitleColor(.blue, for: .normal)
+        btn.setTitleColor(.black, for: .normal)
         btn.backgroundColor = .clear
         btn.addTarget(self, action:#selector(finalise), for: .touchUpInside)
         return btn

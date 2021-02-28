@@ -20,6 +20,8 @@ class BaseViewController: LoadingViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+       
+        
         NotificationCenter.default.addObserver(self, selector: #selector(appleIDStateDidRevoked(_:)), name: ASAuthorizationAppleIDProvider.credentialRevokedNotification, object: nil)
 
         

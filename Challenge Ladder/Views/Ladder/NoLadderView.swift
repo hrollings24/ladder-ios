@@ -29,7 +29,7 @@ class NoLadderView: UIView{
         btn.titleLabel?.adjustsFontSizeToFitWidth = true
         btn.layer.cornerRadius = 10
         btn.titleLabel?.textAlignment = .center
-        btn.setTitleColor(.blue, for: .normal)
+        btn.setTitleColor(.black, for: .normal)
         btn.backgroundColor = .clear
         btn.addTarget(self, action:#selector(createLadderClicked), for: .touchUpInside)
 
@@ -43,7 +43,7 @@ class NoLadderView: UIView{
         btn.titleLabel?.adjustsFontSizeToFitWidth = true
         btn.layer.cornerRadius = 10
         btn.titleLabel?.textAlignment = .center
-        btn.setTitleColor(.blue, for: .normal)
+        btn.setTitleColor(.black, for: .normal)
         btn.backgroundColor = .clear
         btn.addTarget(self, action:#selector(findLadderClicked), for: .touchUpInside)
 

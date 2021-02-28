@@ -48,7 +48,7 @@ class AwaitingView: UIView{
         btn.titleLabel?.adjustsFontSizeToFitWidth = true
         btn.layer.cornerRadius = 10
         btn.titleLabel?.textAlignment = .center
-        btn.setTitleColor(.blue, for: .normal)
+        btn.setTitleColor(.black, for: .normal)
         btn.backgroundColor = .clear
         btn.setTitle("Accept Challenge", for: .normal)
         btn.addTarget(self, action:#selector(acceptChallenge), for: .touchUpInside)
@@ -61,7 +61,7 @@ class AwaitingView: UIView{
         btn.titleLabel?.adjustsFontSizeToFitWidth = true
         btn.layer.cornerRadius = 10
         btn.titleLabel?.textAlignment = .center
-        btn.setTitleColor(.blue, for: .normal)
+        btn.setTitleColor(.black, for: .normal)
         btn.backgroundColor = .clear
         btn.setTitle("Decline Challenge", for: .normal)
         btn.addTarget(self, action:#selector(reject), for: .touchUpInside)

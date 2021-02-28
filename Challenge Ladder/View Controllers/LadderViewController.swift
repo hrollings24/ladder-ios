@@ -105,6 +105,20 @@ class LadderViewController: LoadingViewController {
         if firstLoad == false{
             refreshupdate()
         }
+        else{
+            self.usersInLadder.removeAll()
+            if ladder.adminIDs.contains(MainUser.shared.userID){
+                cornerButton.setTitle("Settings", for: .normal)
+                cornerButton.removeTarget(nil, action: nil, for: .allEvents)
+                cornerButton.addTarget(self, action:#selector(settingsInvoked), for: .touchUpInside)
+            }
+            else{
+                cornerButton.removeTarget(nil, action: nil, for: .allEvents)
+                cornerButton.setTitle("Invite Players", for: .normal)
+                cornerButton.addTarget(self, action:#selector(inviteInvoked), for: .touchUpInside)
+            }
+            self.title = ladder.name
+        }
     }
     
     func setupView(){
@@ -232,6 +246,7 @@ class LadderViewController: LoadingViewController {
     
     
     func refreshupdate(){
+        self.title = ladder.name
         self.usersInLadder.removeAll()
         if ladder.adminIDs.contains(MainUser.shared.userID){
             cornerButton.setTitle("Settings", for: .normal)

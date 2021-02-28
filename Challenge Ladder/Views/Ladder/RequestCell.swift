@@ -40,7 +40,7 @@ class RequestCell: UITableViewCell{
         btn.layer.cornerRadius = 10
         btn.isUserInteractionEnabled = true
         btn.titleLabel?.textAlignment = .center
-        btn.setTitleColor(.blue, for: .normal)
+        btn.setTitleColor(.black, for: .normal)
         btn.setTitle("Reject", for: .normal)
         btn.backgroundColor = .clear
         return btn
@@ -53,7 +53,7 @@ class RequestCell: UITableViewCell{
         btn.layer.cornerRadius = 10
         btn.isUserInteractionEnabled = true
         btn.titleLabel?.textAlignment = .center
-        btn.setTitleColor(.blue, for: .normal)
+        btn.setTitleColor(.black, for: .normal)
         btn.setTitle("Accept", for: .normal)
         btn.backgroundColor = .clear
         return btn

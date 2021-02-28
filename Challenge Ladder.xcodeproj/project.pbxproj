@@ -30,6 +30,7 @@
 		AF405B8825E855530078EC34 /* UserError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF405B8725E855530078EC34 /* UserError.swift */; };
 		AF405B8B25E865390078EC34 /* SignUpKeyboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF405B8A25E865390078EC34 /* SignUpKeyboards.swift */; };
 		AF405B8D25EA75370078EC34 /* BlackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF405B8C25EA75370078EC34 /* BlackButton.swift */; };
+		AF405B8F25EC4AAC0078EC34 /* NameStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF405B8E25EC4AAC0078EC34 /* NameStatus.swift */; };
 		AF45AF5F24F1B11F004A831F /* SelectLadderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF45AF5E24F1B11F004A831F /* SelectLadderViewController.swift */; };
 		AF45AF6124F1BE37004A831F /* LadderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF45AF6024F1BE37004A831F /* LadderViewController.swift */; };
 		AF45AF6324F2DCD4004A831F /* FindUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF45AF6224F2DCD4004A831F /* FindUserViewController.swift */; };
@@ -128,6 +129,7 @@
 		AF405B8725E855530078EC34 /* UserError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserError.swift; sourceTree = "<group>"; };
 		AF405B8A25E865390078EC34 /* SignUpKeyboards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpKeyboards.swift; sourceTree = "<group>"; };
 		AF405B8C25EA75370078EC34 /* BlackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackButton.swift; sourceTree = "<group>"; };
+		AF405B8E25EC4AAC0078EC34 /* NameStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameStatus.swift; sourceTree = "<group>"; };
 		AF45AF5E24F1B11F004A831F /* SelectLadderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLadderViewController.swift; sourceTree = "<group>"; };
 		AF45AF6024F1BE37004A831F /* LadderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LadderViewController.swift; sourceTree = "<group>"; };
 		AF45AF6224F2DCD4004A831F /* FindUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindUserViewController.swift; sourceTree = "<group>"; };
@@ -283,6 +285,7 @@
 			children = (
 				AF405B8425E8473F0078EC34 /* RetriveDocumentStatus.swift */,
 				AF3B444D25DEB545004CE6DA /* CreatingAccountStatus.swift */,
+				AF405B8E25EC4AAC0078EC34 /* NameStatus.swift */,
 			);
 			path = Status;
 			sourceTree = "<group>";
@@ -804,6 +807,7 @@
 				AFB6410024E3259200570C52 /* AppDelegate.swift in Sources */,
 				AF3B444725DD70BE004CE6DA /* RequestCell.swift in Sources */,
 				AF8DA29B254F64E800022940 /* LoadingView.swift in Sources */,
+				AF405B8F25EC4AAC0078EC34 /* NameStatus.swift in Sources */,
 				AFB6410224E3259200570C52 /* SceneDelegate.swift in Sources */,
 				AF8DA29F2550445500022940 /* UserCellData.swift in Sources */,
 				AF45AF5F24F1B11F004A831F /* SelectLadderViewController.swift in Sources */,

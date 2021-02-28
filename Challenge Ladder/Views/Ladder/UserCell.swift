@@ -40,7 +40,7 @@ class UserCell: UITableViewCell{
         btn.layer.cornerRadius = 10
         btn.isUserInteractionEnabled = true
         btn.titleLabel?.textAlignment = .center
-        btn.setTitleColor(.blue, for: .normal)
+        btn.setTitleColor(.black, for: .normal)
         btn.backgroundColor = .clear
         return btn
     }()
@@ -154,7 +154,7 @@ class UserCell: UITableViewCell{
             "toUserID": data!.user.documentID,
             "message": MainUser.shared.username + " has invited you to join " + data!.ladder.name,
             "ladderID": data!.ladder.id!,
-            "type": data!.findingForType.rawValue,
+            "type": "invite",
             "title": "Invitation Recieved",
             "fromUser": MainUser.shared.userID!,
             "username": usernameLabel.text!
@@ -180,7 +180,7 @@ class UserCell: UITableViewCell{
             "toUserID": data!.user.documentID,
             "message": MainUser.shared.username + " has invited you to be an admin of " + data!.ladder.name,
             "ladderID": data!.ladder.id!,
-            "type": data!.findingForType.rawValue,
+            "type": "admin",
             "title": "Admin Request Recieved",
             "fromUser": MainUser.shared.userID!,
             "username": usernameLabel.text!

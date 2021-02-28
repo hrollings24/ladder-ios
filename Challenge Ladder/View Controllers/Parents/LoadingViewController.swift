@@ -23,6 +23,8 @@ class LoadingViewController: UIViewController {
             make.top.bottom.leading.trailing.equalToSuperview()
         }
             
+        self.navigationController?.navigationBar.barTintColor = .black
+        self.navigationController?.navigationBar.tintColor = .black
         
         adjustLargeTitleSize()
         

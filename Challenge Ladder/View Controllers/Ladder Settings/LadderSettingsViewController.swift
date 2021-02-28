@@ -18,6 +18,8 @@ class LadderSettingsViewController: LoadingViewController, UIPickerViewDelegate,
     lazy var functions = Functions.functions()
     var selectLadderVC: UIViewController!
     
+    var enterUsernameTextField: UITextField!
+    
     var ladderName: UILabel = {
         let textLabel = UILabel()
         textLabel.text = ""
@@ -154,6 +156,21 @@ class LadderSettingsViewController: LoadingViewController, UIPickerViewDelegate,
         return btn
     }()
     
+    var changeName: UIButton = {
+        let btn = UIButton()
+        btn.setTitle("Change Name", for: .normal)
+        btn.titleLabel?.font = UIFont.systemFont(ofSize: 20)
+        btn.titleLabel?.adjustsFontSizeToFitWidth = true
+        btn.layer.cornerRadius = 10
+        btn.titleLabel?.textAlignment = .left
+        btn.setTitleColor(.charcoal, for: .normal)
+        btn.backgroundColor = .clear
+        btn.contentHorizontalAlignment = .left
+        btn.addTarget(self, action:#selector(nameClicked), for: .touchUpInside)
+
+        return btn
+    }()
+    
     var changeJump: UIButton = {
         let btn = UIButton()
         btn.setTitle("Change Jump", for: .normal)
@@ -186,6 +203,8 @@ class LadderSettingsViewController: LoadingViewController, UIPickerViewDelegate,
     
     func refreshText(){
         viewRequestsButton.setTitle("View " + String(ladder.requests.count) + " pending requests", for: .normal)
+        ladderName.text = ladder.name
+        self.navigationController?.navigationBar.backItem?.backBarButtonItem?.title = ladder.name
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -212,6 +231,8 @@ class LadderSettingsViewController: LoadingViewController, UIPickerViewDelegate,
         self.view.addSubview(userLabel)
         self.view.addSubview(permissionsLabel)
         self.view.addSubview(ladderLabel)
+        self.view.addSubview(changeName)
+
 
 
 
@@ -304,8 +325,15 @@ class LadderSettingsViewController: LoadingViewController, UIPickerViewDelegate,
 
         }
         
-        deleteButton.snp.makeConstraints { (make) in
+        changeName.snp.makeConstraints { (make) in
             make.top.equalTo(changeJump.snp.bottom)
+            make.leading.equalTo(16)
+            make.trailing.equalTo(-16)
+
+        }
+        
+        deleteButton.snp.makeConstraints { (make) in
+            make.top.equalTo(changeName.snp.bottom)
             make.leading.equalTo(16)
             make.trailing.equalTo(-16)
 
@@ -421,6 +449,11 @@ class LadderSettingsViewController: LoadingViewController, UIPickerViewDelegate,
         self.present(vc, animated: true)
     }
     
+    @objc func nameClicked(){
+        changeNameAlert()
+        
+    }
+    
     @objc func viewUsers(){
         let vc = ViewUsersInLadderViewController()
         vc.ladder = ladder
@@ -466,4 +499,50 @@ class LadderSettingsViewController: LoadingViewController, UIPickerViewDelegate,
         
         CancelAlert(withTitle: "Delete Ladder", withDescription: "Confirm you want to delete this ladder", fromVC: self, perform: perform)
     }
+    
+    
+    func changeNameAlert(){
+        
+        
+        let alert = UIAlertController(title: "Change Name", message: "Please enter a new name", preferredStyle: UIAlertController.Style.alert)
+
+        alert.addTextField(configurationHandler: configurationTextField)
+
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Enter", style: UIAlertAction.Style.default, handler:{ (UIAlertAction)in
+            
+            if self.enterUsernameTextField.text != nil{
+                //check username
+                self.showLoading()
+                let data = [
+                    "name": self.enterUsernameTextField.text!.lowercased()
+                ] as [String : Any]
+                
+                self.functions.httpsCallable("checkName").call(data) { (result, error) in
+                    let resultAsBool = result!.data as! Bool
+                    if let error = error{
+                        Alert(withTitle: "Error", withDescription: error.localizedDescription, fromVC: self, perform: {})
+                    }
+                    if !resultAsBool{
+                        Alert(withTitle: "Error", withDescription: "Name already taken", fromVC: self, perform: {})
+                        self.removeLoading()
+                    }
+                    else{
+                        self.ladder.updateName(to: self.enterUsernameTextField.text!)
+                        self.removeLoading()
+                    }
+                }
+            }
+        }))
+
+        self.present(alert, animated: true, completion: {
+            
+        })
+    }
+    
+    func configurationTextField(textField: UITextField!){
+        self.enterUsernameTextField = textField!
+        textField.placeholder = "Enter name"
+    }
+    
 }

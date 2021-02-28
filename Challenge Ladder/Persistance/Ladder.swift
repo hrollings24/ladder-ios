@@ -126,4 +126,11 @@ class Ladder{
         docRef.updateData(["admins" : adminIDs!])
     }
     
+    func updateName(to: String){
+        name = to
+        let db = Firestore.firestore()
+        let docRef = db.collection("ladders").document(id)
+        docRef.updateData(["name" : to])
+    }
+    
 }
