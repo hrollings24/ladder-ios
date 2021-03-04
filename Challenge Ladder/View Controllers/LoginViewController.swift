@@ -335,21 +335,9 @@ class LoginViewController: LoadingViewController, UITextFieldDelegate {
                     let user2 = Auth.auth().currentUser
                     MainUser.shared.getUser(withID: user2!.uid) { (completed) in
                         //LOAD NEXT VIEW NOW
-                        db.collection("users").whereField("fcm", arrayContains: Messaging.messaging().fcmToken!).whereField("username", isEqualTo: MainUser.shared.username!).getDocuments() { (querySnapshot, err) in
-                            if let err = err {
-                                print("Error getting documents: \(err)")
-                            } else {
-                                if querySnapshot!.documents.isEmpty {
-                                    db.collection("users").document(MainUser.shared.userID).updateData([
-                                        "fcm": FieldValue.arrayUnion([Messaging.messaging().fcmToken!])
-                                    ])
-                                }
-                            }
-                        }
                         
-                        let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-                        let homeVC = mainStoryboard.instantiateViewController(withIdentifier: "home") as? HomeViewController
-                        homeVC!.modalPresentationStyle = .fullScreen
+                        
+                        
                         self?.dismiss(animated: true)
                     }
                 }
@@ -457,7 +445,7 @@ class LoginViewController: LoadingViewController, UITextFieldDelegate {
                 else{
                     //check if document is EMPTY
                     
-                    
+                   
                     UserDefaults.standard.set(true, forKey: "usersignedin")
                     UserDefaults.standard.synchronize()
                     goHome()

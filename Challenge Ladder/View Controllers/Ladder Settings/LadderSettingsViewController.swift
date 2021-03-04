@@ -445,8 +445,17 @@ class LadderSettingsViewController: LoadingViewController, UIPickerViewDelegate,
     @objc func jumpClicked(){
         let vc = ChangeJumpViewController()
         vc.ladder = ladder
-        vc.modalPresentationStyle = .popover
-        self.present(vc, animated: true)
+        if UIDevice.current.userInterfaceIdiom == .pad{
+            vc.modalPresentationStyle = .fullScreen
+            self.navigationController?.pushViewController(vc, animated: true)
+
+        }
+        else{
+            vc.modalPresentationStyle = .popover
+            self.present(vc, animated: true)
+
+        }
+       
     }
     
     @objc func nameClicked(){

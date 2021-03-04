@@ -137,11 +137,17 @@ class BaseViewController: LoadingViewController {
     func moveToLogin(){
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
 
+      
+        
         let secondViewController = storyboard.instantiateViewController(withIdentifier: "login") as! LoginViewController
         let navigationController = UINavigationController(rootViewController: secondViewController)
         navigationController.modalPresentationStyle = .fullScreen
 
-        self.present(navigationController, animated: true)
+        //self.present(navigationController, animated: true)
+        self.present(navigationController, animated: true) {
+            let vc = HomeViewController()
+            self.present(viewController: vc)
+        }
     }
     
     @objc func appleIDStateDidRevoked(_ notification: Notification) {

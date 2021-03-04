@@ -35,6 +35,12 @@ class SelectChallengeCell: UITableViewCell{
         return view
     }()
     
+    var blankView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .clear
+        return view
+    }()
+    
     var data: ChallengeData? {
         didSet {
             guard let data = data else { return }
@@ -51,6 +57,30 @@ class SelectChallengeCell: UITableViewCell{
         self.addSubview(userToChallengeName)
         self.addSubview(challengeInLadderName)
         self.addSubview(underlineView)
+        self.addSubview(blankView)
+
+        
+        self.userToChallengeName.snp.makeConstraints { (make) in
+            make.top.leading.trailing.equalToSuperview()
+
+        }
+        self.challengeInLadderName.snp.makeConstraints { (make) in
+            make.top.equalTo(userToChallengeName.snp.bottom).offset(5)
+            make.leading.trailing.equalToSuperview()
+
+        }
+        self.underlineView.snp.makeConstraints { (make) in
+            make.leading.trailing.equalToSuperview()
+            make.top.equalTo(challengeInLadderName.snp.bottom).offset(5)
+            make.height.equalTo(2)
+        }
+        
+        blankView.snp.makeConstraints { (make) in
+            make.top.equalTo(underlineView.snp.bottom)
+            make.leading.trailing.equalToSuperview()
+            make.height.equalTo(20)
+            make.bottom.equalToSuperview()
+        }
 
         
     }
@@ -63,16 +93,26 @@ class SelectChallengeCell: UITableViewCell{
         
         self.userToChallengeName.snp.remakeConstraints { (make) in
             make.top.leading.trailing.equalToSuperview()
+
         }
         self.challengeInLadderName.snp.remakeConstraints { (make) in
             make.top.equalTo(userToChallengeName.snp.bottom).offset(5)
             make.leading.trailing.equalToSuperview()
+
         }
         self.underlineView.snp.remakeConstraints { (make) in
             make.leading.trailing.equalToSuperview()
             make.top.equalTo(challengeInLadderName.snp.bottom).offset(5)
             make.height.equalTo(2)
         }
+        
+        blankView.snp.remakeConstraints { (make) in
+            make.top.equalTo(underlineView.snp.bottom)
+            make.leading.trailing.equalToSuperview()
+            make.height.equalTo(20)
+            make.bottom.equalToSuperview()
+        }
+        
         
     }
     

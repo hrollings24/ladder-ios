@@ -34,7 +34,7 @@ class LadderUser: User{
         self.reference = withReference
     }
     
-    func loadUser(completion: @escaping(Bool)->()) {
+    func loadUser(completion: @escaping(Bool, Bool)->()) {
         reference.getDocument { (document, error) in
             if let document = document, document.exists {
                 self.firstName = document.get("firstName") as? String
@@ -42,8 +42,10 @@ class LadderUser: User{
                 self.username = document.get("username") as? String
                 self.userID = document.documentID
                 self.isMyself = document.documentID == MainUser.shared.userID
-                completion(self.isMyself)
+                completion(true, self.isMyself)
             } else {
+                completion(false, false)
+
                 print("An error occured")
             }
         }

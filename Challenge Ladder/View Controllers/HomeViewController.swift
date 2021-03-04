@@ -8,6 +8,7 @@
 import UIKit
 import FirebaseAuth
 import FirebaseFirestore
+import FirebaseMessaging
 
 class HomeViewController: BaseViewController {
     
@@ -92,10 +93,15 @@ class HomeViewController: BaseViewController {
             
             MainUser.shared.getUser(withID: user2.uid) { (completed) in
                 self.activity.stopAnimating()
+                
                 switch completed{
                 case .documentEmpty:
                     self.ghostUser()
                 case .success:
+                    let db = Firestore.firestore()
+                    db.collection("users").document(MainUser.shared.userID).updateData([
+                        "fcm": FieldValue.arrayUnion([Messaging.messaging().fcmToken!])
+                    ])
                     self.setupView()
                 case .noDocument:
                     self.ghostUser()
@@ -323,6 +329,7 @@ class HomeViewController: BaseViewController {
         Auth.auth().currentUser?.delete(completion: { error in
             if let error = error{
                 Alert(withTitle: "Error", withDescription: error.localizedDescription, fromVC: self, perform: {})
+                self.moveToLogin()
             }
             else{
                 Alert(withTitle: "Error", withDescription: "An error occured when signing in", fromVC: self, perform: {})

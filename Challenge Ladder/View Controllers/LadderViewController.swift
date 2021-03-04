@@ -106,17 +106,6 @@ class LadderViewController: LoadingViewController {
             refreshupdate()
         }
         else{
-            self.usersInLadder.removeAll()
-            if ladder.adminIDs.contains(MainUser.shared.userID){
-                cornerButton.setTitle("Settings", for: .normal)
-                cornerButton.removeTarget(nil, action: nil, for: .allEvents)
-                cornerButton.addTarget(self, action:#selector(settingsInvoked), for: .touchUpInside)
-            }
-            else{
-                cornerButton.removeTarget(nil, action: nil, for: .allEvents)
-                cornerButton.setTitle("Invite Players", for: .normal)
-                cornerButton.addTarget(self, action:#selector(inviteInvoked), for: .touchUpInside)
-            }
             self.title = ladder.name
         }
     }
@@ -198,19 +187,25 @@ class LadderViewController: LoadingViewController {
     func loadUserData(){
         var amountOfUsersLoaded = 0
         for user in usersInLadder{
-            user.loadUser { (isMe) in
-                if isMe{
-                    if self.firstLoad{
-                        self.firstLoad = false
-                        self.selectedIndex = IndexPath(row: user.position - 1, section: 0)
+            user.loadUser { (success, isMe) in
+                if success{
+                    if isMe{
+                        if self.firstLoad{
+                            self.firstLoad = false
+                            self.selectedIndex = IndexPath(row: user.position - 1, section: 0)
+                        }
+                        self.myPos = user.position
                     }
-                    self.myPos = user.position
+                    amountOfUsersLoaded += 1
+                    if amountOfUsersLoaded == self.usersInLadder.count{
+                        //fully loaded users
+                        self.loadData()
+                    }
                 }
-                amountOfUsersLoaded += 1
-                if amountOfUsersLoaded == self.usersInLadder.count{
-                    //fully loaded users
-                    self.loadData()
+                else{
+                    Alert(withTitle: "Error", withDescription: "Could not load users", fromVC: self, perform: {})
                 }
+                
             }
         }
     }

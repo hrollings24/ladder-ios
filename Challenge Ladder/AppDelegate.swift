@@ -191,7 +191,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
         do{
             try Auth.auth().signOut()
-            //remove fcm
             
             // Check provider ID to verify that the user has signed in with Apple
                if let providerId = currentUser?.providerData.first?.providerID, providerId == "apple.com" {
@@ -200,18 +199,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                }
             
             print(Messaging.messaging().fcmToken!)
-            let db = Firestore.firestore()
-            db.collection("users").document(MainUser.shared.userID).updateData([
-                "fcm": FieldValue.arrayRemove([Messaging.messaging().fcmToken!])
-            ])
+            
             UserDefaults.standard.setValue(false, forKey: "usersignedin")
+            try removeFCM()
             
         }
-        catch _ {
+        catch UserError.currentUserNil{
+            
+        }
+        catch _{
+            
         }
 
     }
    
+    func removeFCM() throws {
+        if MainUser.shared.userID == nil{
+            throw UserError.currentUserNil
+        }
+        let db = Firestore.firestore()
+        db.collection("users").document(MainUser.shared.userID).updateData([
+            "fcm": FieldValue.arrayRemove([Messaging.messaging().fcmToken!])
+        ])
+    }
    
 }
 

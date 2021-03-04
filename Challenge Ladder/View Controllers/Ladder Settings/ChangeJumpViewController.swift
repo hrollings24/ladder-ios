@@ -79,7 +79,7 @@ class ChangeJumpViewController: LoadingViewController, UITextFieldDelegate {
         welcomeLabel.snp.makeConstraints { (make) in
             make.leading.equalTo(10)
             make.trailing.equalTo(-10)
-            make.top.equalTo(50)
+            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(20)
         }
         
         amountLabel.snp.makeConstraints { (make) in

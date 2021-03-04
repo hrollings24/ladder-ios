@@ -34,7 +34,8 @@ class SelectChallengeViewController: BaseViewController {
         noView.load(withText: "You have no ongoing challenges")
         noView.isHidden = false
 
-
+        self.tableView.estimatedRowHeight = 65
+        self.tableView.rowHeight = UITableView.automaticDimension
         
         view.addSubview(tableView)
         
@@ -67,7 +68,7 @@ class SelectChallengeViewController: BaseViewController {
     
     @objc func handleRefreshControl() {
        // Update your content…
-
+        data.removeAll()
         if MainUser.shared.challenges.count == 0{
             noView.isHidden = false
             noView.isHidden = true
@@ -83,17 +84,34 @@ class SelectChallengeViewController: BaseViewController {
             noView.isHidden = true
             tableView.isHidden = false
             for challenge in MainUser.shared.challenges{
-                challengeToShow = Challenge(ref: challenge, completion: { [self] (completed) in
-                    data.append(ChallengeData(personthechallengeiswith: self.challengeToShow.userToChallenge.firstName + " " + self.challengeToShow.userToChallenge.surname, laddername: self.challengeToShow.ladderName, challengeItself: challengeToShow))
-                    amountOfChallengesLoaded += 1
-                    if amountOfChallengesLoaded == MainUser.shared.challenges.count{
-                        // Dismiss the refresh control.
-                        amountOfChallengesLoaded = 0
-                        DispatchQueue.main.async {
-                           self.tableView.refreshControl?.endRefreshing()
-                            tableView.reloadData()
+                 Challenge(ref: challenge, completion: { (theChallenge, challengeStatus) in
+                    switch challengeStatus{
+                    case .documentEmpty:
+                        Alert(withTitle: "Error", withDescription: "Challenge not found", fromVC: self, perform: {})
+                        self.removeLoading()
+
+                    case .success:
+                        self.data.append(ChallengeData(personthechallengeiswith: theChallenge.userToChallenge.firstName + " " + theChallenge.userToChallenge.surname, laddername: theChallenge.ladderName, challengeItself: theChallenge))
+                        
+                        self.amountOfChallengesLoaded += 1
+                        if self.amountOfChallengesLoaded == MainUser.shared.challenges.count{
+                            self.amountOfChallengesLoaded = 0
+                            self.removeLoading()
+                            
                         }
+                        
+                    case .noDocument:
+                        Alert(withTitle: "Error", withDescription: "Challenge not found", fromVC: self, perform: {})
+                        self.removeLoading()
+
+                    case .errorRecievingUsers:
+                        Alert(withTitle: "Error", withDescription: "Error retriving challenge participents", fromVC: self, perform: {})
+                        self.removeLoading()
+
                     }
+                    self.tableView.refreshControl?.endRefreshing()
+                    self.tableView.reloadData()
+                    
                 })
             }
         }
@@ -120,14 +138,29 @@ class SelectChallengeViewController: BaseViewController {
             noView.isHidden = true
             tableView.isHidden = false
             for challenge in MainUser.shared.challenges{
-                challengeToShow = Challenge(ref: challenge, completion: { [self] (completed) in
-                    data.append(ChallengeData(personthechallengeiswith: self.challengeToShow.userToChallenge.firstName + " " + self.challengeToShow.userToChallenge.surname, laddername: self.challengeToShow.ladderName, challengeItself: challengeToShow))
-                    amountOfChallengesLoaded += 1
-                    if amountOfChallengesLoaded == MainUser.shared.challenges.count{
-                        amountOfChallengesLoaded = 0
-                        removeLoading()
-                        tableView.reloadData()
+                 Challenge(ref: challenge, completion: { (theChallenge, challengeStatus) in
+                    switch challengeStatus{
+                    case .documentEmpty:
+                        Alert(withTitle: "Error", withDescription: "Challenge not found", fromVC: self, perform: {})
+                    
+                    case .success:
+                        self.data.append(ChallengeData(personthechallengeiswith: theChallenge.userToChallenge.firstName + " " + theChallenge.userToChallenge.surname, laddername: theChallenge.ladderName, challengeItself: theChallenge))
+                        
+                        self.amountOfChallengesLoaded += 1
+                        if self.amountOfChallengesLoaded == MainUser.shared.challenges.count{
+                            self.amountOfChallengesLoaded = 0
+                            self.removeLoading()
+                        }
+                        
+                    case .noDocument:
+                        Alert(withTitle: "Error", withDescription: "Challenge not found", fromVC: self, perform: {})
+
+                    case .errorRecievingUsers:
+                        Alert(withTitle: "Error", withDescription: "Error retriving challenge participents", fromVC: self, perform: {})
+
                     }
+                    self.tableView.reloadData()
+                    
                 })
             }
         }
@@ -148,10 +181,6 @@ extension SelectChallengeViewController: UITableViewDelegate, UITableViewDataSou
         cell.data = data[indexPath.row]
         cell.selectionStyle = .none
         return cell
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
     }
     
     

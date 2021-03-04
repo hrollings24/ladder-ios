@@ -94,6 +94,19 @@ class ChallengeViewController: LoadingViewController {
         return btn
     }()
     
+    var rejectBtn: UIButton = {
+        let btn = UIButton()
+        btn.titleLabel?.font = UIFont.systemFont(ofSize: 18)
+        btn.titleLabel?.adjustsFontSizeToFitWidth = true
+        btn.layer.cornerRadius = 10
+        btn.setTitle("Reject", for: .normal)
+        btn.titleLabel?.textAlignment = .center
+        btn.setTitleColor(.black, for: .normal)
+        btn.backgroundColor = .clear
+        btn.addTarget(self, action:#selector(reject), for: .touchUpInside)
+        return btn
+    }()
+    
     func refresh(){
         showLoading()
         challenge.update { completed in
@@ -158,6 +171,12 @@ class ChallengeViewController: LoadingViewController {
     
     func setupOngoing(){
         
+        playedLabel.removeFromSuperview()
+        confirmBtn.removeFromSuperview()
+        rejectBtn.removeFromSuperview()
+        player1Btn.removeFromSuperview()
+        player2Btn.removeFromSuperview()
+        
         self.view.addSubview(playedLabel)
 
         
@@ -187,9 +206,18 @@ class ChallengeViewController: LoadingViewController {
                     make.leading.equalTo(16)
                     make.trailing.equalTo(-16)
                 }
+                
+                self.view.addSubview(rejectBtn)
+                
+                rejectBtn.snp.makeConstraints { (make) in
+                    make.top.equalTo(confirmBtn.snp.bottom).offset(10)
+                    make.leading.equalTo(16)
+                    make.trailing.equalTo(-16)
+                }
             }
         }
         else{
+            playedLabel.text = "Completed your challenge? Pick the winner here"
             player1Btn.add(user: MainUser.shared)
             player2Btn.add(user: challenge.userToChallenge)
             
@@ -278,7 +306,10 @@ class ChallengeViewController: LoadingViewController {
         
     }
     
-   
+    @objc func reject(){
+        challenge.reject()
+        setupOngoing()
+    }
     
     func dismissMe(){
         self.navigationController?.popViewControllers(viewsToPop: 1)

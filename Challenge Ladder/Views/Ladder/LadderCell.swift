@@ -244,22 +244,35 @@ class LadderCell: UITableViewCell{
         }
         else{
             let challengeRef = db.collection("challenge").document(ladder.challengesIHaveWithOtherUserIds[data!.userID]!)
-            var challenge: Challenge!
-            challenge = Challenge(ref: challengeRef, completion: { (completed) in
-                if !completed{
-                    Alert(withTitle: "Error", withDescription: "The challenge could not be found", fromVC: self.presentingVC, perform: {})
-                }
+            Challenge(ref: challengeRef, completion: { (theChallenge, challengeStatus) in
+               switch challengeStatus{
+               case .documentEmpty:
+                Alert(withTitle: "Error", withDescription: "Challenge not found", fromVC: self.presentingVC, perform: {})
+               case .success:
+                    self.presentingVC.removeLoading()
+                    let newVC = ChallengeViewController()
+                    newVC.challenge = theChallenge
+                    newVC.previousVC = self.presentingVC
+                    self.presentingVC.navigationController?.pushViewController(newVC, animated: true)
+               case .noDocument:
+                Alert(withTitle: "Error", withDescription: "Challenge not found", fromVC: self.presentingVC, perform: {})
+
+               case .errorRecievingUsers:
+                Alert(withTitle: "Error", withDescription: "Error retriving challenge participents", fromVC: self.presentingVC, perform: {})
+
+               }
                 self.presentingVC.removeLoading()
-                let newVC = ChallengeViewController()
-                newVC.challenge = challenge
-                newVC.previousVC = self.presentingVC
-                self.presentingVC.navigationController?.pushViewController(newVC, animated: true)
+
+               
+              
+                
             })
         }
         
         
         
     }
+
     
     
 }

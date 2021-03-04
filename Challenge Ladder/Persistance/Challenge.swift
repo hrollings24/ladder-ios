@@ -20,9 +20,10 @@ class Challenge{
     
     lazy var functions = Functions.functions()
     
-    init(ref: DocumentReference, completion: @escaping(Bool)->()) {
+    init(ref: DocumentReference, completion: @escaping(Challenge, ChallengeStatus)->()) {
+        
         ref.getDocument { (document, error) in
-            if let document = document {
+        if let document = document {
                 if document.exists{
                     let dic = document.data()
                     let db = Firestore.firestore()
@@ -37,23 +38,41 @@ class Challenge{
 
                     if user1 == MainUser.shared.userID{
                         self.userToChallenge = LadderUser(withReference: db.collection("users").document(user2!))
-                        self.userToChallenge.loadUser { (completed) in
-                            completion(true)
+                        self.userToChallenge.loadUser { (completed, isMe) in
+                            if completed{
+                                completion(self, .success)
+
+                            }
+                            else{
+                                completion(self, .errorRecievingUsers)
+
+                            }
                         }
                     }
                     else{
                         self.userToChallenge = LadderUser(withReference: db.collection("users").document(user1!))
-                        self.userToChallenge.loadUser { (completed) in
-                            completion(true)
+                        self.userToChallenge.loadUser { (completed, isMe) in
+                            if completed{
+                                completion(self, .success)
+
+                            }
+                            else{
+                                completion(self, .errorRecievingUsers)
+
+                            }
                         }
                     }
                 }
-                else{
-                    completion(false)
+                else {
+                    completion(self, .noDocument)
                 }
             }
         }
     }
+        
+       
+    
+
     
     func update(completion: @escaping(Bool)->()) {
         let db = Firestore.firestore()
@@ -74,13 +93,13 @@ class Challenge{
 
                     if user1 == MainUser.shared.userID{
                         self.userToChallenge = LadderUser(withReference: db.collection("users").document(user2!))
-                        self.userToChallenge.loadUser { (completed) in
+                        self.userToChallenge.loadUser { (completed, isMe) in
                             completion(true)
                         }
                     }
                     else{
                         self.userToChallenge = LadderUser(withReference: db.collection("users").document(user1!))
-                        self.userToChallenge.loadUser { (completed) in
+                        self.userToChallenge.loadUser { (completed, isMe) in
                             completion(true)
                         }
                     }
@@ -127,12 +146,25 @@ class Challenge{
                     let loserPos = positions.firstIndex(of: loser)!
                     
                     if winnerPos > loserPos{
-                        positions.swapAt(winnerPos, loserPos)
+                        positions.remove(at: winnerPos)
+                        positions.remove(at: loserPos)
+                        positions.insert(winner, at: loserPos)
+                        positions.insert(loser, at: loserPos+1)
                         ladderRef.updateData(["positions" : positions])
                     }
                 }
             }
         }
+    }
+    
+    func reject(){
+        winner = ""
+        winnerselectedby = ""
+        
+        let db = Firestore.firestore()
+        let ladderRef = db.collection("challenge").document(id)
+        ladderRef.updateData(["winner" : ""])
+        ladderRef.updateData(["winnerselectedby" : ""])
     }
     
     

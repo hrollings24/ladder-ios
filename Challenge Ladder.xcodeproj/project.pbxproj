@@ -38,6 +38,8 @@
 		AF45AF6D24F94C34004A831F /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF45AF6C24F94C34004A831F /* NotificationViewController.swift */; };
 		AF49BB7225DA9FB20089FC2A /* LadderData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF49BB7125DA9FB20089FC2A /* LadderData.swift */; };
 		AF49BB7725DAAC850089FC2A /* SelectLadderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF49BB7625DAAC850089FC2A /* SelectLadderCell.swift */; };
+		AF4F530025ED67080028F5D2 /* ChallengeError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4F52FF25ED67080028F5D2 /* ChallengeError.swift */; };
+		AF4F530225ED6C500028F5D2 /* ChallengeStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4F530125ED6C500028F5D2 /* ChallengeStatus.swift */; };
 		AF52ACE9257BA48B004C8BF6 /* AwaitingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF52ACE8257BA48B004C8BF6 /* AwaitingView.swift */; };
 		AF66162325AF228600A744DF /* ChangeJumpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF66162225AF228600A744DF /* ChangeJumpViewController.swift */; };
 		AF66162825AF263100A744DF /* CancelAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF66162725AF263100A744DF /* CancelAlert.swift */; };
@@ -137,6 +139,8 @@
 		AF45AF6C24F94C34004A831F /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		AF49BB7125DA9FB20089FC2A /* LadderData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LadderData.swift; sourceTree = "<group>"; };
 		AF49BB7625DAAC850089FC2A /* SelectLadderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLadderCell.swift; sourceTree = "<group>"; };
+		AF4F52FF25ED67080028F5D2 /* ChallengeError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeError.swift; sourceTree = "<group>"; };
+		AF4F530125ED6C500028F5D2 /* ChallengeStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeStatus.swift; sourceTree = "<group>"; };
 		AF52ACE8257BA48B004C8BF6 /* AwaitingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwaitingView.swift; sourceTree = "<group>"; };
 		AF66162225AF228600A744DF /* ChangeJumpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeJumpViewController.swift; sourceTree = "<group>"; };
 		AF66162725AF263100A744DF /* CancelAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelAlert.swift; sourceTree = "<group>"; };
@@ -286,6 +290,7 @@
 				AF405B8425E8473F0078EC34 /* RetriveDocumentStatus.swift */,
 				AF3B444D25DEB545004CE6DA /* CreatingAccountStatus.swift */,
 				AF405B8E25EC4AAC0078EC34 /* NameStatus.swift */,
+				AF4F530125ED6C500028F5D2 /* ChallengeStatus.swift */,
 			);
 			path = Status;
 			sourceTree = "<group>";
@@ -294,6 +299,7 @@
 			isa = PBXGroup;
 			children = (
 				AF405B8725E855530078EC34 /* UserError.swift */,
+				AF4F52FF25ED67080028F5D2 /* ChallengeError.swift */,
 			);
 			path = Error;
 			sourceTree = "<group>";
@@ -784,6 +790,7 @@
 				AF0BE6A724E7EC11005FF2CE /* CreateLadderViewController.swift in Sources */,
 				AF45AF6924F85D3A004A831F /* Extensions.swift in Sources */,
 				AFE402BC256947E3008AD818 /* ViewRequestsViewController.swift in Sources */,
+				AF4F530025ED67080028F5D2 /* ChallengeError.swift in Sources */,
 				AF88726C2541C1AB00D6EB5C /* UserButton.swift in Sources */,
 				AF405B8D25EA75370078EC34 /* BlackButton.swift in Sources */,
 				AF3B444125DD469F004CE6DA /* UserCell.swift in Sources */,
@@ -825,6 +832,7 @@
 				AF74AB6E25014B370059C388 /* ChallengeViewController.swift in Sources */,
 				AF0BE69724E553F3005FF2CE /* SignUpViewController.swift in Sources */,
 				AF0BE69D24E55EC2005FF2CE /* Alert.swift in Sources */,
+				AF4F530225ED6C500028F5D2 /* ChallengeStatus.swift in Sources */,
 				AF8354452531C76B0096F3C2 /* NoView.swift in Sources */,
 				AF3B444525DD647A004CE6DA /* DisplayFindViewController.swift in Sources */,
 				AF835439252F2B010096F3C2 /* ForgotPasswordViewController.swift in Sources */,
