@@ -111,16 +111,6 @@ class Challenge{
         }
     }
     
-    func addWinner(userID: String) -> Bool{
-        winner = userID
-        let db = Firestore.firestore()
-        let docRef = db.collection("challenge").document(id)
-        docRef.updateData(["winner" : userID])
-        docRef.updateData(["winnerselectedby" : MainUser.shared.userID!])
-        winnerselectedby = MainUser.shared.userID!
-        return true
-    }
-    
     func delete(){
         
         functions.httpsCallable("deleteChallenge").call(id) { (result, error) in

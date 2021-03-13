@@ -41,6 +41,7 @@ class NotificationCell: UITableViewCell{
                 isMessage = false
                 acceptBtn.isHidden = false
                 denyBtn.isHidden = false
+                acceptBtn.setTitle("Accept", for: .normal)
                 denyBtn.addTarget(self, action:#selector(deny), for: .touchUpInside)
                 acceptBtn.addTarget(self, action:#selector(acceptChallenge), for: .touchUpInside)
 
@@ -74,6 +75,13 @@ class NotificationCell: UITableViewCell{
                 isMessage = true
                 acceptBtn.setTitle("View Request", for: .normal)
                 acceptBtn.addTarget(self, action:#selector(goToRequest), for: .touchUpInside)
+                
+            case "challengeSelected":
+                acceptBtn.isHidden = false
+                denyBtn.isHidden = true
+                isMessage = true
+                acceptBtn.setTitle("View Challenge", for: .normal)
+                acceptBtn.addTarget(self, action:#selector(goToChallenge), for: .touchUpInside)
 
                 break
             default:
@@ -426,6 +434,23 @@ class NotificationCell: UITableViewCell{
             }
         }
         self.presentingVC.getNotifications()
+    }
+    
+    
+    @objc func goToChallenge(){
+        let newVC = ChallengeViewController()
+        self.presentingVC.showLoading()
+        Challenge(ref: challengeRef) { challenge, challengeStatus in
+            self.presentingVC.removeLoading()
+            switch challengeStatus{
+            case .documentEmpty, .noDocument, .errorRecievingUsers:
+                Alert(withTitle: "Error", withDescription: challengeStatus.rawValue, fromVC: self.presentingVC, perform: {})
+            case .success:
+                newVC.challenge = challenge
+                newVC.previousVC = self.presentingVC
+                self.presentingVC.navigationController?.pushViewController(newVC, animated: true)
+            }
+        }
     }
         
         

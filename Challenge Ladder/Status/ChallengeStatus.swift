@@ -7,9 +7,9 @@
 
 import Foundation
 
-enum ChallengeStatus{
-    case documentEmpty
-    case success
-    case noDocument
-    case errorRecievingUsers
+enum ChallengeStatus: String{
+    case documentEmpty = "The challenge was empty"
+    case success = "Success"
+    case noDocument = "The challenge does not exist"
+    case errorRecievingUsers = "Could not retrive users in the challenge"
 }

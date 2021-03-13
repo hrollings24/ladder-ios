@@ -7,13 +7,15 @@
 
 import UIKit
 import FirebaseFirestore
+import FirebaseFunctions
 
 class ChallengeViewController: LoadingViewController {
 
     var challenge: Challenge!
     var ladder: Ladder!
     var previousVC: UIViewController!
-    
+    lazy var functions = Functions.functions()
+
     
     
     var userToChallengeName: UILabel = {
@@ -251,10 +253,29 @@ class ChallengeViewController: LoadingViewController {
     func confirmWinner(asUser: User){
         // create the alert
         let message = "Confirm that " + asUser.firstName! + " has won the challenge?"
+        
         let perform = {
-            let finished = self.challenge.addWinner(userID: asUser.userID)
-            if finished == true{
-                self.refresh()
+            self.showLoading()
+            
+            //data = [toUser, fromUser, ladderID, message, ladderName, challengeID, winnerID]
+
+            let data = [
+                "toUser": self.challenge.userToChallenge.userID!,
+                "fromUser": MainUser.shared.userID!,
+                "ladderID": self.challenge.ladderID!,
+                "message": MainUser.shared.username + " has selected a winner for your challenge",
+                "challengeID": self.challenge.id!,
+                "winnerID": asUser.userID!
+            ] as [String : Any]
+            
+            self.functions.httpsCallable("addWinnerToChallenge").call(data) { (result, error) in
+                if let error = error{
+                    Alert(withTitle: "Error", withDescription: error.localizedDescription, fromVC: self, perform: {self.refresh()})
+                }
+                else{
+                    let resultData = result!.data as! NSDictionary
+                    Alert(withTitle: resultData["title"]! as! String, withDescription: resultData["message"]! as! String, fromVC: self, perform: {self.refresh()})
+                }
             }
         }
         CancelAlert(withTitle: "Confirm", withDescription: message, fromVC: self, perform: perform)
@@ -279,12 +300,32 @@ class ChallengeViewController: LoadingViewController {
                 //loser is main user
                 self.challenge.confirmWinner(winner: self.challenge.winner, loser: MainUser.shared.userID)
                 self.challenge.delete()
+                
+                let db = Firestore.firestore()
+                db.collection("notifications").document().setData([
+                    "toUser": db.collection("users").document(self.challenge.userToChallenge.userID),
+                    "message": "Your challenge with " + MainUser.shared.username + " is complete",
+                    "type": "message",
+                    "fromUser": db.collection("users").document(MainUser.shared.userID),
+                    "ladder": db.collection("ladder").document(self.challenge.ladderID),
+                    "title": "Challenge Completed",
+                ]) { [self] err in
+                    if let err = err {
+                        Alert(withTitle: "Error", withDescription: err.localizedDescription, fromVC: self, perform: {})
+                    } else {
+                        //completed
+                    }
+                }
                 self.removeLoading()
 
-                let perform = {
+
+                let perform2 = {
+                    if let preVC = self.previousVC as? SelectChallengeViewController{
+                        preVC.getChallenges()
+                    }
                     self.dismissMe()
                 }
-                Alert(withTitle: "Challenge completed", withDescription: "The challenge is complete", fromVC: self, perform: perform)
+                Alert(withTitle: "Challenge completed", withDescription: "The challenge is complete", fromVC: self, perform: perform2)
             }
             else{
                 //loser is userToChallenge

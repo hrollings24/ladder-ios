@@ -228,7 +228,7 @@ class LadderCell: UITableViewCell{
                    print("An error occurred while calling the function: \(error)" )
                }
                else{
-                Alert(withTitle: "Success", withDescription: result!.description, fromVC: self.presentingVC, perform: perform)
+                Alert(withTitle: "Success", withDescription: "You were successfully removed from the ladder", fromVC: self.presentingVC, perform: perform)
                }
            }
     }
