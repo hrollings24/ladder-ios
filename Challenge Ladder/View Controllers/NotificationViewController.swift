@@ -42,8 +42,12 @@ class NotificationViewController: BaseViewController {
         tableView.dataSource = self
         
         configureRefreshControl()
+        
+        
         getNotifications()
         
+        
+        setupNoView()
         self.tableView.estimatedRowHeight = 100
         self.tableView.rowHeight = UITableView.automaticDimension
 
@@ -51,33 +55,22 @@ class NotificationViewController: BaseViewController {
     
     
     func getNotifications(){
-        
-       
 
         let db = Firestore.firestore()
         let docRef = Firestore.firestore().collection("users").document(MainUser.shared.userID)
         db.collection("notifications").whereField("toUser", isEqualTo: docRef).addSnapshotListener { (querySnapshot, err) in
+            
             if let err = err {
-                print("Error getting documents: \(err)")
+                Alert(withTitle: "Error", withDescription: err.localizedDescription, fromVC: self, perform: {})
             } else {
-                self.data.removeAll()
-                if querySnapshot!.documents.isEmpty{
-                    self.setupNoView()
-                    self.tableView.isHidden = true
-                    self.tableView.reloadData()
-                }else{
-                    for document in querySnapshot!.documents {
-                        if self.noView != nil{
-                            self.noView.removeFromSuperview()
-                        }
-                        
-                        let noteData2 = document.data()
-                        let noteToAdd = NoteData(message: noteData2["message"] as! String, type: noteData2["type"] as! String, fromUser: noteData2["fromUser"] as! DocumentReference, notification: document, ladderReference: noteData2["ladder"] as? DocumentReference, challengeReference: noteData2["challengeRef"] as? DocumentReference)
-                        self.data.append(noteToAdd)
-                    }
-                    self.tableView.isHidden = false
-                    self.tableView.reloadData()
-
+                
+                let result = self.setupNotes(withSnapshot: querySnapshot)
+                switch result{
+                
+                case .snapshotcouldnotbeunwrapped, .message, .type, .fromUser:
+                    Alert(withTitle: "Error", withDescription: result.rawValue, fromVC: self, perform: {})
+                case .success:
+                    break
                 }
             }
         }
@@ -96,40 +89,66 @@ class NotificationViewController: BaseViewController {
 
         let db = Firestore.firestore()
         let docRef = Firestore.firestore().collection("users").document(MainUser.shared.userID)
+        
         db.collection("notifications").whereField("toUser", isEqualTo: docRef).addSnapshotListener { (querySnapshot, err) in
+            
             if let err = err {
-                print("Error getting documents: \(err)")
+                Alert(withTitle: "Error", withDescription: err.localizedDescription, fromVC: self, perform: {})
             } else {
-                self.data.removeAll()
-                if querySnapshot!.documents.isEmpty{
-                    // Dismiss the refresh control.
+                
+                let result = self.setupNotes(withSnapshot: querySnapshot)
+                switch result{
+                
+                case .snapshotcouldnotbeunwrapped, .message, .type, .fromUser:
+                    Alert(withTitle: "Error", withDescription: result.rawValue, fromVC: self, perform: {})
+                case .success:
                     DispatchQueue.main.async {
-                       self.tableView.refreshControl?.endRefreshing()
+                        self.tableView.refreshControl?.endRefreshing()
                     }
-                    self.setupNoView()
-                    self.tableView.isHidden = true
-                    self.tableView.reloadData()
-                }else{
-                    for document in querySnapshot!.documents {
-                        if self.noView != nil{
-                            self.noView.removeFromSuperview()
-                        }
-                        let noteData2 = document.data()
-                        let noteToAdd = NoteData(message: noteData2["message"] as! String, type: noteData2["type"] as! String, fromUser: noteData2["fromUser"] as! DocumentReference, notification: document, ladderReference: noteData2["ladder"] as? DocumentReference, challengeReference: noteData2["challengeRef"] as? DocumentReference)
-                        self.data.append(noteToAdd)
-                    }
-                    self.tableView.isHidden = false
-                    self.tableView.reloadData()
-                    // Dismiss the refresh control.
-                    DispatchQueue.main.async {
-                       self.tableView.refreshControl?.endRefreshing()
-                    }
-
                 }
             }
         }
+    }
+    
+    func setupNotes(withSnapshot: QuerySnapshot?) -> NotificationError{
+        self.data.removeAll()
         
-       
+        guard let querySnapshot = withSnapshot else {
+            return NotificationError.snapshotcouldnotbeunwrapped
+        }
+
+        if querySnapshot.documents.isEmpty{
+            // Dismiss the refresh control.
+            DispatchQueue.main.async {
+               self.tableView.refreshControl?.endRefreshing()
+            }
+            self.noView.isHidden = false
+            self.tableView.isHidden = true
+            self.tableView.reloadData()
+        } else{
+            for document in querySnapshot.documents {
+                self.noView.isHidden = true
+                
+                let noteData2 = document.data()
+                
+                guard let message = noteData2["message"] as? String else {
+                    return NotificationError.message
+                }
+                guard let type = noteData2["type"] as? String else {
+                    return NotificationError.type
+                }
+                guard let fromUser = noteData2["fromUser"] as? DocumentReference else {
+                    return NotificationError.fromUser
+                }
+                
+                
+                let noteToAdd = NoteData(message: message, type: type, fromUser: fromUser, notification: document, ladderReference: noteData2["ladder"] as? DocumentReference, challengeReference: noteData2["challengeRef"] as? DocumentReference)
+                self.data.append(noteToAdd)
+            }
+            self.tableView.isHidden = false
+            self.tableView.reloadData()
+        }
+        return .success
     }
 
     func setupNoView(){
@@ -153,8 +172,6 @@ extension NotificationViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return data.count
-   
-    
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -170,11 +187,5 @@ extension NotificationViewController: UITableViewDelegate, UITableViewDataSource
         return cell
     }
    
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-       
-        print("cell tapped")
-        
-    }
 }
 

@@ -66,19 +66,28 @@ class FindLadderViewController: FindViewController {
         var loadedLadderCount = 0
         data.removeAll()
         for ladder in withLadders{
-            Ladder(ref: ladder.reference, completion: { [self] (completed) in
-                data.append(LadderData(nameofladder: completed.name!, ladderitself: completed))
-                loadedLadderCount += 1
-                if loadedLadderCount == withLadders.count{
-                    removeLoading()
-                    tableView.reloadData()
-                    tableView.isHidden = false
-                    nothingFoundLabel.isHidden = true
+            Ladder(ref: ladder.reference){ result in
+                switch result{
+                case .success(let ladderitself):
+                    self.data.append(LadderData(nameofladder: ladderitself.name!, ladderitself: ladderitself))
+                    loadedLadderCount += 1
+                    if loadedLadderCount == withLadders.count{
+                        self.removeLoading()
+                        self.tableView.reloadData()
+                        self.tableView.isHidden = false
+                        self.nothingFoundLabel.isHidden = true
+                    }
+
+                case .failure(let error):
+                    Alert(withTitle: "Error", withDescription: error.rawValue, fromVC: self, perform: {})
                 }
-            })
+            }
         }
     }
 }
+
+
+
 
 extension FindLadderViewController: UITableViewDelegate, UITableViewDataSource{
     

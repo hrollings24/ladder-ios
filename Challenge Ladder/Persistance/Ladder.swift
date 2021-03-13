@@ -23,21 +23,55 @@ class Ladder{
     var updateSettings: LadderSettingsViewController!
     var initialising: Bool!
     
-    init(ref: DocumentReference, completion: @escaping(Ladder)->()) {
+    init(ref: DocumentReference, completion: @escaping(Result<Ladder, LadderError>)->()) {
         ref.addSnapshotListener { (document, error) in
+            if error != nil{
+                completion(.failure(.couldnotretrive))
+            }
             if let document = document {
-                print(document.exists)
                 if document.exists{
-                    let dic = document.data()
+                    guard let dic = document.data() else {
+                        completion(.failure(.nodata))
+                        return
+                    }
                     self.id = document.documentID
-                    let n = dic!["name"] as? String
+                    let n = dic["name"] as? String
                     self.name = n?.capitalized
-                    let perAsString = dic!["permission"] as? String
-                    self.permission = LadderPermission(rawValue: perAsString!)
-                    self.jump = dic!["jump"] as? Int
-                    self.positions = dic!["positions"] as? [String]
-                    self.adminIDs = dic!["admins"] as? [String]
-                    self.requests = dic!["requests"] as? [String]
+                    guard let perAsString = dic["permission"] as? String else {
+                        completion(.failure(.corrupt))
+                        return
+                    }
+                    self.permission = LadderPermission(rawValue: perAsString)
+                    
+                    guard let jump2 = dic["jump"] as? Int else {
+                        completion(.failure(.corrupt))
+                        return
+                    }
+                    self.jump = jump2
+                        
+                        
+                    guard let positions2 = dic["positions"] as? [String] else {
+                            completion(.failure(.corrupt))
+                        return
+                    }
+                    self.positions = positions2
+
+                                
+                                
+                    guard let adminsIDs2 = dic["admins"] as? [String] else {
+                        completion(.failure(.corrupt))
+                        return
+                    }
+                    self.adminIDs = adminsIDs2
+                                    
+                                    
+                    guard let requests2 = dic["requests"] as? [String] else {
+                        completion(.failure(.corrupt))
+                        return
+                    }
+                    self.requests = requests2
+
+                                    
                     if self.initialising == nil{
                         self.initialising = true
                     }
@@ -52,21 +86,29 @@ class Ladder{
                             self.challengesIHaveWithOtherUserIds.removeAll()
                             self.getUser1 { (completed) in
                                 self.getUser2 { (completed2) in
-                                    if self.updateScene != nil{
-                                        self.updateScene.refreshupdate()
+                                    if completed && completed2{
+                                        if self.updateScene != nil{
+                                            self.updateScene.refreshupdate()
+                                        }
+                                        if self.updateSettings != nil{
+                                            self.updateSettings.refreshText()
+                                        }
+                                        completion(.success(self))
                                     }
-                                    if self.updateSettings != nil{
-                                        self.updateSettings.refreshText()
+                                    else{
+                                        completion(.failure(.challengeerror))
                                     }
-                                    completion(self)
                                 }
                             }
                         }
                     }
-                   
-                 
-                    
                 }
+                else{
+                    completion(.failure(.couldnotretrive))
+                }
+            }
+            else{
+                completion(.failure(.couldnotbeunwrapped))
             }
         }
     }
@@ -76,8 +118,13 @@ class Ladder{
         db.collection("challenge").whereField("ladder", isEqualTo: self.id!).whereField("user1", isEqualTo: MainUser.shared.userID!).getDocuments { (querySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
+                completion(false)
             } else {
-                for document in querySnapshot!.documents {
+                guard let querySnapshot = querySnapshot else {
+                    completion(false)
+                    return
+                }
+                for document in querySnapshot.documents {
                     let dic = document.data()
                     self.challengesIHaveWithOtherUserIds[(dic["user2"] as? String)!] = document.documentID
                 }
@@ -91,8 +138,13 @@ class Ladder{
         db.collection("challenge").whereField("ladder", isEqualTo: self.id!).whereField("user2", isEqualTo: MainUser.shared.userID!).getDocuments { (querySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
+                completion(false)
             } else {
-                for document in querySnapshot!.documents {
+                guard let querySnapshot = querySnapshot else {
+                    completion(false)
+                    return
+                }
+                for document in querySnapshot.documents {
                     let dic = document.data()
                     self.challengesIHaveWithOtherUserIds[(dic["user1"] as? String)!] = document.documentID
                 }

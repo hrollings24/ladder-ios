@@ -340,20 +340,24 @@ class CreateLadderViewController: BaseViewController, UITextFieldDelegate {
                     "ladders": FieldValue.arrayUnion([ref])
                 ])
                 
-                self.ladder = Ladder(ref: ref, completion: { (completed) in
-                    //ladder loaded
-                    
-                    if self.ladder.initialising{
-                        self.removeLoading()
-                        let alertController = UIAlertController(title: "Success", message: "Ladder successfully created", preferredStyle: .alert)
-                        let okAction = UIAlertAction(title: "OK", style: .default) {
-                                UIAlertAction in
-                            self.goToLadder()
+                Ladder(ref: ref) { result in
+                    switch result{
+                    case .success(let data):
+                        self.ladder = data
+                        if data.initialising{
+                            self.removeLoading()
+                            let alertController = UIAlertController(title: "Success", message: "Ladder successfully created", preferredStyle: .alert)
+                            let okAction = UIAlertAction(title: "OK", style: .default) {
+                                    UIAlertAction in
+                                self.goToLadder()
+                            }
+                            alertController.addAction(okAction)
+                            self.present(alertController, animated: true, completion: nil)
                         }
-                        alertController.addAction(okAction)
-                        self.present(alertController, animated: true, completion: nil)
+                    case .failure(let error):
+                        Alert(withTitle: "Error", withDescription: error.rawValue, fromVC: self, perform: {})
                     }
-                })
+                }
             }
         }
     }

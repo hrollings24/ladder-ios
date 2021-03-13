@@ -107,26 +107,33 @@ class SelectLadderViewController: BaseViewController {
             tableView.isHidden = false
             for ladder in MainUser.shared.ladders{
                 //ladder is DocumentReference
-                Ladder(ref: ladder, completion: { [self] (completed) in
-                    print(completed.name!)
-                    data.append(LadderData(nameofladder: completed.name!, ladderitself: completed))
-                    loadedLadderCount += 1
-                    if loadedLadderCount == MainUser.shared.ladders.count{
-                        loadedLadderCount = 0
-                        print(data)
-                        // Dismiss the refresh control.
-                        DispatchQueue.main.async {
-                           self.tableView.refreshControl?.endRefreshing()
-                            tableView.reloadData()
-
+                Ladder(ref: ladder){ result in
+                    switch result{
+                    case .success(let ladderitself):
+                        let ladderToADD = LadderData(nameofladder: ladderitself.name!, ladderitself: ladderitself)
+                        let found = self.data.filter{$0.nameofladder == ladderitself.name!}.count > 0
+                        if !found{
+                            self.data.append(ladderToADD)
+                            self.loadedLadderCount += 1
+                            if self.loadedLadderCount == MainUser.shared.ladders.count{
+                                self.loadedLadderCount = 0
+                                DispatchQueue.main.async {
+                                   self.tableView.refreshControl?.endRefreshing()
+                                    self.tableView.reloadData()
+                                }
+                            }
                         }
+                    case .failure(let error):
+                        Alert(withTitle: "Error", withDescription: error.rawValue, fromVC: self, perform: {})
                     }
-                })
+                }
             }
         }
         
        
     }
+    
+    
     
     func getLadders(){
         
@@ -144,26 +151,33 @@ class SelectLadderViewController: BaseViewController {
             noView.isHidden = true
             cornerButton.isHidden = false
             tableView.isHidden = false
+            
             for ladder in MainUser.shared.ladders{
-                print(ladder)
                 //ladder is DocumentReference
-                Ladder(ref: ladder, completion: { [self] (completed) in
-                    print(completed.name!)
-                    let ladderToADD = LadderData(nameofladder: completed.name!, ladderitself: completed)
-                    let found = data.filter{$0.nameofladder == completed.name!}.count > 0
-                    if !found{
-                        data.append(ladderToADD)
-                        loadedLadderCount += 1
-                        if loadedLadderCount == MainUser.shared.ladders.count{
-                            loadedLadderCount = 0
-                            print(data)
-                            removeLoading()
-                            tableView.reloadData()
+                Ladder(ref: ladder){ result in
+                    switch result{
+                    case .success(let ladderitself):
+                        let ladderToADD = LadderData(nameofladder: ladderitself.name!, ladderitself: ladderitself)
+                        let found = self.data.filter{$0.nameofladder == ladderitself.name!}.count > 0
+                        if !found{
+                            self.data.append(ladderToADD)
+                            self.loadedLadderCount += 1
+                            if self.loadedLadderCount == MainUser.shared.ladders.count{
+                                self.loadedLadderCount = 0
+                                self.removeLoading()
+                                self.tableView.reloadData()
+                            }
                         }
+                    case .failure(let error):
+                        Alert(withTitle: "Error", withDescription: error.rawValue, fromVC: self, perform: {
+                            self.removeLoading()
+                        })
                     }
-                    
-                })
+                }
             }
+            
+            
+           
         }
     }
     

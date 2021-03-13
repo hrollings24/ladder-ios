@@ -174,7 +174,6 @@ class NotificationCell: UITableViewCell{
         
         messageLabel.snp.remakeConstraints { (make) in
             make.top.leading.trailing.equalToSuperview()
-            make.bottom.equalTo(acceptBtn.snp.top)
         }
         
         if !isMessage{
@@ -426,6 +425,7 @@ class NotificationCell: UITableViewCell{
                 print("Document successfully removed!")
             }
         }
+        self.presentingVC.getNotifications()
     }
         
         

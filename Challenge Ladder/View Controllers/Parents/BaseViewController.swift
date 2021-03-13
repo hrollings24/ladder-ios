@@ -20,7 +20,9 @@ class BaseViewController: LoadingViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-       
+        let swipe = UISwipeGestureRecognizer(target: self, action: #selector(menuPressed))
+        swipe.direction = [.right]
+        self.view.addGestureRecognizer(swipe)
         
         NotificationCenter.default.addObserver(self, selector: #selector(appleIDStateDidRevoked(_:)), name: ASAuthorizationAppleIDProvider.credentialRevokedNotification, object: nil)
 
@@ -59,7 +61,7 @@ class BaseViewController: LoadingViewController {
             present(viewController: vc)
             break
         case .logout:
-            logout()
+            logoutAlert()
             break
         case .home:
             let vc = HomeViewController()
@@ -92,6 +94,11 @@ class BaseViewController: LoadingViewController {
     
     @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
           dismiss(animated: true, completion: nil)
+    }
+    
+    func logoutAlert(){
+        let perform: () -> Void = { self.logout() }
+        CancelAlert(withTitle: "Logout", withDescription: "Are you sure you want to log out?", fromVC: self, perform: perform)
     }
     
     func logout(){

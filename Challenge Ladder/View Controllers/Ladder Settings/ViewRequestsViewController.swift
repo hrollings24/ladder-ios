@@ -72,9 +72,14 @@ class ViewRequestsViewController: LoadingViewController {
     func setupView(withReference: DocumentReference){
         
         showLoading()
-        Ladder(ref: withReference) { ladder in
-            self.removeLoading()
-            self.setupView(withLadder: ladder)
+        Ladder(ref: withReference) { result in
+            switch result{
+            case .success(let data):
+                self.removeLoading()
+                self.setupView(withLadder: data)
+            case .failure(let error):
+                Alert(withTitle: "Error", withDescription: error.rawValue, fromVC: self, perform: {})
+            }
         }
         
     }

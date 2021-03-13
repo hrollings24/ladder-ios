@@ -41,6 +41,8 @@
 		AF4F530025ED67080028F5D2 /* ChallengeError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4F52FF25ED67080028F5D2 /* ChallengeError.swift */; };
 		AF4F530225ED6C500028F5D2 /* ChallengeStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4F530125ED6C500028F5D2 /* ChallengeStatus.swift */; };
 		AF52ACE9257BA48B004C8BF6 /* AwaitingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF52ACE8257BA48B004C8BF6 /* AwaitingView.swift */; };
+		AF564CBA25FCEC69002BE8E8 /* NotificationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF564CB925FCEC69002BE8E8 /* NotificationError.swift */; };
+		AF564CBC25FCF524002BE8E8 /* LadderError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF564CBB25FCF524002BE8E8 /* LadderError.swift */; };
 		AF66162325AF228600A744DF /* ChangeJumpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF66162225AF228600A744DF /* ChangeJumpViewController.swift */; };
 		AF66162825AF263100A744DF /* CancelAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF66162725AF263100A744DF /* CancelAlert.swift */; };
 		AF66162D25AF2A0C00A744DF /* ViewUsersInLadderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF66162C25AF2A0C00A744DF /* ViewUsersInLadderViewController.swift */; };
@@ -142,6 +144,8 @@
 		AF4F52FF25ED67080028F5D2 /* ChallengeError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeError.swift; sourceTree = "<group>"; };
 		AF4F530125ED6C500028F5D2 /* ChallengeStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeStatus.swift; sourceTree = "<group>"; };
 		AF52ACE8257BA48B004C8BF6 /* AwaitingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwaitingView.swift; sourceTree = "<group>"; };
+		AF564CB925FCEC69002BE8E8 /* NotificationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationError.swift; sourceTree = "<group>"; };
+		AF564CBB25FCF524002BE8E8 /* LadderError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LadderError.swift; sourceTree = "<group>"; };
 		AF66162225AF228600A744DF /* ChangeJumpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeJumpViewController.swift; sourceTree = "<group>"; };
 		AF66162725AF263100A744DF /* CancelAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelAlert.swift; sourceTree = "<group>"; };
 		AF66162C25AF2A0C00A744DF /* ViewUsersInLadderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewUsersInLadderViewController.swift; sourceTree = "<group>"; };
@@ -287,6 +291,7 @@
 		AF405B8325E844AA0078EC34 /* Status */ = {
 			isa = PBXGroup;
 			children = (
+				AF564CB925FCEC69002BE8E8 /* NotificationError.swift */,
 				AF405B8425E8473F0078EC34 /* RetriveDocumentStatus.swift */,
 				AF3B444D25DEB545004CE6DA /* CreatingAccountStatus.swift */,
 				AF405B8E25EC4AAC0078EC34 /* NameStatus.swift */,
@@ -300,6 +305,7 @@
 			children = (
 				AF405B8725E855530078EC34 /* UserError.swift */,
 				AF4F52FF25ED67080028F5D2 /* ChallengeError.swift */,
+				AF564CBB25FCF524002BE8E8 /* LadderError.swift */,
 			);
 			path = Error;
 			sourceTree = "<group>";
@@ -779,6 +785,7 @@
 				AF52ACE9257BA48B004C8BF6 /* AwaitingView.swift in Sources */,
 				AF45AF6124F1BE37004A831F /* LadderViewController.swift in Sources */,
 				AFE402F3256FBFC5008AD818 /* PermissionsTextField.swift in Sources */,
+				AF564CBC25FCF524002BE8E8 /* LadderError.swift in Sources */,
 				AFBFC09E25CC5AA900028F77 /* NotificationCell.swift in Sources */,
 				AF0BE6A924E88632005FF2CE /* Ladder.swift in Sources */,
 				AF3B444E25DEB545004CE6DA /* CreatingAccountStatus.swift in Sources */,
@@ -809,6 +816,7 @@
 				AF0BE69F24E56181005FF2CE /* HomeViewController.swift in Sources */,
 				AFBFC0A325CC5BA000028F77 /* NoteData.swift in Sources */,
 				AF0BE6A524E5E91D005FF2CE /* SlideInTransition.swift in Sources */,
+				AF564CBA25FCEC69002BE8E8 /* NotificationError.swift in Sources */,
 				AF01E9642552D1E1008862B4 /* FindLadderViewController.swift in Sources */,
 				AF3B444925DD719E004CE6DA /* RequestCellData.swift in Sources */,
 				AFB6410024E3259200570C52 /* AppDelegate.swift in Sources */,
@@ -1017,6 +1025,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Challenge Ladder/Challenge Ladder.entitlements";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = G3CQTBK5N8;
 				INFOPLIST_FILE = "Challenge Ladder/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1039,6 +1048,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Challenge Ladder/Challenge Ladder.entitlements";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = G3CQTBK5N8;
 				INFOPLIST_FILE = "Challenge Ladder/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
