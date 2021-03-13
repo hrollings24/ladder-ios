@@ -299,33 +299,38 @@ class ChallengeViewController: LoadingViewController {
             if self.challenge.userToChallenge.userID == self.challenge.winner{
                 //loser is main user
                 self.challenge.confirmWinner(winner: self.challenge.winner, loser: MainUser.shared.userID)
-                self.challenge.delete()
-                
-                let db = Firestore.firestore()
-                db.collection("notifications").document().setData([
-                    "toUser": db.collection("users").document(self.challenge.userToChallenge.userID),
-                    "message": "Your challenge with " + MainUser.shared.username + " is complete",
-                    "type": "message",
-                    "fromUser": db.collection("users").document(MainUser.shared.userID),
-                    "ladder": db.collection("ladder").document(self.challenge.ladderID),
-                    "title": "Challenge Completed",
-                ]) { [self] err in
-                    if let err = err {
-                        Alert(withTitle: "Error", withDescription: err.localizedDescription, fromVC: self, perform: {})
-                    } else {
-                        //completed
+                self.functions.httpsCallable("deleteChallenge").call(self.challenge.id) { (result, error) in
+                    if let error = error{
+                        Alert(withTitle: "Error", withDescription: error.localizedDescription, fromVC: self, perform: {self.refresh()})
                     }
-                }
-                self.removeLoading()
+                    else{
+                        let db = Firestore.firestore()
+                        db.collection("notifications").document().setData([
+                            "toUser": db.collection("users").document(self.challenge.userToChallenge.userID),
+                            "message": "Your challenge with " + MainUser.shared.username + " is complete",
+                            "type": "message",
+                            "fromUser": db.collection("users").document(MainUser.shared.userID),
+                            "ladder": db.collection("ladder").document(self.challenge.ladderID),
+                            "title": "Challenge Completed",
+                        ]) { [self] err in
+                            if let err = err {
+                                Alert(withTitle: "Error", withDescription: err.localizedDescription, fromVC: self, perform: {})
+                            } else {
+                                //completed
+                            }
+                        }
+                        self.removeLoading()
 
 
-                let perform2 = {
-                    if let preVC = self.previousVC as? SelectChallengeViewController{
-                        preVC.getChallenges()
+                        let perform2 = {
+                            if let preVC = self.previousVC as? SelectChallengeViewController{
+                                preVC.getChallenges()
+                            }
+                            self.dismissMe()
+                        }
+                        Alert(withTitle: "Challenge completed", withDescription: "The challenge is complete", fromVC: self, perform: perform2)
                     }
-                    self.dismissMe()
                 }
-                Alert(withTitle: "Challenge completed", withDescription: "The challenge is complete", fromVC: self, perform: perform2)
             }
             else{
                 //loser is userToChallenge

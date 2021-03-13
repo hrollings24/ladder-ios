@@ -134,43 +134,46 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     {
         
         let content = response.notification.request.content.userInfo
-        let noteType:String = content["type"] as? String ?? ""
-        let inLadderID:String = content["ladder"] as? String ?? ""
-        print(noteType)
-        print(inLadderID)
-        
-        guard let rootViewController = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window?.rootViewController else {
-               return
-           }
-           
-        
-            // instantiate the view controller we want to show from storyboard
-            // root view controller is tab bar controller
-            // the selected tab is a navigation controller
-            // then we push the new view controller to it
-            if noteType == "request"{
-                //take user to admin request page
-                if let navController = rootViewController as? UINavigationController {
-                        
-                    let ladderref = Firestore.firestore().collection("ladders").document(inLadderID)
-                    let pushVC = ViewRequestsViewController()
-                    pushVC.setupView(withReference: ladderref)
+        if !content.isEmpty{
+            let noteType:String = content["type"] as? String ?? ""
+            let inLadderID:String = content["ladder"] as? String ?? ""
+            print(noteType)
+            print(inLadderID)
+            
+            guard let rootViewController = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window?.rootViewController else {
+                   return
+               }
+               
+            
+                // instantiate the view controller we want to show from storyboard
+                // root view controller is tab bar controller
+                // the selected tab is a navigation controller
+                // then we push the new view controller to it
+                if noteType == "request"{
+                    //take user to admin request page
+                    if let navController = rootViewController as? UINavigationController {
+                            
+                        let ladderref = Firestore.firestore().collection("ladders").document(inLadderID)
+                        let pushVC = ViewRequestsViewController()
+                        pushVC.setupView(withReference: ladderref)
 
-                    navController.pushViewController(pushVC, animated: true)
+                        navController.pushViewController(pushVC, animated: true)
 
+                    }
+                    
                 }
-                
-            }
-            else{
-                //take user to notification page
-                let notificationVC = NotificationViewController()
-                if let navController = rootViewController as? UINavigationController {
-                        
-                        // you can access custom data of the push notification by using userInfo property
-                        // response.notification.request.content.userInfo
-                        navController.pushViewController(notificationVC, animated: true)
+                else{
+                    //take user to notification page
+                    let notificationVC = NotificationViewController()
+                    if let navController = rootViewController as? UINavigationController {
+                            
+                            // you can access custom data of the push notification by using userInfo property
+                            // response.notification.request.content.userInfo
+                            navController.pushViewController(notificationVC, animated: true)
+                    }
                 }
-            }
+        }
+       
         
            
         
