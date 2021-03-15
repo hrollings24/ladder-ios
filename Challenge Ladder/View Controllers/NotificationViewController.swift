@@ -7,6 +7,8 @@
 
 import UIKit
 import FirebaseFirestore
+import FirebaseAuth
+import FirebaseMessaging
 
 class NotificationViewController: BaseViewController {
     
@@ -41,10 +43,23 @@ class NotificationViewController: BaseViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
+        
+        if MainUser.shared.userID == nil{
+            do {
+                try loadUser()
+            }
+            catch UserError.currentUserNil{
+                self.moveToLogin()
+            }
+            catch{
+                Alert(withTitle: "Error", withDescription: "unknown", fromVC: self, perform: {})
+            }
+        }
+        else{
+            getNotifications()
+        }
         configureRefreshControl()
-        
-        
-        getNotifications()
+
         
         
         setupNoView()
@@ -53,9 +68,33 @@ class NotificationViewController: BaseViewController {
 
     }
     
+    func loadUser() throws{
+        
+        guard let user2 = Auth.auth().currentUser else{
+            throw UserError.currentUserNil
+        }
+        
+        showLoading()
+        MainUser.shared.getUser(withID: user2.uid) { (completed) in
+            
+            switch completed{
+            case .documentEmpty:
+                self.ghostUser()
+            case .success:
+                let db = Firestore.firestore()
+                db.collection("users").document(MainUser.shared.userID).updateData([
+                    "fcm": FieldValue.arrayUnion([Messaging.messaging().fcmToken!])
+                ])
+                self.removeLoading()
+                self.getNotifications()
+            case .noDocument:
+                self.ghostUser()
+            }
+        }
+    }
     
     func getNotifications(){
-
+        
         let db = Firestore.firestore()
         let docRef = Firestore.firestore().collection("users").document(MainUser.shared.userID)
         db.collection("notifications").whereField("toUser", isEqualTo: docRef).addSnapshotListener { (querySnapshot, err) in
@@ -164,6 +203,18 @@ class NotificationViewController: BaseViewController {
         
     }
   
+    func ghostUser(){
+        Auth.auth().currentUser?.delete(completion: { error in
+            if let error = error{
+                Alert(withTitle: "Error", withDescription: error.localizedDescription, fromVC: self, perform: {})
+                self.moveToLogin()
+            }
+            else{
+                Alert(withTitle: "Error", withDescription: "An error occured when signing in", fromVC: self, perform: {})
+                self.moveToLogin()
+            }
+        })
+    }
     
 
 }

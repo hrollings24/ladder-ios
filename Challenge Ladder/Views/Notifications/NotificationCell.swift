@@ -78,11 +78,12 @@ class NotificationCell: UITableViewCell{
                 
             case "challengeSelected":
                 acceptBtn.isHidden = false
-                denyBtn.isHidden = true
-                isMessage = true
+                denyBtn.isHidden = false
+                isMessage = false
                 acceptBtn.setTitle("View Challenge", for: .normal)
+                denyBtn.setTitle("Remove", for: .normal)
                 acceptBtn.addTarget(self, action:#selector(goToChallenge), for: .touchUpInside)
-
+                denyBtn.addTarget(self, action:#selector(removeNotification), for: .touchUpInside)
                 break
             default:
                 //error
@@ -449,6 +450,19 @@ class NotificationCell: UITableViewCell{
                 newVC.challenge = challenge
                 newVC.previousVC = self.presentingVC
                 self.presentingVC.navigationController?.pushViewController(newVC, animated: true)
+            }
+        }
+    }
+    
+    @objc func removeNotification(){
+        presentingVC.showLoading()
+        notification.reference.delete { (error) in
+            self.presentingVC.removeLoading()
+            if let error = error{
+                Alert(withTitle: "Error", withDescription: error.localizedDescription, fromVC: self.presentingVC, perform:{})
+            }
+            else{
+                self.presentingVC.getNotifications()
             }
         }
     }
