@@ -146,8 +146,8 @@ class AwaitingView: UIView{
         let data = [
             "fromUser": MainUser.shared.userID!,
             "ladderID": challenge.ladderID!,
-            "notificationID": notificationID!,
             "toUser": challenge.userToChallenge.userID!,
+            "challengeID": challenge.id!,
             "message": MainUser.shared.username + " has accepted your challenge"
             
         ] as [String : Any]
@@ -165,25 +165,21 @@ class AwaitingView: UIView{
                 Alert(withTitle: resultData["title"]! as! String, withDescription: resultData["message"]! as! String, fromVC: self.presentingVC, perform: perform)
             }
         }
-            
-        
-        
     }
+
     
-    func decline(){
-        //remove notification
-        let db = Firestore.firestore()
+    @objc func reject(){
+        presentingVC.showLoading()
         
-        let reference = db.collection("notifications").document(notificationID)
-        reference.delete() { err in
-            if let err = err {
-                print("Error removing document: \(err)")
-            } else {
-                print("Document successfully removed!")
-            }
-        }
-                
-        functions.httpsCallable("deleteChallenge").call(challengeRef.documentID) { (result, error) in
+        let data = [
+            "fromUserID": MainUser.shared.userID!,
+            "ladderID": challenge.ladderID!,
+            "challengeID": challenge.id!,
+            "toUserID": challenge.userToChallenge.userID!,
+            "message": MainUser.shared.username + " has declined your challenge"
+        ] as [String : Any]
+        
+        functions.httpsCallable("declineChallenge").call(data) { (result, error) in
             self.presentingVC.removeLoading()
             let perform: () -> Void = {
                 self.presentingVC.navigationController?.popViewControllers(viewsToPop: 1)
@@ -197,34 +193,5 @@ class AwaitingView: UIView{
             }
         }
         
-        
     }
-    
-    func deny(){
-        presentingVC.showLoading()
-            //Add notification
-            let db = Firestore.firestore()
-        let ladderRef = db.collection("ladders").document(challenge.ladderID)
-            db.collection("notifications").document().setData([
-                "toUser": fromUser!,
-                "message": MainUser.shared.username + " has declined your challenge",
-                "type": "message",
-                "fromUser": db.collection("users").document(MainUser.shared.userID),
-                "ladder": ladderRef,
-                "title": "Challenge Declined",
-            ]) { [self] err in
-                if let err = err {
-                    let perform = {}
-                    Alert(withTitle: "Error", withDescription: err.localizedDescription, fromVC: self.presentingVC, perform: perform)
-                } else {
-                    //completed
-                }
-            }
-            decline()
-    }
-    
-    @objc func reject(){
-        deny()
-    }
-    
 }

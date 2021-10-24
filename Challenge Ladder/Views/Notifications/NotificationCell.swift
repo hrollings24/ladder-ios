@@ -343,7 +343,7 @@ class NotificationCell: UITableViewCell{
         let data = [
             "fromUser": MainUser.shared.userID!,
             "ladderID": ladderReference.documentID,
-            "notificationID": notification.documentID,
+            "challengeID": challengeRef.documentID,
             "toUser": fromUser.documentID,
             "message": MainUser.shared.username + " has accepted your challenge"
             
@@ -367,25 +367,20 @@ class NotificationCell: UITableViewCell{
         
     }
     
-    
-    @objc func declineChallenge(){
-        //remove notification
-        let db = Firestore.firestore()
+    @objc func deny(){
+        presentingVC.showLoading()
+        let data = [
+            "fromUserID": MainUser.shared.userID!,
+            "ladderID": ladderReference.documentID,
+            "challengeID": challengeRef.documentID,
+            "toUserID": fromUser.documentID,
+            "message": MainUser.shared.username + " has declined your challenge"
+        ] as [String : Any]
         
-        let reference = db.collection("notifications").document(notification.documentID)
-        reference.delete() { err in
-            if let err = err {
-                print("Error removing document: \(err)")
-            } else {
-                print("Document successfully removed!")
-            }
-        }
-        
-        
-        functions.httpsCallable("deleteChallenge").call(challengeRef.documentID) { (result, error) in
+        functions.httpsCallable("declineChallenge").call(data) { (result, error) in
             self.presentingVC.removeLoading()
-            let perform = {
-                self.presentingVC.getNotifications()
+            let perform: () -> Void = {
+                self.presentingVC.navigationController?.popViewControllers(viewsToPop: 1)
             }
             if let error = error{
                 Alert(withTitle: "Error", withDescription: error.localizedDescription, fromVC: self.presentingVC, perform: perform)
@@ -395,31 +390,7 @@ class NotificationCell: UITableViewCell{
                 Alert(withTitle: resultData["title"]! as! String, withDescription: resultData["message"]! as! String, fromVC: self.presentingVC, perform: perform)
             }
         }
-        
-        
     }
-    
-    @objc func deny(){
-        presentingVC.showLoading()
-            //Add notification
-            let db = Firestore.firestore()
-            db.collection("notifications").document().setData([
-                "toUser": fromUser!,
-                "message": MainUser.shared.username + " has declined your challenge",
-                "type": "message",
-                "fromUser": db.collection("users").document(MainUser.shared.userID),
-                "ladder": ladderReference!,
-                "title": "Challenge Declined",
-            ]) { [self] err in
-                if let err = err {
-                    let perform = {}
-                    Alert(withTitle: "Error", withDescription: err.localizedDescription, fromVC: self.presentingVC, perform: perform)
-                } else {
-                    //completed
-                }
-            }
-            declineChallenge()
-        }
     
     
     @objc func decline(){
