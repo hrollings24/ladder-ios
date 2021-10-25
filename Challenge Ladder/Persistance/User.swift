@@ -12,6 +12,5 @@ class User{
     var surname: String!
     var username: String!
     var userID: String!
-    
-    
+    var pictureURL: String!
 }

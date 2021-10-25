@@ -10,8 +10,11 @@ import FirebaseFunctions
 import FirebaseAuth
 import FirebaseFirestore
 import FirebaseMessaging
+import FirebaseStorage
+import Firebase
 
-class AccountViewController: BaseViewController {
+
+class AccountViewController: BaseViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     var textField: UITextField!
     lazy var functions = Functions.functions()
@@ -50,6 +53,20 @@ class AccountViewController: BaseViewController {
         return btn
     }()
     
+    var changeImage: UIButton = {
+        let btn = UIButton()
+        btn.setTitle("Change Profile Picture", for: .normal)
+        btn.titleLabel?.font = UIFont.systemFont(ofSize: 20)
+        btn.titleLabel?.adjustsFontSizeToFitWidth = true
+        btn.layer.cornerRadius = 10
+        btn.titleLabel?.textAlignment = .left
+        btn.setTitleColor(.charcoal, for: .normal)
+        btn.addTarget(self, action:#selector(changeProfilePicture), for: .touchUpInside)
+        btn.backgroundColor = .clear
+        btn.contentHorizontalAlignment = .left
+        return btn
+    }()
+    
     var supportBtn: UIButton = {
         let btn = UIButton()
         btn.setTitle("Email Support", for: .normal)
@@ -78,6 +95,27 @@ class AccountViewController: BaseViewController {
         return btn
     }()
     
+    
+    var profilePicture: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFill
+        if let profilePictureURL = MainUser.shared.pictureURL {
+            let url = URL(string: profilePictureURL)
+            URLSession.shared.dataTask(with: url!) { data, response, error in
+                if (error == nil){
+                    DispatchQueue.main.async {
+                        imageView.image = UIImage(data: data!)
+                        imageView.layer.masksToBounds = false
+                        imageView.layer.borderColor = UIColor.black.cgColor
+                        imageView.layer.cornerRadius = imageView.frame.height/2
+                        imageView.clipsToBounds = true
+                    }
+                }
+            }.resume()
+        }
+        return imageView
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Account"
@@ -86,35 +124,54 @@ class AccountViewController: BaseViewController {
     }
     
     func setupView(){
+        
+        self.view.addSubview(profilePicture)
         self.view.addSubview(usernameLabel)
         self.view.addSubview(firstNameLabel)
         self.view.addSubview(deleteAccountBtn)
         self.view.addSubview(changeUsernameBtn)
         self.view.addSubview(supportBtn)
+        self.view.addSubview(changeImage)
 
-        
-        firstNameLabel.snp.makeConstraints { (make) in
+
+        profilePicture.snp.makeConstraints { (make) in
+            if (UIDevice.current.userInterfaceIdiom == .phone){
+                make.width.equalTo(self.view.frame.width/4)
+                make.height.equalTo(self.view.frame.width/4)
+            }
+            else{
+                make.width.equalTo(self.view.frame.width/6)
+                make.height.equalTo(self.view.frame.width/6)
+            }
+
             make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(20)
             make.leading.equalTo(20)
         }
         
+        firstNameLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(20)
+            make.leading.equalTo(profilePicture.snp.trailing).offset(20)
+        }
+        
         usernameLabel.snp.makeConstraints { (make) in
             make.top.equalTo(firstNameLabel.snp.bottom)
-            make.leading.equalTo(20)
+            make.leading.equalTo(profilePicture.snp.trailing).offset(20)
         }
-        
         
         changeUsernameBtn.snp.makeConstraints { (make) in
-            make.top.equalTo(usernameLabel.snp.bottom).offset(30)
+            make.top.equalTo(profilePicture.snp.bottom).offset(20)
             make.leading.equalTo(20)
         }
         
-        
-        supportBtn.snp.makeConstraints { (make) in
+        changeImage.snp.makeConstraints { (make) in
             make.top.equalTo(changeUsernameBtn.snp.bottom)
             make.leading.equalTo(20)
         }
         
+        supportBtn.snp.makeConstraints { (make) in
+            make.top.equalTo(changeImage.snp.bottom)
+            make.leading.equalTo(20)
+        }
         
         deleteAccountBtn.snp.makeConstraints { (make) in
             make.top.equalTo(supportBtn.snp.bottom)
@@ -127,8 +184,51 @@ class AccountViewController: BaseViewController {
         
     }
     
-    @objc func changeUsername(){
-        doSomething()
+    @objc func changeProfilePicture(){
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        picker.allowsEditing = true
+        present(picker, animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        var selectedImage: UIImage?
+        if let editedImage = info[UIImagePickerController.InfoKey.editedImage]{
+            selectedImage = editedImage as? UIImage
+        }
+        else if let originalImage = info[UIImagePickerController.InfoKey.originalImage]{
+            selectedImage = originalImage as? UIImage
+        }
+        
+        if let confirmedImage = selectedImage {
+            showLoading()
+            //upload image to firebase
+            let storageRef = Storage.storage().reference().child("profileimages/" + MainUser.shared.username + "Picture")
+            
+            let imageData = confirmedImage.pngData()! as Data
+            storageRef.putData(imageData, metadata: nil) { metadata, error in
+                if error != nil{
+                    print(error!)
+                    self.removeLoading()
+                }
+                else{
+                    storageRef.downloadURL(completion: { url, error in
+                        let db = Firestore.firestore()
+                        let docRef = db.collection("users").document(MainUser.shared.userID)
+                        docRef.updateData(["picture" : url!.absoluteString])
+                        self.removeLoading()
+                        self.profilePicture.image = confirmedImage
+                    })
+                }
+            }
+
+        }
+        dismiss(animated: true, completion: nil)
+
     }
     
     @objc func deleteAccount(){
@@ -171,16 +271,9 @@ class AccountViewController: BaseViewController {
             }
             
             CancelAlert(withTitle: "Delete Account", withDescription: "Are you sure you want to delete your account? This will delete any ladders you are the only admin of", fromVC: self, perform: deleteperform)
-           
-        
-        
-        
-        
-       
     }
-
     
-    func doSomething(){
+    @objc func changeUsername(){
         let alert = UIAlertController(title: "Change Username", message: "Please enter a new username", preferredStyle: UIAlertController.Style.alert)
 
         alert.addTextField(configurationHandler: configurationTextField)

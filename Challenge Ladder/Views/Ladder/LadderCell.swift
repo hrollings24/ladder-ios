@@ -79,6 +79,26 @@ class LadderCell: UITableViewCell{
         return textLabel
     }()
     
+    var profilePicture: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFill
+        if let profilePictureURL = MainUser.shared.pictureURL {
+            let url = URL(string: profilePictureURL)
+            URLSession.shared.dataTask(with: url!) { data, response, error in
+                if (error == nil){
+                    DispatchQueue.main.async {
+                        imageView.image = UIImage(data: data!)
+                        imageView.layer.masksToBounds = false
+                        imageView.layer.borderColor = UIColor.black.cgColor
+                        imageView.layer.cornerRadius = imageView.frame.height/2
+                        imageView.clipsToBounds = true
+                    }
+                }
+            }.resume()
+        }
+        return imageView
+    }()
+    
     var positionLabel: UILabel = {
         let textLabel = UILabel()
         textLabel.text = ""

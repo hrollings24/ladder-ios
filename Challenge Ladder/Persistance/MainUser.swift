@@ -8,6 +8,7 @@
 import Foundation
 import FirebaseFirestore
 import Firebase
+import FirebaseStorage
 
 class MainUser: User{
     
@@ -33,6 +34,7 @@ class MainUser: User{
             self.firstName = document.get("firstName") as? String
             self.surname = document.get("surname") as? String
             self.username = document.get("username") as? String
+            self.pictureURL = document.get("picture") as? String
             self.userID = withID
             self.ladders.removeAll()
             let laddersArray = data["ladders"] as? NSArray
@@ -71,7 +73,6 @@ class MainUser: User{
         let docRef = db.collection("users").document(userID)
         docRef.updateData(["username" : to])
     }
-    
     
     
 }
