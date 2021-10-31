@@ -127,7 +127,7 @@ extension FindLadderViewController: UITableViewDelegate, UITableViewDataSource{
         }
 
 
-        CancelAlert(withTitle: "Join Ladder", withDescription: "Confirm you want to join this ladder", fromVC: self, perform: perform)
+        CancelAlert(isDestructive: false, withTitle: "Join Ladder", withDescription: "Confirm you want to join this ladder", fromVC: self, perform: perform)
     
     }
 }

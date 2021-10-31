@@ -10,7 +10,7 @@ import UIKit
 
 class CancelAlert{
     
-    @discardableResult init(withTitle: String, withDescription: String, fromVC: UIViewController, perform: @escaping () -> Void){
+    @discardableResult init(isDestructive: Bool, withTitle: String, withDescription: String, fromVC: UIViewController, perform: @escaping () -> Void){
         
         let alertController = UIAlertController(title: withTitle, message: withDescription, preferredStyle: .alert)
         let actionOk = UIAlertAction(title: "OK", style: .default) {
@@ -20,11 +20,20 @@ class CancelAlert{
         
         }
         
-        let noAction = UIAlertAction(title: "Cancel", style: .cancel) {
-                UIAlertAction in
+        if (isDestructive){
+            let noAction = UIAlertAction(title: "Cancel", style: .destructive) {
+                    UIAlertAction in
+            }
+            alertController.addAction(noAction)
         }
+        else{
+            let noAction = UIAlertAction(title: "Cancel", style: .cancel) {
+                    UIAlertAction in
+            }
+            alertController.addAction(noAction)
+        }
+       
         
-        alertController.addAction(noAction)
 
         alertController.addAction(actionOk)
         fromVC.present(alertController, animated: true, completion: nil)

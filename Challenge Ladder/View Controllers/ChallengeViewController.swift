@@ -278,7 +278,7 @@ class ChallengeViewController: LoadingViewController {
                 }
             }
         }
-        CancelAlert(withTitle: "Confirm", withDescription: message, fromVC: self, perform: perform)
+        CancelAlert(isDestructive: false, withTitle: "Confirm", withDescription: message, fromVC: self, perform: perform)
         
     }
     
@@ -345,7 +345,7 @@ class ChallengeViewController: LoadingViewController {
             }
             
         }
-        CancelAlert(withTitle: "Confirm", withDescription: message, fromVC: self, perform: perform)
+        CancelAlert(isDestructive: false, withTitle: "Confirm", withDescription: message, fromVC: self, perform: perform)
         
         
         

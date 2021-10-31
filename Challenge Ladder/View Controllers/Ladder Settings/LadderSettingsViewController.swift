@@ -506,7 +506,7 @@ class LadderSettingsViewController: LoadingViewController, UIPickerViewDelegate,
         }
         
         
-        CancelAlert(withTitle: "Delete Ladder", withDescription: "Confirm you want to delete this ladder", fromVC: self, perform: perform)
+        CancelAlert(isDestructive: true, withTitle: "Delete Ladder", withDescription: "Confirm you want to delete this ladder", fromVC: self, perform: perform)
     }
     
     

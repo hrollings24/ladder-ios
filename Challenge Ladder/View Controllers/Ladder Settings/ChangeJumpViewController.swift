@@ -120,7 +120,7 @@ class ChangeJumpViewController: LoadingViewController, UITextFieldDelegate {
                 }
                 Alert(withTitle: "Success", withDescription: "The jump was changed", fromVC: self, perform: dismissperform)
             }
-            CancelAlert(withTitle: "Confirm", withDescription: "Please confirm you want to change the jump", fromVC: self, perform: perform)
+            CancelAlert(isDestructive: false, withTitle: "Confirm", withDescription: "Please confirm you want to change the jump", fromVC: self, perform: perform)
         }
     }
     

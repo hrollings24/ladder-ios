@@ -234,40 +234,38 @@ class AccountViewController: BaseViewController, UIImagePickerControllerDelegate
         // Check provider ID to verify that the user has signed in with Apple
         
             
-            let deleteperform = {
-                self.showLoading()
-                let data = [
-                    "userID": MainUser.shared.userID!
-                ] as [String : Any]
-                
-                self.functions.httpsCallable("deleteUser").call(data) { (result, error) in
-                    self.removeLoading()
-                    
-                    if let error = error{
-                        Alert(withTitle: "Error", withDescription: error.localizedDescription, fromVC: self, perform: {})
-                    }
-                    else{
-                        
-                        
-                        
-                        user?.delete { error in
-                          if let error = error {
-                            print(error)
-                          } else {
-                                let perform = {
-                                    //go to login page
-                                    UserDefaults.standard.setValue(false, forKey: "usersignedin")
-                                    self.moveToLogin()
-                                }
-                            Alert(withTitle: "Account Deleted", withDescription: "Your account has been deleted", fromVC: self, perform: perform)
+        let deleteperform = {
+            self.showLoading()
+            
+            user?.delete { error in
+              if let error = error {
+                print(error)
+              } else {
+                  let data = [
+                      "userID": MainUser.shared.userID!
+                  ] as [String : Any]
+                  
+                  self.functions.httpsCallable("deleteUser").call(data) { (result, error) in
+                      self.removeLoading()
+                      
+                      if let error = error{
+                          Alert(withTitle: "Error", withDescription: error.localizedDescription, fromVC: self, perform: {})
+                      }
+                      else{
+                            let perform = {
+                                //go to login page
+                                UserDefaults.standard.setValue(false, forKey: "usersignedin")
+                                self.moveToLogin()
+                            }
+                        Alert(withTitle: "Account Deleted", withDescription: "Your account has been deleted", fromVC: self, perform: perform)
 
-                          }
                         }
                     }
                 }
             }
+        }
             
-            CancelAlert(withTitle: "Delete Account", withDescription: "Are you sure you want to delete your account? This will delete any ladders you are the only admin of", fromVC: self, perform: deleteperform)
+        CancelAlert(isDestructive: true, withTitle: "Delete Account", withDescription: "Are you sure you want to delete your account? This will delete any ladders you are the only admin of", fromVC: self, perform: deleteperform)
     }
     
     @objc func changeUsername(){

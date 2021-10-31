@@ -98,7 +98,7 @@ class BaseViewController: LoadingViewController {
     
     func logoutAlert(){
         let perform: () -> Void = { self.logout() }
-        CancelAlert(withTitle: "Logout", withDescription: "Are you sure you want to log out?", fromVC: self, perform: perform)
+        CancelAlert(isDestructive: false, withTitle: "Logout", withDescription: "Are you sure you want to log out?", fromVC: self, perform: perform)
     }
     
     func logout(){

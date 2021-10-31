@@ -231,7 +231,7 @@ class UserCell: UITableViewCell{
             }
         }
         
-        CancelAlert(withTitle: "Confirm Removal", withDescription: "Are you sure you want to remove " + data!.username + " from the ladder?", fromVC: presentingVC, perform: perform)
+        CancelAlert(isDestructive: false, withTitle: "Confirm Removal", withDescription: "Are you sure you want to remove " + data!.username + " from the ladder?", fromVC: presentingVC, perform: perform)
 
     }
     
@@ -275,7 +275,7 @@ class UserCell: UITableViewCell{
                             
                         }
                         
-                        CancelAlert(withTitle: "New Admin Required", withDescription: "You must select a new admin for this ladder as there are players in the ladder.", fromVC: self.presentingVC, perform: perform)
+                        CancelAlert(isDestructive: false, withTitle: "New Admin Required", withDescription: "You must select a new admin for this ladder as there are players in the ladder.", fromVC: self.presentingVC, perform: perform)
                                                 
                     }
                 }
@@ -300,7 +300,7 @@ class UserCell: UITableViewCell{
             
         }
         
-        CancelAlert(withTitle: "Confirm Removal", withDescription: "Are you sure you want to remove " + data!.username + " as an admin?", fromVC: presentingVC, perform: perform)
+        CancelAlert(isDestructive: true, withTitle: "Confirm Removal", withDescription: "Are you sure you want to remove " + data!.username + " as an admin?", fromVC: presentingVC, perform: perform)
 
     }
     
