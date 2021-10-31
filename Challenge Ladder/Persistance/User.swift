@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 class User{
     var firstName: String!
@@ -13,4 +14,5 @@ class User{
     var username: String!
     var userID: String!
     var pictureURL: String!
+    var picture: UIImage?
 }

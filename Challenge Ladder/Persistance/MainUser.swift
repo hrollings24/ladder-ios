@@ -47,8 +47,32 @@ class MainUser: User{
                 self.challenges.append(challenge as! DocumentReference)
             }
             
+            if let profilePictureURL = MainUser.shared.pictureURL {
+                let url = URL(string: profilePictureURL)
+                URLSession.shared.dataTask(with: url!) { data, response, error in
+                    if (error == nil){
+                        DispatchQueue.main.async {
+                            self.picture = UIImage(data: data!)
+                            completion(RetriveDocumentStatus.success)
+                        }
+                    }
+                }.resume()
+            }
+            else{
+                var initials = ""
+                if let letter = MainUser.shared.firstName.first {
+                    initials += (String(letter))
+                }
+                if let letter = MainUser.shared.surname.first {
+                    initials += (String(letter))
+                }
+                self.picture = UIImage.makeLetterAvatar(withUsername: initials.uppercased())
+
+                completion(RetriveDocumentStatus.success)
+
+            }
             
-            completion(RetriveDocumentStatus.success)
+            
                 
         }
     }

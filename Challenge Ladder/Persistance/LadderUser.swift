@@ -39,6 +39,7 @@ class LadderUser: User{
             if let document = document, document.exists {
                 self.firstName = document.get("firstName") as? String
                 self.surname = document.get("surname") as? String
+                self.pictureURL = document.get("picture") as? String
                 self.username = document.get("username") as? String
                 self.userID = document.documentID
                 self.isMyself = document.documentID == MainUser.shared.userID

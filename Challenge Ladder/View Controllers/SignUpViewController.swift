@@ -10,8 +10,9 @@ import FirebaseAuth
 import FirebaseFirestore
 import FirebaseFunctions
 import FirebaseMessaging
+import FirebaseStorage
 
-class SignUpViewController: LoadingViewController, UITextFieldDelegate {
+class SignUpViewController: LoadingViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate  {
     
     lazy var functions = Functions.functions()
     var selectedTF: UITextField!
@@ -198,6 +199,20 @@ class SignUpViewController: LoadingViewController, UITextFieldDelegate {
         return view
     }()
     
+    var addPicture: UIButton = {
+        let btn = UIButton()
+        btn.setTitle("Add Profile Picture", for: .normal)
+        btn.titleLabel?.font = UIFont.systemFont(ofSize: 20)
+        btn.titleLabel?.adjustsFontSizeToFitWidth = true
+        btn.layer.cornerRadius = 10
+        btn.titleLabel?.textAlignment = .left
+        btn.setTitleColor(.charcoal, for: .normal)
+        btn.addTarget(self, action:#selector(changeProfilePicture), for: .touchUpInside)
+        btn.backgroundColor = .clear
+        btn.contentHorizontalAlignment = .left
+        return btn
+    }()
+    
     var createAccountButton: UIButton = {
         let btn = UIButton()
         btn.setTitle("Create Account", for: .normal)
@@ -210,6 +225,9 @@ class SignUpViewController: LoadingViewController, UITextFieldDelegate {
         btn.addTarget(self, action:#selector(createAccount), for: .touchUpInside)
         return btn
     }()
+    
+    var profileImage: UIImage?
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -243,6 +261,8 @@ class SignUpViewController: LoadingViewController, UITextFieldDelegate {
         self.view.addSubview(passwordTextField)
         self.view.addSubview(underlineViewForPassword)
         self.view.addSubview(createAccountButton)
+        self.view.addSubview(addPicture)
+
         
         passwordTextField.delegate = self
         usernameTextField.delegate = self
@@ -358,14 +378,22 @@ class SignUpViewController: LoadingViewController, UITextFieldDelegate {
             make.top.equalTo(passwordTextField.snp.bottom)
         }
         
+        addPicture.snp.makeConstraints { (make) in
+            make.width.equalTo(self.view.frame.width - 40)
+            make.height.equalTo(20)
+            make.leading.equalTo(20)
+            make.trailing.equalTo(-20)
+            make.top.equalTo(passwordTextField.snp.bottom).offset(20)
+        }
+        
         createAccountButton.snp.makeConstraints { (make) in
             make.width.equalTo(self.view.frame.width - 40)
             make.leading.equalTo(20)
             make.trailing.equalTo(-20)
             make.height.equalTo(40)
-            make.top.equalTo(passwordTextField.snp.bottom).offset(20)
+            make.top.equalTo(addPicture.snp.bottom).offset(20)
         }
-
+    
     }
     
     @objc func createAccount(){
@@ -375,11 +403,22 @@ class SignUpViewController: LoadingViewController, UITextFieldDelegate {
         else{
             createUser(username: usernameTextField.text!, firstName: firstNameTextField.text!, surname: surnameTextField.text!, email: emailTextField.text!, password: passwordTextField.text!)
         }
-        
-        
-      
     }
     
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        var selectedImage: UIImage?
+        if let editedImage = info[UIImagePickerController.InfoKey.editedImage]{
+            selectedImage = editedImage as? UIImage
+        }
+        else if let originalImage = info[UIImagePickerController.InfoKey.originalImage]{
+            selectedImage = originalImage as? UIImage
+        }
+        
+        if let confirmedImage = selectedImage {
+            self.profileImage = confirmedImage
+        }
+        dismiss(animated: true, completion: nil)
+    }
    
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool
@@ -389,8 +428,6 @@ class SignUpViewController: LoadingViewController, UITextFieldDelegate {
     }
     
     func createUser(username: String, firstName: String, surname: String, email: String, password: String){
-        
-        
         
         //Check username doesn't already exist
         showLoading()
@@ -412,10 +449,38 @@ class SignUpViewController: LoadingViewController, UITextFieldDelegate {
     
     func goahead(username: String, firstName: String, surname: String, email: String, password: String){
         
+        //upload image
+        //upload image to firebase
+                
+        if profileImage != nil{
+            let storageRef = Storage.storage().reference().child("profileimages/" + username + "Picture")
+            
+            let imageData = profileImage!.pngData()! as Data
+            storageRef.putData(imageData, metadata: nil) { metadata, error in
+                if error != nil{
+                    print(error!)
+                    self.removeLoading()
+                }
+                else{
+                    storageRef.downloadURL(completion: { url, error in
+                        self.createAuth(username: username, firstName: firstName, surname: surname, email: email, password: password, profileImageURI: url!.absoluteString)
+
+                    })
+                }
+            }
+        }
+        else{
+            createAuth(username: username, firstName: firstName, surname: surname, email: email, password: password, profileImageURI: nil)
+        }
+    }
+    
+    func createAuth(username: String, firstName: String, surname: String, email: String, password: String, profileImageURI: String?){
+        
         let ladders = [DocumentReference]()
         let challenges = [DocumentReference]()
         let db = Firestore.firestore()
         let perform = {}
+        
         Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
             if let _eror = error {
                 self.removeLoading()
@@ -426,23 +491,44 @@ class SignUpViewController: LoadingViewController, UITextFieldDelegate {
                 // Add a new document in collection "users"
                 let fcmArray = [Messaging.messaging().fcmToken!]
                 
-                db.collection("users").document(authResult!.user.uid).setData([
-                    "firstName": firstName,
-                    "surname": surname,
-                    "ladders": ladders,
-                    "username": username.lowercased(),
-                    "challenges": challenges,
-                    "fcm": fcmArray
-                    
-                ]) { err in
-                    if let err = err {
-                        Alert(withTitle: "Error", withDescription: err.localizedDescription, fromVC: self, perform: perform)
-                    } else {
-                        
-                        self.removeLoading()
-                        self.presentHome()
-                    }
+                if profileImageURI != nil{
+                    db.collection("users").document(authResult!.user.uid).setData([
+                        "firstName": firstName,
+                        "surname": surname,
+                        "ladders": ladders,
+                        "username": username.lowercased(),
+                        "challenges": challenges,
+                        "fcm": fcmArray,
+                        "picture": profileImageURI!
+                        ])            { err in
+                            if let err = err {
+                                Alert(withTitle: "Error", withDescription: err.localizedDescription, fromVC: self, perform: perform)
+                            } else {
+                                
+                                self.removeLoading()
+                                self.presentHome()
+                            }
+                        }
                 }
+                else{
+                    db.collection("users").document(authResult!.user.uid).setData([
+                        "firstName": firstName,
+                        "surname": surname,
+                        "ladders": ladders,
+                        "username": username.lowercased(),
+                        "challenges": challenges,
+                        "fcm": fcmArray,
+                        ])            { err in
+                            if let err = err {
+                                Alert(withTitle: "Error", withDescription: err.localizedDescription, fromVC: self, perform: perform)
+                            } else {
+                                
+                                self.removeLoading()
+                                self.presentHome()
+                            }
+                        }
+                }
+
             }
         }
     }
@@ -494,5 +580,16 @@ class SignUpViewController: LoadingViewController, UITextFieldDelegate {
     
     @objc func textTarget(textField: UITextField) {
         selectedTF = textField
+    }
+    
+    @objc func changeProfilePicture(){
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        picker.allowsEditing = true
+        present(picker, animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
     }
 }

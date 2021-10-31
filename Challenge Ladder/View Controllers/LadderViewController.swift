@@ -185,6 +185,7 @@ class LadderViewController: LoadingViewController {
     }
     
     func loadUserData(){
+        showLoading()
         var amountOfUsersLoaded = 0
         for user in usersInLadder{
             user.loadUser { (success, isMe) in
@@ -195,12 +196,47 @@ class LadderViewController: LoadingViewController {
                             self.selectedIndex = IndexPath(row: user.position - 1, section: 0)
                         }
                         self.myPos = user.position
+                        user.picture = MainUser.shared.picture
+                    }
+                    else{
+                        var initials = ""
+                        if let letter = user.firstName.first {
+                            initials += (String(letter))
+                        }
+                        if let letter = user.surname.first {
+                            initials += (String(letter))
+                        }
+                        
+                        user.picture = UIImage.makeLetterAvatar(withUsername: initials.uppercased())
+                        
+                        if (user.pictureURL != nil && user.pictureURL != ""){
+                            let url = URL(string: user.pictureURL)
+                            URLSession.shared.dataTask(with: url!) { [self] imgData, response, error in
+                                if (error == nil){
+                                    DispatchQueue.main.async {
+                                        user.picture = UIImage(data: imgData!)
+
+                                        self.loadData(reload: false)
+                                        
+                                        let index = IndexPath(row: user.position-1, section: 0)
+                                        if let userCell = self.tableView.cellForRow(at: index) as? LadderCell {
+                                            // instead of telling tableView to reload this cell, just configure here
+                                            // the changed data, e.g.:
+                                            userCell.profilePicture.image = user.picture
+                                        }
+                                    }
+                                }
+                            }.resume()
+                        }
                     }
                     amountOfUsersLoaded += 1
+                    //load image
+                    
                     if amountOfUsersLoaded == self.usersInLadder.count{
                         //fully loaded users
-                        self.loadData()
+                        self.loadData(reload: true)
                     }
+                    
                 }
                 else{
                     Alert(withTitle: "Error", withDescription: "Could not load users", fromVC: self, perform: {})
@@ -213,18 +249,18 @@ class LadderViewController: LoadingViewController {
    
     
     
-    func loadData(){
+    func loadData(reload: Bool){
+        removeLoading()
         for i in 1..<(ladder.jump + 1){
             challengeArray.append(myPos - i)
         }
         self.data.removeAll()
         for user in usersInLadder{
-            data.append(ladderData(name: user.firstName + " " + user.surname, position: String(user.position), username: user.username, userID: user.userID))
+            data.append(ladderData(name: user.firstName + " " + user.surname, position: String(user.position), username: user.username, userID: user.userID, picture: user.picture!))
         }
-        self.tableView.reloadData()
-
-       
-
+        if (reload){
+            self.tableView.reloadData()
+        }
     }
     
     
@@ -235,10 +271,7 @@ class LadderViewController: LoadingViewController {
         
         vc.selectLadderVC = selectLadderVC
         self.navigationController?.pushViewController(vc, animated: true)
-        
     }
-    
-    
     
     func refreshupdate(){
         self.title = ladder.name
@@ -281,7 +314,7 @@ extension LadderViewController: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if selectedIndex == indexPath { return 200 }
+        if selectedIndex == indexPath { return 160 }
         return 60
     }
     
@@ -305,4 +338,5 @@ struct ladderData {
     var position: String
     var username: String
     var userID: String
+    var picture: UIImage
 }

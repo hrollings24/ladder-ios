@@ -146,6 +146,7 @@
 		AF52ACE8257BA48B004C8BF6 /* AwaitingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwaitingView.swift; sourceTree = "<group>"; };
 		AF564CB925FCEC69002BE8E8 /* NotificationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationError.swift; sourceTree = "<group>"; };
 		AF564CBB25FCF524002BE8E8 /* LadderError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LadderError.swift; sourceTree = "<group>"; };
+		AF5DA201272B35FF007D68CD /* LetterAvatarKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = LetterAvatarKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF66162225AF228600A744DF /* ChangeJumpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeJumpViewController.swift; sourceTree = "<group>"; };
 		AF66162725AF263100A744DF /* CancelAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelAlert.swift; sourceTree = "<group>"; };
 		AF66162C25AF2A0C00A744DF /* ViewUsersInLadderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewUsersInLadderViewController.swift; sourceTree = "<group>"; };
@@ -235,6 +236,7 @@
 		4A67F2B731A7EE1206F5AB85 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AF5DA201272B35FF007D68CD /* LetterAvatarKit.framework */,
 				E9AC10DC01DEBE76B216A176 /* Pods_Challenge_Ladder.framework */,
 				238D774F442967D2DEF461C4 /* Pods_Challenge_Ladder_Challenge_LadderUITests.framework */,
 				A91BF2BAF56DF1A453CC8828 /* Pods_Challenge_LadderTests.framework */,
@@ -512,7 +514,7 @@
 				AFB640F924E3259200570C52 /* Frameworks */,
 				AFB640FA24E3259200570C52 /* Resources */,
 				D7A02F5E907C8FBCE8982C74 /* [CP] Embed Pods Frameworks */,
-				23E9C0EC8A48068DFF6863EB /* [CP] Copy Pods Resources */,
+				B3A42807B9468A1986117E1F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -551,7 +553,7 @@
 				AFB6411A24E3259500570C52 /* Frameworks */,
 				AFB6411B24E3259500570C52 /* Resources */,
 				E9188A82E2E73C85A8141A39 /* [CP] Embed Pods Frameworks */,
-				EA7311DD3EDC8DC62376D5FE /* [CP] Copy Pods Resources */,
+				230DD2BBF72D623AA9141913 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -656,21 +658,21 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		23E9C0EC8A48068DFF6863EB /* [CP] Copy Pods Resources */ = {
+		230DD2BBF72D623AA9141913 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Challenge Ladder/Pods-Challenge Ladder-resources-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Challenge Ladder-Challenge LadderUITests/Pods-Challenge Ladder-Challenge LadderUITests-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Challenge Ladder/Pods-Challenge Ladder-resources-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Challenge Ladder-Challenge LadderUITests/Pods-Challenge Ladder-Challenge LadderUITests-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Challenge Ladder/Pods-Challenge Ladder-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Challenge Ladder-Challenge LadderUITests/Pods-Challenge Ladder-Challenge LadderUITests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		4A05FDF8EC6523CC050150B3 /* [CP] Check Pods Manifest.lock */ = {
@@ -693,6 +695,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B3A42807B9468A1986117E1F /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Challenge Ladder/Pods-Challenge Ladder-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Challenge Ladder/Pods-Challenge Ladder-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Challenge Ladder/Pods-Challenge Ladder-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D7A02F5E907C8FBCE8982C74 /* [CP] Embed Pods Frameworks */ = {
@@ -749,23 +768,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Challenge Ladder-Challenge LadderUITests/Pods-Challenge Ladder-Challenge LadderUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		EA7311DD3EDC8DC62376D5FE /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Challenge Ladder-Challenge LadderUITests/Pods-Challenge Ladder-Challenge LadderUITests-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Challenge Ladder-Challenge LadderUITests/Pods-Challenge Ladder-Challenge LadderUITests-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Challenge Ladder-Challenge LadderUITests/Pods-Challenge Ladder-Challenge LadderUITests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -956,6 +958,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1010,6 +1013,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -1027,6 +1031,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = G3CQTBK5N8;
+				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "Challenge Ladder/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1034,6 +1039,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "modeflick.Challenge-Ladder";
+				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1050,6 +1056,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = G3CQTBK5N8;
+				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "Challenge Ladder/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1057,6 +1064,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "modeflick.Challenge-Ladder";
+				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

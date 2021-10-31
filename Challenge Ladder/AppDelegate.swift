@@ -15,7 +15,7 @@ import FirebaseInstanceID
 import UserNotifications
 import AuthenticationServices
 import GoogleSignIn
-
+import LetterAvatarKit
 
 
 

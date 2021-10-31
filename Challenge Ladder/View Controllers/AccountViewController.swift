@@ -12,6 +12,7 @@ import FirebaseFirestore
 import FirebaseMessaging
 import FirebaseStorage
 import Firebase
+import LetterAvatarKit
 
 
 class AccountViewController: BaseViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -99,20 +100,7 @@ class AccountViewController: BaseViewController, UIImagePickerControllerDelegate
     var profilePicture: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
-        if let profilePictureURL = MainUser.shared.pictureURL {
-            let url = URL(string: profilePictureURL)
-            URLSession.shared.dataTask(with: url!) { data, response, error in
-                if (error == nil){
-                    DispatchQueue.main.async {
-                        imageView.image = UIImage(data: data!)
-                        imageView.layer.masksToBounds = false
-                        imageView.layer.borderColor = UIColor.black.cgColor
-                        imageView.layer.cornerRadius = imageView.frame.height/2
-                        imageView.clipsToBounds = true
-                    }
-                }
-            }.resume()
-        }
+        imageView.image = MainUser.shared.picture
         return imageView
     }()
     
@@ -121,6 +109,11 @@ class AccountViewController: BaseViewController, UIImagePickerControllerDelegate
         self.title = "Account"
         setupView()
         
+    }
+    
+    
+    override func viewDidLayoutSubviews() {
+        profilePicture.layer.cornerRadius = profilePicture.frame.height/2
     }
     
     func setupView(){
@@ -132,8 +125,12 @@ class AccountViewController: BaseViewController, UIImagePickerControllerDelegate
         self.view.addSubview(changeUsernameBtn)
         self.view.addSubview(supportBtn)
         self.view.addSubview(changeImage)
-
-
+        
+        profilePicture.layer.masksToBounds = false
+        profilePicture.layer.borderColor = UIColor.black.cgColor
+        profilePicture.layer.cornerRadius = profilePicture.frame.height/2
+        profilePicture.clipsToBounds = true
+        
         profilePicture.snp.makeConstraints { (make) in
             if (UIDevice.current.userInterfaceIdiom == .phone){
                 make.width.equalTo(self.view.frame.width/4)
