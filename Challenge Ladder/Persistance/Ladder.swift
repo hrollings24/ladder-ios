@@ -16,6 +16,7 @@ class Ladder{
     var adminIDs: [String]!
     var jump: Int!
     var id: String!
+    var description: String!
     var permission: LadderPermission!
     var requests: [String]!
     var challengesIHaveWithOtherUserIds: [String: String] = [:]
@@ -48,6 +49,12 @@ class Ladder{
                         return
                     }
                     self.jump = jump2
+                    
+                    guard let desc = dic["description"] as? String else {
+                        completion(.failure(.corrupt))
+                        return
+                    }
+                    self.description = desc
                         
                         
                     guard let positions2 = dic["positions"] as? [String] else {

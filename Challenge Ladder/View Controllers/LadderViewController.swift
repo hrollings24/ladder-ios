@@ -179,9 +179,6 @@ class LadderViewController: LoadingViewController {
             }
             loadUserData()
         }
-        
-        
-        
     }
     
     func loadUserData(){
@@ -241,7 +238,6 @@ class LadderViewController: LoadingViewController {
                 else{
                     Alert(withTitle: "Error", withDescription: "Could not load users", fromVC: self, perform: {})
                 }
-                
             }
         }
     }

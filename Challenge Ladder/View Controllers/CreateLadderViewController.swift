@@ -45,7 +45,37 @@ class CreateLadderViewController: BaseViewController, UITextFieldDelegate {
         return textField
     }()
     
+    var ladderDescriptionLabel: UILabel = {
+        let textLabel = UILabel()
+        textLabel.text = "LADDER DESCRIPTION"
+        textLabel.textColor = .black
+        textLabel.font = UIFont.systemFont(ofSize: 18)
+        textLabel.adjustsFontSizeToFitWidth = true
+        textLabel.textAlignment = .left
+        return textLabel
+    }()
+    
+    var ladderDescriptionTextField: UITextField = {
+        let textField =  UITextField()
+        textField.font = UIFont.systemFont(ofSize: 15)
+        textField.borderStyle = UITextField.BorderStyle.none
+        textField.autocorrectionType = UITextAutocorrectionType.no
+        textField.backgroundColor = .clear
+        textField.textColor = .white
+        textField.keyboardType = UIKeyboardType.default
+        textField.returnKeyType = UIReturnKeyType.default
+        textField.clearButtonMode = UITextField.ViewMode.whileEditing
+        textField.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
+        return textField
+    }()
+    
     var underlineViewForLadderName: UIView = {
+        let view = UIView()
+        view.backgroundColor = .black
+        return view
+    }()
+    
+    var underlineViewForLadderDescription: UIView = {
         let view = UIView()
         view.backgroundColor = .black
         return view
@@ -165,6 +195,10 @@ class CreateLadderViewController: BaseViewController, UITextFieldDelegate {
         self.view.addSubview(permissionsLabel)
         self.view.addSubview(permissionsTextField)
         self.view.addSubview(backgroundBlur)
+        self.view.addSubview(ladderDescriptionLabel)
+        self.view.addSubview(ladderDescriptionTextField)
+        self.view.addSubview(underlineViewForLadderDescription)
+
 
         backgroundBlur.isHidden = true
         backgroundBlur.layer.zPosition = 3
@@ -190,6 +224,7 @@ class CreateLadderViewController: BaseViewController, UITextFieldDelegate {
             make.leading.equalTo(20)
             make.top.equalTo(ladderNameLabel.snp.bottom).offset(10)
         }
+        
         underlineViewForLadderName.snp.makeConstraints { (make) in
             make.trailing.equalTo((-20))
             make.leading.equalTo(20)
@@ -198,23 +233,43 @@ class CreateLadderViewController: BaseViewController, UITextFieldDelegate {
             make.top.equalTo(ladderNameTextField.snp.bottom)
         }
         
-        amountLabel.snp.makeConstraints { (make) in
+        ladderDescriptionLabel.snp.makeConstraints { (make) in
             make.leading.equalTo(20)
             make.top.equalTo(underlineViewForLadderName.snp.bottom).offset(20)
+        }
+        
+        ladderDescriptionTextField.snp.makeConstraints { (make) in
+            make.trailing.equalTo((-20))
+            make.width.equalTo(self.view.frame.width - 40)
+            make.leading.equalTo(20)
+            make.top.equalTo(ladderDescriptionLabel.snp.bottom).offset(10)
+        }
+        
+        underlineViewForLadderDescription.snp.makeConstraints { (make) in
+            make.trailing.equalTo((-20))
+            make.leading.equalTo(20)
+            make.width.equalTo(ladderDescriptionTextField)
+            make.height.equalTo(2)
+            make.top.equalTo(ladderDescriptionTextField.snp.bottom)
+        }
+        
+        amountLabel.snp.makeConstraints { (make) in
+            make.leading.equalTo(20)
+            make.top.equalTo(underlineViewForLadderDescription.snp.bottom).offset(20)
         }
         
         amountTextField.snp.makeConstraints { (make) in
             make.leading.equalTo(positionsInfo.snp.trailing).offset(20)
             make.height.equalTo(amountLabel)
             make.width.equalTo(70)
-            make.top.equalTo(underlineViewForLadderName.snp.bottom).offset(20)
+            make.top.equalTo(underlineViewForLadderDescription.snp.bottom).offset(20)
         }
         
         positionsInfo.snp.makeConstraints { (make) in
             make.leading.equalTo(amountLabel.snp.trailing).offset(10)
             make.height.equalTo(amountLabel)
             make.width.equalTo(amountLabel.snp.height)
-            make.top.equalTo(underlineViewForLadderName.snp.bottom).offset(20)
+            make.top.equalTo(underlineViewForLadderDescription.snp.bottom).offset(20)
         }
         
         includeMeLabel.snp.makeConstraints { (make) in
@@ -270,45 +325,46 @@ class CreateLadderViewController: BaseViewController, UITextFieldDelegate {
     @objc func createdPressed(){
         let db = Firestore.firestore()
 
-        if permissionsTextField.text?.isReallyEmpty ?? true || ladderNameTextField.text?.isReallyEmpty ?? true || amountTextField.text?.isReallyEmpty ?? true{
+        if permissionsTextField.text?.isReallyEmpty ?? true || ladderNameTextField.text?.isReallyEmpty ?? true || ladderDescriptionTextField.text?.isReallyEmpty ?? true || amountTextField.text?.isReallyEmpty ?? true{
             Alert(withTitle: "Error", withDescription: "Please complete all fields", fromVC: self, perform: {})
         }
-        else{
-            //check if ladder name already exists
-            let ref = db.collection("ladders").whereField("name", isEqualTo: ladderNameTextField.text!.lowercased())
-            ref.getDocuments { snapshot, error in
-                if let error = error{
-                    Alert(withTitle: "Error", withDescription: error.localizedDescription, fromVC: self, perform: {})
-                }
-                else{
-                    if let snapshot = snapshot{
-                        if snapshot.isEmpty{
-                            self.createLadder()
-                        }
-                        else{
-                            Alert(withTitle: "Name Taken", withDescription: "A ladder with your chosen name already exists. Please choose a new name", fromVC: self, perform: {})
-                        }
+        if ladderNameTextField.text!.count <= 8{
+            Alert(withTitle: "Error", withDescription: "Name must be at least 8 characters long", fromVC: self, perform: {})
+        }
+        if ladderDescriptionTextField.text!.count <= 32{
+            Alert(withTitle: "Error", withDescription: "Description must be at least 32 characters long", fromVC: self, perform: {})
+        }
+         
+        //check if ladder name already exists
+        let ref = db.collection("ladders").whereField("name", isEqualTo: ladderNameTextField.text!.lowercased())
+        ref.getDocuments { snapshot, error in
+            if let error = error{
+                Alert(withTitle: "Error", withDescription: error.localizedDescription, fromVC: self, perform: {})
+            }
+            else{
+                if let snapshot = snapshot{
+                    if snapshot.isEmpty{
+                        self.createLadder()
                     }
                     else{
-                        Alert(withTitle: "Error", withDescription: "An unknown error occured", fromVC: self, perform: {})
-
+                        Alert(withTitle: "Name Taken", withDescription: "A ladder with your chosen name already exists. Please choose a new name", fromVC: self, perform: {})
                     }
                 }
-            }
+                else{
+                    Alert(withTitle: "Error", withDescription: "An unknown error occured", fromVC: self, perform: {})
 
-            
+                }
+            }
         }
-        
     }
     
     
     func createLadder(){
         
         
-        
-        
         let permissions = permissionsTextField.text
         let name = ladderNameTextField.text!.lowercased()
+        let description = ladderDescriptionTextField.text!
         var adminIDs = [String]()
         adminIDs.append(MainUser.shared.userID)
         let jump = Int(amountTextField.text!)
@@ -330,7 +386,8 @@ class CreateLadderViewController: BaseViewController, UITextFieldDelegate {
             "admins": adminIDs,
             "requests": requests,
             "jump": jump!,
-            "positions": positions
+            "positions": positions,
+            "description": description
         ]) { err in
             if let err = err {
                 let perform = {}

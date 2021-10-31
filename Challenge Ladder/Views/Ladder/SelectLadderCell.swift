@@ -16,10 +16,21 @@ class SelectLadderCell: UITableViewCell{
         let textLabel = UILabel()
         textLabel.text = ""
         textLabel.textColor = .black
-        textLabel.font = UIFont.systemFont(ofSize: 24)
+        textLabel.font = UIFont.boldSystemFont(ofSize: 24)
         textLabel.adjustsFontSizeToFitWidth = true
         textLabel.numberOfLines = 1
-        textLabel.textAlignment = .center
+        textLabel.textAlignment = .left
+        return textLabel
+    }()
+    
+    var descriptionLabel: UILabel = {
+        let textLabel = UILabel()
+        textLabel.text = ""
+        textLabel.textColor = .black
+        textLabel.font = UIFont.systemFont(ofSize: 18)
+        textLabel.adjustsFontSizeToFitWidth = true
+        textLabel.numberOfLines = 0
+        textLabel.textAlignment = .left
         return textLabel
     }()
     
@@ -42,6 +53,7 @@ class SelectLadderCell: UITableViewCell{
             guard let data = data else { return }
             self.nameLabel.text = data.nameofladder
             self.ladder = data.ladderitself
+            self.descriptionLabel.text = data.ladderDescription
         }
     }
     
@@ -54,20 +66,25 @@ class SelectLadderCell: UITableViewCell{
 
         self.contentView.addSubview(nameLabel)
         self.contentView.addSubview(underlineView)
+        self.contentView.addSubview(descriptionLabel)
         self.contentView.addSubview(blankView)
         
         nameLabel.snp.makeConstraints { (make) in
             make.top.leading.trailing.equalToSuperview()
+            make.bottom.equalTo(descriptionLabel.snp.top)
+        }
+        
+        descriptionLabel.snp.makeConstraints { (make) in
+            make.leading.trailing.equalToSuperview()
+            make.top.equalTo(nameLabel.snp.bottom)
             make.bottom.equalTo(underlineView.snp.top)
-
         }
         
         underlineView.snp.makeConstraints { (make) in
-            make.top.equalTo(nameLabel.snp.bottom).offset(5)
+            make.top.equalTo(descriptionLabel.snp.bottom).offset(5)
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(2)
             make.bottom.equalTo(blankView.snp.top)
-
         }
         
         blankView.snp.makeConstraints { (make) in
@@ -98,16 +115,20 @@ class SelectLadderCell: UITableViewCell{
         
         nameLabel.snp.remakeConstraints { (make) in
             make.top.leading.trailing.equalToSuperview()
+            make.bottom.equalTo(descriptionLabel.snp.top)
+        }
+        
+        descriptionLabel.snp.remakeConstraints { (make) in
+            make.leading.trailing.equalToSuperview()
+            make.top.equalTo(nameLabel.snp.bottom)
             make.bottom.equalTo(underlineView.snp.top)
-
         }
         
         underlineView.snp.remakeConstraints { (make) in
-            make.top.equalTo(nameLabel.snp.bottom)
+            make.top.equalTo(descriptionLabel.snp.bottom).offset(5)
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(2)
             make.bottom.equalTo(blankView.snp.top)
-
         }
         
         blankView.snp.remakeConstraints { (make) in

@@ -110,7 +110,7 @@ class SelectLadderViewController: BaseViewController {
                 Ladder(ref: ladder){ result in
                     switch result{
                     case .success(let ladderitself):
-                        let ladderToADD = LadderData(nameofladder: ladderitself.name!, ladderitself: ladderitself)
+                        let ladderToADD = LadderData(nameofladder: ladderitself.name!, ladderitself: ladderitself, ladderDescription: ladderitself.description)
                         let found = self.data.filter{$0.nameofladder == ladderitself.name!}.count > 0
                         if !found{
                             self.data.append(ladderToADD)
@@ -157,7 +157,7 @@ class SelectLadderViewController: BaseViewController {
                 Ladder(ref: ladder){ result in
                     switch result{
                     case .success(let ladderitself):
-                        let ladderToADD = LadderData(nameofladder: ladderitself.name!, ladderitself: ladderitself)
+                        let ladderToADD = LadderData(nameofladder: ladderitself.name!, ladderitself: ladderitself, ladderDescription: ladderitself.description)
                         let found = self.data.filter{$0.nameofladder == ladderitself.name!}.count > 0
                         if !found{
                             self.data.append(ladderToADD)

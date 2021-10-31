@@ -69,7 +69,7 @@ class FindLadderViewController: FindViewController {
             Ladder(ref: ladder.reference){ result in
                 switch result{
                 case .success(let ladderitself):
-                    self.data.append(LadderData(nameofladder: ladderitself.name!, ladderitself: ladderitself))
+                    self.data.append(LadderData(nameofladder: ladderitself.name!, ladderitself: ladderitself, ladderDescription: ladderitself.description))
                     loadedLadderCount += 1
                     if loadedLadderCount == withLadders.count{
                         self.removeLoading()

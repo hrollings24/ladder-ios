@@ -10,4 +10,5 @@ import Foundation
 struct LadderData{
     var nameofladder: String
     var ladderitself: Ladder
+    var ladderDescription: String
 }
